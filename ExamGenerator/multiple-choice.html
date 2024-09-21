@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Choice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="static/css/multiple-choice.css">
+</head>
+
+<body>
+    <span class="dot"></span>
+
+    <div id="container">
+        <div id="quiz_header">
+            <h5>Multiple Choice</h5>
+        </div>
+        <div id="quiz">
+            <div class="progressBarContainer">
+                <div class="progressBar">
+                    <div id="progress" style="width: 10%;"></div>
+                </div>   
+            </div>
+            <h2 id="questionNo"></h2>         
+            <div id="question">
+                <h2 id="questionText"></h2>
+            </div>
+            <div id="optionList">
+                <h2 id="questionText1"></h2>
+                <div class="answerItem">
+                    <h4 id="answerNo1">a</h4>
+                    <h4 class="choice_que" id="option1"></h4>
+                </div>
+                <div class="answerItem">
+                    <h4 id="answerNo2">b</h4>
+                    <h4 class="choice_que" id="option2"></h4>
+                </div>
+                <div class="answerItem">
+                    <h4 id="answerNo3">c</h4>
+                    <h4 class="choice_que" id="option3"></h4>
+                </div>
+                <div class="answerItem">
+                    <h4 id="answerNo4">d</h4>
+                    <h4 class="choice_que" id="option4"></h4>
+                </div>
+            </div>
+            <button id="Submit">Submit</button>
+            <button id="Cancel">Cancel</button>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="static/js/multiple-choice.js"></script>
+    <script src="static/js/questions.js"></script>
+</body>
+
+</html>
