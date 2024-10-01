@@ -8,11 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/identification.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/multiple-choice.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/true-or-false.css') }}">
-    
+
+    {% block css_file %} {% endblock %}
     
     <title>{% block title %} {% endblock %} | Easygen</title>
 </head>
@@ -29,8 +26,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     
     <script src="../../static/js/up1.js"></script>
-    <script src="../../static/js/multiple-choice.js"></script>
     <script src="../../static/js/questions.js"></script>
+    <script src="../../static/js/identification.js"></script>
+    <script src="../../static/js/multiple-choice.js"></script>
+    <script src="../../static/js/true-or-false.js"></script>
 
 </body>
 </html>

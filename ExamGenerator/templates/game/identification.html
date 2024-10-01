@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "layout/game_base.html" %}
 
-    <title>Identification Quiz</title>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <link rel="stylesheet" href="static/css/identification.css">
-</head>
-<body>
+{% block css_file %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/identification.css') }}">
+{% endblock %}
+
+{% block game_title %} {{ game_mode }} {% endblock %} 
+
+{% block game_header %} {{ game_mode }} {% endblock %} 
+
+{% block game_content %}
     <span class="dot"></span>
 
     <div id="container">
@@ -32,8 +32,5 @@
             <div id="feedback"></div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="static/js/identification.js"></script>
-    <script src="static/js/questions.js"></script>
-</body>
-</html>
+
+{% endblock %}

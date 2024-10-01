@@ -1,47 +1,39 @@
-{% extends "layout/base.html" %}
+{% extends "/layout/game_base.html" %}
 
-{% block title %} File Upload {% endblock %} 
+{% block css_file %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/multiple-choice.css') }}">
+{% endblock %}
 
-{% block content %}
+{% block game_title %} {{ game_mode }} {% endblock %} 
 
-    <span class="dot"></span>
+{% block game_header %} {{ game_mode }} {% endblock %} 
 
-    <div id="container">
-        <div id="quiz_header">
-            <h5>Multiple Choice</h5>
+{% block game_content %}      
+    <div id="question">
+        <h2 id="questionText"></h2>
+    </div>
+    <div id="optionList">
+        <h2 id="questionText1"></h2>
+        <div class="answerItem">
+            <h4 id="answerNo1">a</h4>
+            <h4 class="choice_que" id="option1"></h4>
         </div>
-        <div id="quiz">
-            <div class="progressBarContainer">
-                <div class="progressBar">
-                    <div id="progress" style="width: 10%;"></div>
-                </div>   
-            </div>
-            <h2 id="questionNo"></h2>         
-            <div id="question">
-                <h2 id="questionText"></h2>
-            </div>
-            <div id="optionList">
-                <h2 id="questionText1"></h2>
-                <div class="answerItem">
-                    <h4 id="answerNo1">a</h4>
-                    <h4 class="choice_que" id="option1"></h4>
-                </div>
-                <div class="answerItem">
-                    <h4 id="answerNo2">b</h4>
-                    <h4 class="choice_que" id="option2"></h4>
-                </div>
-                <div class="answerItem">
-                    <h4 id="answerNo3">c</h4>
-                    <h4 class="choice_que" id="option3"></h4>
-                </div>
-                <div class="answerItem">
-                    <h4 id="answerNo4">d</h4>
-                    <h4 class="choice_que" id="option4"></h4>
-                </div>
-            </div>
-            <button id="Submit">Submit</button>
-            <button id="Cancel">Cancel</button>
+        <div class="answerItem">
+            <h4 id="answerNo2">b</h4>
+            <h4 class="choice_que" id="option2"></h4>
         </div>
+        <div class="answerItem">
+            <h4 id="answerNo3">c</h4>
+            <h4 class="choice_que" id="option3"></h4>
+        </div>
+        <div class="answerItem">
+            <h4 id="answerNo4">d</h4>
+            <h4 class="choice_que" id="option4"></h4>
+        </div>
+    </div>
+    <div>
+        <button id="Submit" class="btn btn-primary">Submit</button>
+        <button id="Cancel" class="btn btn-secondary">Cancel</button>
     </div>
 
 {% endblock %}

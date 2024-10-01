@@ -1,0 +1,25 @@
+{% extends "layout/base.html" %}
+
+{% block title %} {% block game_title %} {% endblock %} Game {% endblock %} 
+
+{% block content %}
+<div id="container">
+    <div id="quiz_header">
+        <h2>{% block game_header %} {% endblock %} Quiz</h2>
+    </div>
+    <div id="quiz">
+        <div class="progressBarContainer">
+            <div class="progressBar">
+                <div id="progress" style="width: 10%;"></div>
+            </div>  
+            <span><h2 id="questionNo"></h2></span>
+        </div>
+
+        <div class="quiz_main">
+            <!-- Quiz questions and choices goes here -->
+            {% block game_content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

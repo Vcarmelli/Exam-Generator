@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout/game_base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>True or False</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <link rel="stylesheet" href="static/css/true-or-false.css">
-</head>
+{% block css_file %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/true-or-false.css') }}">
+{% endblock %}
 
-<body>
+{% block game_title %} {{ game_mode }} {% endblock %} 
+
+{% block game_header %} {{ game_mode }} {% endblock %} 
+
+{% block game_content %}
     <span class="dot"></span>
 
     <div id="container">
@@ -39,9 +38,5 @@
             <button id="Cancel">Cancel</button>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="static/js/true-or-false.js"></script>
-    <script src="static/js/questions.js"></script>
-</body>
 
-</html>
+{% endblock %}
