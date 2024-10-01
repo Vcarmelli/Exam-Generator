@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout/base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiple Choice</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <link rel="stylesheet" href="static/css/multiple-choice.css">
-</head>
+{% block title %} File Upload {% endblock %} 
 
-<body>
+{% block content %}
+
     <span class="dot"></span>
 
     <div id="container">
@@ -50,9 +43,6 @@
             <button id="Cancel">Cancel</button>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="static/js/multiple-choice.js"></script>
-    <script src="static/js/questions.js"></script>
-</body>
 
-</html>
+{% endblock %}
+ 

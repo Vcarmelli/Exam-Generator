@@ -1,19 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
 
 body {
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #EDD7ED;
-    overflow: hidden; 
+    background-color: var(--secondary-color);    
 }
 
 .dot {

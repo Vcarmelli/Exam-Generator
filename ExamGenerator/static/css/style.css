@@ -35,6 +35,8 @@ h1 {
     border: 2px solid var(--primary-color);
     box-shadow: 0 4px 10px -5px rgba(0, 0, 0, 0.5);
     transition: ease 0.8s;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .btn-primary {

@@ -3,15 +3,9 @@
 {% block title %} Dashboard {% endblock %} 
 
 {% block content %}
-    <h1>Easygen: Exam Generator</h1>
-
-    <div style="margin: 2em;">
-        <h3>Button Colors</h3>
-
-        <p>class="btn btn-primary"</p>
-        <button class="btn btn-primary">Primary</button>
-
-        <p>class="btn btn-secondary"</p>
-        <button class="btn btn-secondary">Secondary</button>
+    <div style="display: block; margin: 5em;">
+        <h1>Easygen: Exam Generator</h1>
+        <p>Transform PDFs into engaging quizzes!</p>
+        <a class="btn btn-primary" href=" {{ url_for('views.upload') }}">Start</a>
     </div>
 {% endblock %}

@@ -6,8 +6,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Easygen | {% block title %} {% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/identification.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/multiple-choice.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/true-or-false.css') }}">
+    
+    
+    <title>{% block title %} {% endblock %} | Easygen</title>
 </head>
 <body>
     <div>
@@ -15,6 +22,15 @@
         {% block content %}
         {% endblock %}
     </div>
+
+
+    
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    
+    <script src="../../static/js/up1.js"></script>
+    <script src="../../static/js/multiple-choice.js"></script>
+    <script src="../../static/js/questions.js"></script>
 
 </body>
 </html>

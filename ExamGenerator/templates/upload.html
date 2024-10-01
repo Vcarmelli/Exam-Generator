@@ -1,0 +1,32 @@
+{% extends "layout/base.html" %}
+
+{% block title %} File Upload {% endblock %} 
+
+{% block content %}
+<div class="header-section">
+    <h1>EasyGen</h1>
+    <p>Upload and attach files to generate exam (PDF, DOCX, PPT, or other file formats).</p>
+</div>
+<div class="container">
+    <div class="drop-section">
+        <div class="col">
+            <div class="upload-icon">
+                <img src="static/images/up.svg" alt="file">
+            </div>
+            <button class="file-selector">Click to upload</button>
+            <span>or drag and drop.</span>
+            <input type="file" class="file-selector-input" multiple>
+        </div>
+        <div class="col">
+            <div class="drop-here">or drag and drop</div>
+        </div>
+    </div>
+    <div class="list-section">
+        <ul class="list"></ul>
+        </div>            
+    </div>
+</div>
+<div class="upload-btn"><button class="btn btn-primary" role="button">Submit</button></div>
+    
+
+{% endblock %}

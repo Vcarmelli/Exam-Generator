@@ -6,6 +6,11 @@ views = Blueprint('views', __name__)
 def index():
     return render_template('index.html')
 
+@views.route('/upload')
+def upload():
+    return render_template('upload.html')  
+
+
 @views.route('/score')
 def score():
     return render_template('score.html')
