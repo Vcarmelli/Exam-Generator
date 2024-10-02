@@ -2,84 +2,6 @@ body {
     background-image: radial-gradient(circle, white 10%, var(--tertiary-color), var(--tertiary-color));
 }
 
-#quiz {
-    height: 480px;
-    width: 70%;
-    padding: 20px;
-    border-radius: 30px 10px;
-    text-align: center;
-    position: relative;
-    margin-top: -100px;
-}
-
-.progressBarContainer {
-    width: 100%;
-    padding: 10px 0;
-    position: absolute;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.progressBar {
-    width: 90%;
-    height: 5px;
-    background-color: #e7e7e7;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.progressBar #progress {
-    height: 100%;
-    background-color: black;
-    border-radius: 10px;
-}
-
-#progress {
-    height: 100%;
-    background-color: #4caf50;
-    color: white;
-    text-align: center;
-    line-height: 30px; 
-    width: 0; 
-}
-
-#questionNo {
-    font-size: 16px;
-    color: black;   
-    margin-top: -1px;
-    transform: translateX(50%) translateY(0);
-}
-
-
-#quiz #question {
-    width: 97%;
-    position: absolute;
-    top: 90px;
-    display: flex;
-    flex-direction: row;
-    color: white;
-    background-color: #5B699C;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-#quiz #question h2 {
-    font-size: 27px;
-}
-
-#quiz #question h2:first-child {
-    margin: 0 10px 0 5px;
-}
-
-#quiz #optionList {
-    height: 400px;
-    width: 100%;
-    position: absolute;
-    top: 160px;
-}
-
 .answerItem {
     display: flex;
     align-items: center;
@@ -92,7 +14,7 @@ body {
     padding: 0;
     line-height: 50px;
     border-radius: 7px;
-    font-size: 20px;
+    font-size: 18px;
     background-color: #FFFFFF;
     overflow: hidden;
     border: 2px solid black;
@@ -115,26 +37,23 @@ body {
 }
 
 .correct-message {
-    color: green;
+    color: var(--green-color);
 }
 
 .incorrect-message {
-    color: red;
+    color: var(--red-color);
 }
 
 #optionList h4.correct {
-    border: 3px solid #4caf50; 
-    color: black;
+    border: 3px solid var(--green-color);
 }
 
 #optionList h4.incorrect {
-    border: 3px solid #f44336;
-    color: black;
+    border: 3px solid var(--red-color) !important;
 }
 
 #optionList h4.choice_que.correct {
-    border: 3px solid #4caf50;
-    color: black;
+    border: 3px solid var(--green-color);
 }
 
 #optionList .answerItem h4.choice_que:hover,
@@ -145,30 +64,7 @@ body {
 #optionList .answerItem h4.choice_que.active,
 #optionList .answerItem.active h4.choice_que{
     background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6));
-}
-
-#Submit, #NextButton, #Cancel {
-    margin-top: 35%;
-    outline: none;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    font-weight: bold;
-}
-
-#Submit {
-    background-color: #5B699C;
-    color: white;
-    border: 2px solid white;
-    border-radius: 10px;
-    width: 400px;
-    position: absolute;
-    left: 30%;
-    transform: translateX(-50%) translateY(0);
+    border: 3px solid var(--accent-color);
 }
 
 #NextButton {
@@ -182,33 +78,11 @@ body {
     transform: translateX(-50%) translateY(0);
 }
 
-#Cancel {
-    background-color: white;
-    color: #5B699C;
-    border: 2px solid #5B699C;
-    border-radius: 10px;
-    width: 400px;
-    position: absolute;
-    left: calc(50% + 350px);
-    transform: translateX(-50%) translateY(0);
-}
-
-#Submit:hover {
-    background: white;
-    color: #5B699C;
-    border: 2px solid black;
-}
-
 #NextButton:hover {
     background: white;
     color: #4caf50;
     border: 2px solid black;
     margin-top: -100%;
-}
-
-#Cancel:hover {
-    background: #5B699C;
-    color: white;
 }
 
 #NextButton.disabled {

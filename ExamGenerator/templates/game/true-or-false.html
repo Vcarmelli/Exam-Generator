@@ -9,33 +9,17 @@
 {% block game_header %} {{ game_mode }} {% endblock %} 
 
 {% block game_content %}
-    <span class="dot"></span>
 
-    <div id="container">
-        <div id="quiz_header">
-            <h5>True or False</h5>
+    <div id="question">
+        <h2 id="questionText"></h2>
+    </div>
+    <div id="optionList">
+        <h3 id="questionText1"></h3>
+        <div class="answerItem">
+            <h4 class="choice_que" id="option1"></h4>
         </div>
-        <div id="quiz">
-            <div class="progressBarContainer">
-                <div class="progressBar">
-                    <div id="progress" style="width: 10%;"></div>
-                </div>   
-            </div>
-            <h2 id="questionNo"></h2>         
-            <div id="question">
-                <h2 id="questionText"></h2>
-            </div>
-            <div id="optionList">
-                <h2 id="questionText1"></h2>
-                <div class="answerItem">
-                    <h4 class="choice_que" id="option1"></h4>
-                </div>
-                <div class="answerItem">
-                    <h4 class="choice_que" id="option2"></h4>
-                </div>
-            </div>
-            <button id="Submit">Submit</button>
-            <button id="Cancel">Cancel</button>
+        <div class="answerItem">
+            <h4 class="choice_que" id="option2"></h4>
         </div>
     </div>
 

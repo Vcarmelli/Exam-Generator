@@ -1,37 +1,5 @@
-
 body {
     background-image: radial-gradient(circle, white 10%, var(--secondary-color), var(--secondary-color));  
-}
-
-#quiz {
-    height: 480px;
-    width: 70%;
-    border-radius: 30px 10px;
-    text-align: center;
-    position: relative;
-}
-
-#quiz #question {
-    width: 97%;
-    display: flex;
-    color: white;
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    padding: 20px;
-}
-
-#quiz #question h2 {
-    font-size: 26px;
-}
-
-#quiz #question h2:first-child {
-    margin: 0 10px 0 5px;
-}
-
-#quiz #optionList {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 .answerItem {
@@ -46,7 +14,7 @@ body {
     padding: 0;
     line-height: 50px;
     border-radius: 7px;
-    font-size: 20px;
+    font-size: 18px;
     background-color: #FFFFFF;
     overflow: hidden;
     border: 2px solid black;
@@ -89,17 +57,14 @@ body {
 
 #optionList h4.correct {
     border: 3px solid var(--green-color);
-    color: black;
 }
 
 #optionList h4.incorrect {
-    border: 3px solid var(--red-color);
-    color: black;
+    border: 3px solid var(--red-color) !important;
 }
 
 #optionList h4.choice_que.correct {
     border: 3px solid var(--green-color);
-    color: black;
 }
 
 #optionList .answerItem h4.choice_que:hover,
@@ -126,12 +91,10 @@ body {
 #optionList .answerItem.active h4#answerNo3,
 #optionList .answerItem.active h4#answerNo4 {
     background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6));
+    border: 3px solid var(--accent-color);
 }
 
-.quiz_buttons button {
-    width: 300px;
-    margin: 2em 3em;
-}
+
 
 
 #NextButton {
