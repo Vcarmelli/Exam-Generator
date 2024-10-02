@@ -28,6 +28,8 @@ $(document).ready(function () {
         choice_que[2].innerText = MCQS[index].choice3;
         choice_que[3].innerText = MCQS[index].choice4;
 
+        console.log("MCQS[index].choice1;", MCQS[index].choice1);
+
         choice_que.forEach((option, idx) => {
             option.classList.remove("active", "correct", "incorrect", "disabled");
             if (answerNo[idx]) {

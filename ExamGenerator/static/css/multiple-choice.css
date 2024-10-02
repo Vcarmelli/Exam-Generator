@@ -13,8 +13,6 @@ body {
 
 #quiz #question {
     width: 97%;
-    position: absolute;
-    top: 60px;
     display: flex;
     color: white;
     background-color: var(--primary-color);
@@ -32,8 +30,8 @@ body {
 
 #quiz #optionList {
     width: 100%;
-    position: absolute;
-    top: 160px;
+    display: flex;
+    flex-direction: column;
 }
 
 .answerItem {
@@ -82,25 +80,25 @@ body {
 }
 
 .correct-message {
-    color: green;
+    color: var(--green-color);
 }
 
 .incorrect-message {
-    color: red;
+    color: var(--red-color);
 }
 
 #optionList h4.correct {
-    border: 3px solid #4caf50; 
+    border: 3px solid var(--green-color);
     color: black;
 }
 
 #optionList h4.incorrect {
-    border: 3px solid #f44336; 
+    border: 3px solid var(--red-color);
     color: black;
 }
 
 #optionList h4.choice_que.correct {
-    border: 3px solid #4caf50;
+    border: 3px solid var(--green-color);
     color: black;
 }
 
@@ -130,24 +128,14 @@ body {
     background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6));
 }
 
-#Submit, #NextButton, #Cancel {
-    margin: 45% 2% 0 2%;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 10px;
-    font-weight: bold;
+.quiz_buttons button {
+    width: 300px;
+    margin: 2em 3em;
 }
 
-#Submit {
-    background-color: #5B699C;
-    color: white;
-    border: 2px solid white;
-    border-radius: 10px;
-    width: 400px;
-}
 
 #NextButton {
-    background-color: #4caf50;
+    background-color: var(--green-color);
     color: white;
     border: 2px solid white;
     border-radius: 10px;
@@ -156,30 +144,11 @@ body {
     left: calc(50% + 100px); 
 }
 
-#Cancel {
-    background-color: white;
-    color: #5B699C;
-    border: 2px solid #5B699C;
-    border-radius: 10px;
-    width: 400px;
-}
-
-#Submit:hover {
-    background: white;
-    color: #5B699C;
-    border: 2px solid black;
-}
-
 #NextButton:hover {
     background: white;
     color: #4caf50;
     border: 2px solid black;
     margin-top: -100%;
-}
-
-#Cancel:hover {
-    background: #5B699C;
-    color: white;
 }
 
 #NextButton.disabled {
