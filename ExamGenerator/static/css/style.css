@@ -173,9 +173,11 @@ h1 {
 }
 
 .score-text {
-    display: inherit;
+    display: flex;
     flex-direction: column;
     gap: 1.5em;
+    padding-bottom: 2em;
+
 }
 
 .score-text h1 {
@@ -186,9 +188,9 @@ h1 {
     font-weight: bold;
 }
 
-.score-buttons button {
+.score-buttons a {
     padding: 1.2em 2.5em;
-    margin: 1.5em 1em;
+    margin: 1.5em 2em;
 }
 
 

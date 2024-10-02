@@ -1,5 +1,5 @@
 body {
-    background-image: radial-gradient(circle, white 10%, var(--tertiary-color), var(--tertiary-color));
+    background-image: radial-gradient(circle, white 7%, var(--tertiary-color), var(--tertiary-color));
 }
 
 .answerItem {
@@ -15,9 +15,9 @@ body {
     line-height: 50px;
     border-radius: 7px;
     font-size: 18px;
-    background-color: #FFFFFF;
+    background-color: white;
     overflow: hidden;
-    border: 2px solid black;
+    border: 2px solid var(--black-color);
     cursor: pointer;
     display: flex;
     align-items: center;

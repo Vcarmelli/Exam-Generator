@@ -1,5 +1,5 @@
 body {
-    background-image: radial-gradient(circle, white 10%, var(--secondary-color), var(--secondary-color));
+    background-image: radial-gradient(circle, white 7%, var(--secondary-color), var(--secondary-color));
 }
 
 #quiz #answerList {

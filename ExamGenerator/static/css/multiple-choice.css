@@ -1,5 +1,5 @@
 body {
-    background-image: radial-gradient(circle, white 10%, var(--secondary-color), var(--secondary-color));  
+    background-image: radial-gradient(circle, white 7%, var(--secondary-color), var(--secondary-color));  
 }
 
 .answerItem {
@@ -15,9 +15,9 @@ body {
     line-height: 50px;
     border-radius: 7px;
     font-size: 18px;
-    background-color: #FFFFFF;
+    background-color: white;
     overflow: hidden;
-    border: 2px solid black;
+    border: 2px solid var(--black-color);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -36,7 +36,7 @@ body {
 #optionList h4#answerNo4 {
     width: 3%;
     text-align: center;
-    background-color: #FFFFFF;
+    background-color: white;
     margin-left: 20px;
     padding-left: 20px;
 }

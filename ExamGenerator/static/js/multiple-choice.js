@@ -115,9 +115,7 @@ $(document).ready(function () {
                 index++;
                 loadData();
             } else {
-                quiz.style.display = "none";
-                result.style.display = "block";
-                points.innerHTML = `You Got ${correct} Out Of ${MCQS.length}`;
+                passData(correct, totalQuestion);
             }
         } else {
             if (confirm("Are you sure you want to cancel?")) {

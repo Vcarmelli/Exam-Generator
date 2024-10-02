@@ -12,6 +12,9 @@ $(document).ready(function () {
 
     let index = 0;
     let correct = 0;
+    let UserAns = undefined;
+    let UserAnsList = [];
+    let totalQuestion = TOF.length;
 
     const loadData = () => {
         questionNo.innerText = (index + 1) + "/6";
@@ -69,9 +72,7 @@ $(document).ready(function () {
                 index++;
                 loadData();
             } else {
-                quiz.style.display = "none";
-                result.style.display = "block";
-                points.innerText = correct;
+                passData(correct, totalQuestion);
             }
         } else {
             if (confirm("Are you sure you want to cancel?")) {

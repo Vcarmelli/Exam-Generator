@@ -12,9 +12,11 @@ $(document).ready(function () {
     let index = 0;
     let correct = 0;
     let UserAns = undefined;
+    let UserAnsList = [];
+    let totalQuestion = TOF.length;
 
     const loadData = () => {
-        questionNo.innerText = (index + 1) + "/6";
+        questionNo.innerText = (index + 1) + "/" + totalQuestion;
         questionText.innerText = TOF[index].question;
         questionText1.innerText = "Select up to one option";
         choice_que[0].innerText = TOF[index].choice1;
@@ -43,7 +45,7 @@ $(document).ready(function () {
         };
 
         // Calculate and update progress
-        let progressPercentage = ((index + 1) / TOF.length) * 100;
+        let progressPercentage = ((index + 1) / totalQuestion) * 100;
         updateProgress(progressPercentage);
     };
 
@@ -81,6 +83,8 @@ $(document).ready(function () {
                 message.innerText = "Check your answer!";
                 message.classList.add("incorrect-message");
             }
+            // save the user's answers in each question
+            UserAnsList[index] = UserAns;
 
             // Append the feedback message after the question text
             questionText1.parentElement.appendChild(message);
@@ -99,9 +103,7 @@ $(document).ready(function () {
                 index++;
                 loadData();
             } else {
-                quiz.style.display = "none";
-                result.style.display = "block";
-                points.innerHTML = `You Got ${correct} Out Of ${TOF.length}`;
+                passData(correct, totalQuestion);
             }
         } else {
             if (confirm("Are you sure you want to cancel?")) {

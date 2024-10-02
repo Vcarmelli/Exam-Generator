@@ -11,4 +11,9 @@ def create_app():
     app.register_blueprint(views)
     app.register_blueprint(game)
 
+    import secrets
+    secret_key = secrets.token_hex(16)  # Generates a random 16-byte hex key
+    print(secret_key)
+
+    app.secret_key = secret_key
     return app

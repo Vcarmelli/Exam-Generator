@@ -7,13 +7,13 @@
     <div class="score-text" >
         <h1> Exam Complete </h1>
         <p> You answered </p>
-        <h1> 10 / 100 </h1>
+        <h1> {{ score }} / {{ total }} </h1>
         <p> questions correct </p>
     </div>
     
     <div class="score-buttons">
-        <button class="btn btn-primary">Review Answers</button>
-        <button  class="btn btn-secondary">Back to Home</button>
+        <a class="btn btn-primary">Review Answers</a>
+        <a class="btn btn-secondary" href=" {{ url_for('views.index') }}">Back to Home</a>
     </div>
 </div>
 {% endblock %}
