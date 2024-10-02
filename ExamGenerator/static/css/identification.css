@@ -2,76 +2,6 @@ body {
     background-image: radial-gradient(circle, white 10%, var(--secondary-color), var(--secondary-color));
 }
 
-#quiz {
-    height: 480px;
-    width: 70%;
-    padding: 20px;
-    border-radius: 30px 10px;
-    text-align: center;
-    position: relative;
-    margin-top: -100px;
-}
-
-#progressBarContainer {
-    width: 100%;
-    padding: 10px 0;
-    position: absolute;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-}
-
-#progressBar {
-    width: 90%;
-    height: 5px;
-    background-color: #e7e7e7;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-#progressBar #progress {
-    height: 100%;
-    background-color: black;
-    border-radius: 10px;
-}
-
-#questionNo {
-    font-size: 16px;
-    color: black;
-    margin-top: -10px;
-    margin-right: -100%;
-    margin-bottom: 150px;
-}
-
-#quiz #question {
-    width: 97%;
-    position: absolute;
-    top: 90px;
-    display: flex;
-    flex-direction: row;
-    color: white;
-    background-color: #5B699C;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-#quiz #question h2 {
-    font-size: 27px;
-}
-
-#quiz #question h2:first-child {
-    margin: 0 10px 0 5px;
-}
-
-#quiz #optionList {
-    height: 400px;
-    width: 100%;
-    position: absolute;
-    top: 160px;
-}
-
 #quiz #answerList {
     width: 100%;
     display: flex;
@@ -87,9 +17,9 @@ body {
     width: 100%;
     border-radius: 7px;
     font-size: 20px;
-    background-color: #FFFFFF;
+    background-color: white;
     overflow: hidden;
-    border: 2px solid black;
+    border: 2px solid var(--black-color);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -122,7 +52,7 @@ body {
     background: rebeccapurple;
     position: absolute;
     right: 0;
-    color: #fff;
+    color: white;
     border: 1px solid #b0c4d8;
     font-size: 18px;
     border-radius: 20px 5px;
@@ -142,23 +72,22 @@ body {
 }
 
 #userAnswer {
-    width: 101%; 
+    width: 93%; 
     padding: 20px;
     font-size: 18px;
     border-radius: 10px;
-    border: 2px solid black; 
-    background-color: #ffffff;
-    color: #333; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border: 2px solid var(--black-color);
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     outline: none; 
 }
 
 #userAnswer.correct {
-    border-color: #4caf50;
+    border-color: var(--green-color);
 }
 
 #userAnswer.incorrect {
-    border-color: #f44336; 
+    border-color: var(--red-color);
 }
 
 #feedback {
@@ -170,50 +99,9 @@ body {
 }
 
 .correct-message{
-    color: green;
+    color: var(--green-color);
 }
 
 .incorrect-message {
-    color: #721c24;
-}
-
-#Submit, #Cancel {
-    margin-top: 50px;
-    outline: none;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    position: absolute;
-    margin-top: 10%;
-    font-weight: bold;
-}
-
-#Submit {
-    background-color:#5B699C;
-    color: white;
-    border-radius: 10px;
-    width: 400px;
-    left: 30%;
-    transform: translateX(-50%) translateY(0); 
-}
-
-#Cancel {
-    background-color:white;
-    color: #5B699C;
-    border: 2px solid #5B699C;
-    border-radius: 10px;
-    width: 400px;
-    left: calc(50% + 100px);
-    transform: translateY(0);
-}
-
-#container #submit #Submit:hover {
-    background: #9921e8;
-}
-#container #submit #Cancel:hover {
-    background: #9921e8;
+    color: var(--red-color);
 }

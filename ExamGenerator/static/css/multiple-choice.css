@@ -56,7 +56,7 @@ body {
 }
 
 #optionList h4.correct {
-    border: 3px solid var(--green-color);
+    border: 3px solid var(--green-color) !important;
 }
 
 #optionList h4.incorrect {
