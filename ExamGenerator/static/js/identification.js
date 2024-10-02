@@ -12,12 +12,10 @@ $(document).ready(function () {
 
     let index = 0;
     let correct = 0;
-    let UserAns = undefined;
-    let UserAnsList = [];
-    let totalQuestion = TOF.length;
+    let totalQuestion = IDEN.length;
 
     const loadData = () => {
-        questionNo.innerText = (index + 1) + "/6";
+        questionNo.innerText = (index + 1) + "/" + totalQuestion;
         questionText.innerText = IDEN[index].question;
         if (IDEN[index].image) {
             questionImage.src = IDEN[index].image;
@@ -38,7 +36,7 @@ $(document).ready(function () {
                 progressBar.textContent = Math.round(percent) + '%';
             }
         };
-        let progressPercentage = ((index + 1) / IDEN.length) * 100;
+        let progressPercentage = ((index + 1) / totalQuestion) * 100;
         updateProgress(progressPercentage);
     };
 
