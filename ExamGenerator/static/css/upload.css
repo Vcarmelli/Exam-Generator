@@ -79,11 +79,9 @@
     width: 80%;
 }
 
-.drop-section button {
+.drop-section a {
     font-family: 'Poppins', sans-serif;
     align-items: center;
-    background-color: white;
-    border: none;
     cursor: pointer;
     text-decoration: underline;
     font-size: large;

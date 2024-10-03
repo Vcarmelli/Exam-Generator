@@ -10,10 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         [...fileSelectorInput.files].forEach((file) => {
             if (typeValidation(file.type)) {
                 uploadFile(file);
+            } else {
+                alert("INVALID FILE.")
             }
         });
     };
-
 
     function typeValidation(type) {
         const allowedTypes = [
@@ -116,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
             li.querySelector('.file-progress span').style.width = percent_complete + '%';
         };
 
-        http.open('POST', 'sender.php', true);
-        http.send(data);
+        http.open('POST', '/upload/file', true);
+        http.send();
 
         li.querySelector('.cross').onclick = () => http.abort();
         http.onabort = () => {

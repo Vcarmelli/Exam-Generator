@@ -1,0 +1,40 @@
+{% extends "layout/base.html" %}
+
+{% block title %} Page Selection {% endblock %} 
+
+{% block content %}
+    <div>
+        <h1>Page Selection</h1>
+        <div class="file-container" id="thumbnail-container">
+            <!-- PDF.js selection goes here -->
+        </div>
+
+        <div class="options-container">
+            <h2>Options</h2>
+            <form action="" class="options">
+                <div>
+                    <label for="page-selection">Page Selection</label>
+                    <select name="" id="page-selection">
+                        <option value="all">All Pages</option>
+                        <option value="current">Current Page</option>
+                        <option value="select">Select Pages</option>
+                    </select>
+                    <input type="text">
+                </div>
+                <div>
+                    <label for="ques-type">Question Type</label>
+                    <select name="" id="ques-type">
+                        <option value="identi">Identification</option>
+                        <option value="multi">Multiple Choice</option>
+                        <option value="tf">True or False</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="ques-num">No. of Questions</label>
+                    <input type="number" id="ques-num">
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

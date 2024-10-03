@@ -230,3 +230,22 @@ h1 {
     margin: 2em auto 0 auto;
     width: 45%;
 }
+
+
+ 
+.file-container,
+.options-container {
+    display: inline-block;
+    background-color: var(--background-color);
+    width: max-content;
+    padding: 1.5em;
+    margin: 2em;
+    border-radius: 1em;
+    box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
+}
+
+.options, .options div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}

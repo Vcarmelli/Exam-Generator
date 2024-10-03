@@ -1,4 +1,13 @@
 from flask import Flask
+import os
+
+def create_upload_folder():
+    UPLOAD_FOLDER = 'uploads'
+
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
+
+    return UPLOAD_FOLDER
 
 
 def create_app():
@@ -11,9 +20,12 @@ def create_app():
     app.register_blueprint(views)
     app.register_blueprint(game)
 
-    import secrets
-    secret_key = secrets.token_hex(16)  # Generates a random 16-byte hex key
-    print(secret_key)
+    # import secrets
+    # secret_key = secrets.token_hex(16)  # Generates a random 16-byte hex key
+    # app.secret_key = secret_key
 
-    app.secret_key = secret_key
+    # setting up uploads folder
+    uploads = create_upload_folder()
+    app.config['UPLOAD_FOLDER'] = uploads
+
     return app
