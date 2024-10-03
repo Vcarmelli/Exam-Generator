@@ -2,7 +2,7 @@ from flask import Flask
 import os
 
 def create_upload_folder():
-    UPLOAD_FOLDER = 'uploads'
+    UPLOAD_FOLDER = os.path.join('static', 'uploads')
 
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)

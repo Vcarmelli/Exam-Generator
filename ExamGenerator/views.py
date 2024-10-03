@@ -1,7 +1,6 @@
-from flask import Blueprint, current_app, render_template, redirect, url_for, request, make_response, jsonify
+from flask import Blueprint, current_app, render_template, redirect, url_for, request
 import os
-
-
+from .thumbnails import convert_file_to_thumbnail
 
 views = Blueprint('views', __name__)
 
@@ -20,7 +19,15 @@ def download():
 
 @views.route('/selection')
 def selection():
-    return render_template('preview.html')
+    file_path = request.args.get('file_path')
+    thumbnail_path = os.path.join('static', 'uploads', 'tmp')
+
+    if not os.path.exists(thumbnail_path):
+        os.makedirs(thumbnail_path)
+
+    thumbnails = convert_file_to_thumbnail(file_path, thumbnail_path)
+
+    return render_template('preview.html', thumbnails=thumbnails)
 
 @views.route('/quiz-complete')
 def quiz_complete():
@@ -38,6 +45,7 @@ def upload_file():
     file = request.files['input_file']
     if file.filename == '':
         return redirect(request.url)
+    
     if file and file.filename.endswith('.pdf'):
         file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
@@ -50,13 +58,9 @@ def upload_file():
 @views.route('/quiz-complete/responses', methods=['POST'])
 def responses():
     result = request.get_json()
-
     score = result.get('score')
     total = result.get('totalQuestion')
 
-    print('RES:', result)
-    response = make_response(jsonify({'message': 'JSON received'}), 200)
-    #return response
     return redirect( url_for('views.quiz_complete', score=score, total=total) )
 
 
