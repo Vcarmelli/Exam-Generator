@@ -3,23 +3,25 @@
 {% block title %} Page Selection {% endblock %} 
 
 {% block content %}
-    <h1>Page Selection</h1>
+    <h1 class="preview-container-title">Page Selection</h1>
     <div class="preview-container">
         <div class="file-container" id="thumbnail-container">
             <div class="file-header">
                 <h2>File Name Here</h2>
             </div>
 
-            {% if thumbnails %}
-                {% for thumbnail in thumbnails %}
-                    <div class="thumbnail-item">
-                        <p>Page {{ loop.index }}</p>
-                        <img src="{{ thumbnail }}">
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>No thumbnails available.</p>
-            {% endif %}
+            <div class="pages-container">
+                {% if thumbnails %}
+                    {% for thumbnail in thumbnails %}
+                        <div class="thumbnail-item">
+                            <p>Page {{ loop.index }}</p>
+                            <img src="../{{ thumbnail }}">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No thumbnails available.</p>
+                {% endif %}
+            </div>
         </div>
 
         <div class="options-container">
@@ -32,7 +34,7 @@
                         <option value="current">Current Page</option>
                         <option value="select">Select Pages</option>
                     </select>
-                    <input type="text">
+                    <input type="text" placeholder="Example: “1-2, 5”">
                 </div>
                 <div>
                     <label for="ques-type">Question Type</label>
@@ -44,7 +46,7 @@
                 </div>
                 <div>
                     <label for="ques-num">No. of Questions</label>
-                    <input type="number" id="ques-num">
+                    <input type="number" id="ques-num" placeholder="1">
                 </div>
             </form>
         </div>

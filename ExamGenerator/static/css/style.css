@@ -232,14 +232,16 @@ h1 {
 }
 
 
-
+.preview-container-title {
+    margin: 1em 2em 0 2em;
+}
 
 .preview-container {
     display: flex;
+    justify-content: center;
     gap: 3%;
     padding: 2%;
 }
-
 
 .file-container {
     display: flex;
@@ -260,11 +262,22 @@ h1 {
     display: flex;
     flex-basis: 100%;
     width: 100%;
+    color: white;
     background-color: var(--primary-color);
 }
 
 .file-container div {
     width: max-content;
+}
+
+.pages-container {
+    background-color: #D9D9D9;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5em;
+    padding: 3em 0;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.7);
 }
 
 .options {
@@ -281,4 +294,22 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 0.8em;
+}
+
+.options select,
+.options input {
+    height: 2.5em;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5em;
+}
+
+.options select {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.options label {
+    font-weight: bold;
 }

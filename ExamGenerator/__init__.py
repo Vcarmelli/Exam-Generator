@@ -2,7 +2,11 @@ from flask import Flask
 import os
 
 def create_upload_folder():
-    UPLOAD_FOLDER = os.path.join('static', 'uploads')
+    # Get the current directory (assuming your script is inside ExamGenerator)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Create path relative to the ExamGenerator folder
+    UPLOAD_FOLDER = os.path.join(base_dir, 'static', 'uploads')
 
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
