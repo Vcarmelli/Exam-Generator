@@ -2,7 +2,7 @@ from PIL import Image
 from pdf2image import convert_from_path
 import os
 
-def convert_file_to_thumbnail(file_path, thumbnail_path, size=(128, 128)):
+def convert_file_to_thumbnail(file_path, thumbnail_path, size=(256, 256)):
     # Convert PDF to a list of images (one per page)
     images = convert_from_path(file_path, 200)
 
@@ -15,5 +15,5 @@ def convert_file_to_thumbnail(file_path, thumbnail_path, size=(128, 128)):
         page.save(thumbnail_file, 'JPEG')
 
     # Return the list of generated thumbnails
-    return [os.path.join(thumbnail_path, f'thumbnail_{i + 1}.jpg') for i in range(len(images))]
+    return [f'thumbnail_{i + 1}.jpg' for i in range(len(images))]
 

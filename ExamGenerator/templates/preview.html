@@ -7,15 +7,15 @@
     <div class="preview-container">
         <div class="file-container" id="thumbnail-container">
             <div class="file-header">
-                <h2>File Name Here</h2>
+                <h2>{{ filename }}</h2>
             </div>
 
             <div class="pages-container">
                 {% if thumbnails %}
                     {% for thumbnail in thumbnails %}
                         <div class="thumbnail-item">
-                            <p>Page {{ loop.index }}</p>
-                            <img src="../{{ thumbnail }}">
+                            <img src="../static/uploads/tmp/{{ thumbnail }}">
+                            <p>{{ loop.index }}</p>
                         </div>
                     {% endfor %}
                 {% else %}
@@ -24,32 +24,37 @@
             </div>
         </div>
 
-        <div class="options-container">
-            <h2>Options</h2>
-            <form action="" class="options">
+        <form action="" method="POST" class="options-container">
+            <div>
+                <h2>Options</h2>
+            </div>
+            <div class="options">
                 <div>
                     <label for="page-selection">Page Selection</label>
-                    <select name="" id="page-selection">
+                    <select name="page-selection" id="page-selection">
                         <option value="all">All Pages</option>
                         <option value="current">Current Page</option>
                         <option value="select">Select Pages</option>
                     </select>
-                    <input type="text" placeholder="Example: “1-2, 5”">
+                    <input type="text" name="pages" placeholder="Example: “1-2, 5”">
                 </div>
                 <div>
                     <label for="ques-type">Question Type</label>
-                    <select name="" id="ques-type">
-                        <option value="identi">Identification</option>
-                        <option value="multi">Multiple Choice</option>
-                        <option value="tf">True or False</option>
+                    <select name="ques-type" id="ques-type">
+                        <option value="identification">Identification</option>
+                        <option value="multiple_choice">Multiple Choice</option>
+                        <option value="true_false">True or False</option>
                     </select>
                 </div>
                 <div>
                     <label for="ques-num">No. of Questions</label>
-                    <input type="number" id="ques-num" placeholder="1">
+                    <input type="number" name="ques-num" id="ques-num" placeholder="1">
                 </div>
-            </form>
-        </div>
+            </div>
+            <div class="options-button">
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </div>
+        </form>
     </div>
 
 {% endblock %}

@@ -2,16 +2,23 @@ from flask import Flask
 import os
 
 def create_upload_folder():
-    # Get the current directory (assuming your script is inside ExamGenerator)
+    # Get the current directory
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
-    # Create path relative to the ExamGenerator folder
+    # Create path to uploads folder
     UPLOAD_FOLDER = os.path.join(base_dir, 'static', 'uploads')
 
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
 
-    return UPLOAD_FOLDER
+    # Create path to thumbnails folder
+    THUMBNAILS_FOLDER = os.path.join(UPLOAD_FOLDER, 'tmp')
+
+    if not os.path.exists(THUMBNAILS_FOLDER):
+        os.makedirs(THUMBNAILS_FOLDER)
+
+    return UPLOAD_FOLDER, THUMBNAILS_FOLDER
+
 
 
 def create_app():
@@ -29,7 +36,8 @@ def create_app():
     # app.secret_key = secret_key
 
     # setting up uploads folder
-    uploads = create_upload_folder()
+    uploads, thumbnails = create_upload_folder()
     app.config['UPLOAD_FOLDER'] = uploads
+    app.config['THUMBNAIL_FOLDER'] = thumbnails
 
     return app

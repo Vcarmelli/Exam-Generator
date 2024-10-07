@@ -17,17 +17,29 @@ def upload():
 def download():
     return render_template('download.html')
 
-@views.route('/selection')
+@views.route('/selection',  methods=['GET', 'POST'])
 def selection():
-    file_path = request.args.get('file_path')
-    thumbnail_path = os.path.join('static', 'uploads', 'tmp')
+    if request.method == 'GET':
+        file_path = request.args.get('file_path')
+        filename = request.args.get('file_name')
+        thumbnails = convert_file_to_thumbnail(file_path, current_app.config['THUMBNAIL_FOLDER'])
 
-    if not os.path.exists(thumbnail_path):
-        os.makedirs(thumbnail_path)
+        return render_template('preview.html', filename=filename, thumbnails=thumbnails)
+    
+    elif request.method == 'POST':
+        page_selection = request.form.get('page-selection')
+        pages = request.form.get('pages')
+        ques_type = request.form.get('ques-type')
+        ques_num = request.form.get('ques-num')
+        
+        print(f"Page Selection: {page_selection}")
+        print(f"Pages: {pages}")
+        print(f"Question Type: {ques_type}")
+        print(f"Number of Questions: {ques_num}")
 
-    thumbnails = convert_file_to_thumbnail(file_path, thumbnail_path)
+        return redirect(url_for('game.index', ques_type=ques_type))
 
-    return render_template('preview.html', thumbnails=thumbnails)
+
 
 @views.route('/quiz-complete')
 def quiz_complete():
@@ -50,7 +62,7 @@ def upload_file():
         file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
 
-        return redirect(url_for('views.selection', file_path=file_path))
+        return redirect(url_for('views.selection', file_name=file.filename, file_path=file_path))
     return redirect(request.url)
 
     
