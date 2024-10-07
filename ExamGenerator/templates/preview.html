@@ -3,8 +3,9 @@
 {% block title %} Page Selection {% endblock %} 
 
 {% block content %}
+<div class="preview-container">
     <h1 class="preview-container-title">Page Selection</h1>
-    <div class="preview-container">
+    <div class="preview-main">
         <div class="file-container" id="thumbnail-container">
             <div class="file-header">
                 <h2>{{ filename }}</h2>
@@ -42,8 +43,8 @@
                     <label for="ques-type">Question Type</label>
                     <select name="ques-type" id="ques-type">
                         <option value="identification">Identification</option>
-                        <option value="multiple_choice">Multiple Choice</option>
-                        <option value="true_false">True or False</option>
+                        <option value="multiple-choice">Multiple Choice</option>
+                        <option value="true-or-false">True or False</option>
                     </select>
                 </div>
                 <div>
@@ -56,5 +57,5 @@
             </div>
         </form>
     </div>
-
+</div>
 {% endblock %}

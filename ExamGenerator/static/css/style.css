@@ -233,11 +233,21 @@ h1 {
 }
 
 
-.preview-container-title {
-    margin: 1em 2em 0 2em;
-}
+
+
 
 .preview-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../images/preview_bg.svg');
+    background-size: cover;
+}
+
+.preview-container-title {
+    padding: 1em 2em 0 2em;
+}
+
+.preview-main {
     display: flex;
     justify-content: center;
     gap: 3%;
@@ -282,6 +292,14 @@ h1 {
     gap: 2.5em;
     padding: 3em 0;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.7);
+}
+
+.thumbnail-item img {
+    border-radius: 5px;
+}
+
+.thumbnail-item img:hover {
+    border: 2px solid var(--primary-color);
 }
 
 .thumbnail-item p {

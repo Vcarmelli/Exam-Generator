@@ -1,6 +1,6 @@
 from flask import Blueprint, current_app, render_template, redirect, url_for, request
 import os
-from .thumbnails import convert_file_to_thumbnail
+from .util import convert_file_to_thumbnail
 
 views = Blueprint('views', __name__)
 
@@ -15,7 +15,11 @@ def upload():
 
 @views.route('/download')
 def download():
-    return render_template('download.html')
+    # integrate model to generate questions here
+
+    ques_type = request.args.get('ques_type')
+    return render_template('download.html', ques_type=ques_type)
+
 
 @views.route('/selection',  methods=['GET', 'POST'])
 def selection():
@@ -31,13 +35,15 @@ def selection():
         pages = request.form.get('pages')
         ques_type = request.form.get('ques-type')
         ques_num = request.form.get('ques-num')
+
+        # NOTE: add form validation here
         
         print(f"Page Selection: {page_selection}")
         print(f"Pages: {pages}")
         print(f"Question Type: {ques_type}")
         print(f"Number of Questions: {ques_num}")
 
-        return redirect(url_for('game.index', ques_type=ques_type))
+        return redirect(url_for('views.download', ques_type=ques_type))
 
 
 
