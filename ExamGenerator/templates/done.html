@@ -1,0 +1,16 @@
+{% extends "layout/base.html" %}
+
+{% block title %} Exam Complete {% endblock %} 
+
+{% block content %}
+<div class="score-container">
+    <div class="score-text" >
+        <h1> Successfully Downloaded! </h1>
+        <p> Thank you for using EasyGen. </p>
+    </div>
+    
+    <div class="score-buttons">
+        <a class="btn btn-secondary" href=" {{ url_for('views.index') }}">Back to Home</a>
+    </div>
+</div>
+{% endblock %}
