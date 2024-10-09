@@ -34,10 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 dropArea.classList.add('drag-over-effect');
             }
         });
+        console.log("DRAG OVER");
     };
 
     dropArea.ondragleave = () => {
         dropArea.classList.remove('drag-over-effect');
+        console.log("DRAG LEAVE");
     };
 
     dropArea.ondrop = (e) => {
@@ -52,12 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
+            console.log("ON DROP - IF");
         } else {
             [...e.dataTransfer.files].forEach((file) => {
                 if (typeValidation(file.type)) {
                     uploadFile(file);
                 }
             });
+            console.log("ON DROP - ELSE");
         }
     };
 

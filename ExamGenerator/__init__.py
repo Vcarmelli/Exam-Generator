@@ -1,6 +1,7 @@
 from flask import Flask
 import os
 
+
 def create_upload_folder():
     # Get the current directory
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -31,9 +32,9 @@ def create_app():
     app.register_blueprint(views)
     app.register_blueprint(game)
 
-    # import secrets
-    # secret_key = secrets.token_hex(16)  # Generates a random 16-byte hex key
-    # app.secret_key = secret_key
+    import secrets
+    secret_key = secrets.token_hex(16)  # Generates a random 16-byte hex key
+    app.config['SECRET_KEY'] = secret_key
 
     # setting up uploads folder
     uploads, thumbnails = create_upload_folder()

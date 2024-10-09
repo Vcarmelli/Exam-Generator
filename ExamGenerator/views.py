@@ -21,6 +21,15 @@ def download():
     return render_template('download.html', ques_type=ques_type)
 
 
+@views.route('/review-questions')
+def review_questions():
+    return render_template('review-ques.html')
+
+@views.route('/review-answers')
+def review_answers():
+    return render_template('review-ans.html')
+
+
 @views.route('/selection',  methods=['GET', 'POST'])
 def selection():
     if request.method == 'GET':
@@ -47,10 +56,14 @@ def selection():
 
 
 
-@views.route('/quiz-complete')
+@views.route('/quiz-complete', methods=['GET', 'POST'])
 def quiz_complete():
     score = request.args.get('score')
     total = request.args.get('total')
+
+    ajax = '_ajax' in request.form
+    if ajax:        # Add these
+        return ''   # two lines
     return render_template('quiz-complete.html', score=score, total=total)
 
 

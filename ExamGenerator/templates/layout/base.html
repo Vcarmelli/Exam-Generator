@@ -7,10 +7,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
+    {% block css_file %} {% endblock %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    {% block css_file %} {% endblock %}
-    
     <title>{% block title %} {% endblock %} | Easygen</title>
 </head>
 <body>

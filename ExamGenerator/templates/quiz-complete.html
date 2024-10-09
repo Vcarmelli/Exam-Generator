@@ -1,5 +1,9 @@
 {% extends "layout/base.html" %}
 
+{% block css_file %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">    
+{% endblock %}
+
 {% block title %} Exam Complete {% endblock %} 
 
 {% block content %}
@@ -12,8 +16,18 @@
     </div>
     
     <div class="score-buttons">
-        <a class="btn btn-primary">Review Answers</a>
+        <button type="button" id="review-ans" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewAnsModal">
+            Review Answers
+        </button>
         <a class="btn btn-secondary" href=" {{ url_for('views.index') }}">Back to Home</a>
     </div>
+
+    <!-- Answers modal -->
+    {% include "review-ans.html" %}
 </div>
+{% endblock %}
+
+{% block js_file %}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>    
 {% endblock %}
