@@ -295,6 +295,19 @@ h1 {
     align-items: center;
 }
 
+.rev-ques-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.rev-ques-buttons a {
+    width: 40vw;
+    margin: 4em 2em;
+    text-align: center;
+}
+
 .edit-question {
     width: 65%;
     text-align: left;

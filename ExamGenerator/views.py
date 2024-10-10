@@ -27,7 +27,8 @@ def download():
 
 @views.route('/review-questions')
 def review_questions():
-    return render_template('review-ques.html')
+    ques_type = request.args.get('ques_type')
+    return render_template('review-ques.html', ques_type=ques_type)
 
 @views.route('/review-answers')
 def review_answers():
@@ -64,7 +65,7 @@ def selection():
 def quiz_complete():
     score = request.args.get('score')
     total = request.args.get('total')
-    
+
     return render_template('quiz-complete.html', score=score, total=total)
 
 

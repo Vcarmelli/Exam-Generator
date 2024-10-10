@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
-{% block title %} Page Selection {% endblock %} 
+{% block title %} Review Questions {% endblock %} 
 
 {% block content %}
 <h1 class="page-title">Review Questions</h1>
@@ -115,6 +115,12 @@
                 </div>
             </div>    
         </div>
+    </div>
+
+
+    <div class="rev-ques-buttons">
+        <a class="btn btn-secondary" href="{{ url_for('views.download', ques_type=ques_type) }}">Back</a>
+        <a class="btn btn-primary" href="{{ url_for('views.done') }}">Download Exam</a>
     </div>
 </div>
 {% endblock %}
