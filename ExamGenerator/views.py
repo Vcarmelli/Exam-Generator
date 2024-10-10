@@ -13,6 +13,10 @@ def index():
 def upload():
     return render_template('upload.html')  
 
+@views.route('/done')
+def done():
+    return render_template('done.html') 
+
 @views.route('/download')
 def download():
     # integrate model to generate questions here

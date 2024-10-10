@@ -19,3 +19,18 @@ function passData(score, totalQuestion) {
     })
     .catch( error => console.error("Error:", error));
 }
+
+$(document).ready(function() {
+    $('#options-form').on('submit', function(event) {
+        event.preventDefault();
+        // Show the loader
+        $('.loader-container').css('display', 'flex');
+
+        const form = this;
+        setTimeout(() => {
+            form.submit(); 
+        }, 3000);
+    });
+});
+
+

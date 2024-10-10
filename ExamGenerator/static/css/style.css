@@ -201,9 +201,12 @@ h1 {
     margin: 1.5em 2em;
 }
 
+.modal-content {
+    padding: 1em 1.5em;
+}
+
 .modal-title {
     text-align: left;
-    padding: 0 1em;
 }
 
 .modal-title h3 {
@@ -219,7 +222,8 @@ h1 {
     box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
 }
 
-.results h4 {
+.results h4,
+.results h6 {
     font-weight: bold;
 }
 
@@ -238,6 +242,30 @@ h1 {
 
 .wrong-ans h4 {
     color: var(--red-color);
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8em;
+    margin: 1.4em;
+}
+
+.choice-letter {
+    padding: 0.6em 0.8em;
+    width: 5%;
+    border-radius: 5px;
+    background-color: var(--background-color);
+}
+
+.correct-choice {
+    background-color: var(--green-color);
+    color: white;
+}
+
+.wrong-choice {
+    background-color: var(--red-color);
+    color: white;
 }
 
 
@@ -270,8 +298,7 @@ h1 {
     width: 60%;
 }
 
-.download-buttons a,
-.download-buttons button {
+.download-buttons a {
     display: block;
     padding: 1.5em;
     margin: 2em auto 0 auto;
@@ -386,4 +413,59 @@ h1 {
     width: 90%;
     display: block;
     margin: 0 auto;
+}
+
+
+/* Loader Container CSS */
+.loader-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Loader CSS */
+.loader {
+    width: 40px;
+    height: 20px;
+    background: orange;
+    position: absolute;
+    animation: l9-0 1.5s infinite linear;
+}
+.loader:before,
+.loader:after {
+    content: "";
+    position: absolute;
+    background: inherit;
+    bottom: 100%;
+    width: 50%;
+    height: 100%;
+    animation: inherit;
+    animation-name: l9-1;
+}
+.loader:before {
+    left: 0;
+    transform-origin: bottom left;
+    --s: -1;
+}
+.loader:after {
+    right: 0;
+    transform-origin: bottom right;
+}
+@keyframes l9-0 {
+    0%, 10% {transform: translateY(0%) scaleY(1)}
+    49.99% {transform: translateY(-50%) scaleY(1)}
+    50% {transform: translateY(-50%) scaleY(-1)}
+    90%, 100% {transform: translateY(-100%) scaleY(-1)}
+}
+@keyframes l9-1 {
+    10%, 90% {transform: rotate(0deg)}
+    50% {transform: rotate(calc(var(--s,1)*180deg))}
 }
