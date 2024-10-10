@@ -1,9 +1,17 @@
-function passData(score, totalQuestion) {
+const updateProgress = (percent) => {
+    const progressBar = document.getElementById('progress');
+    if (progressBar) {
+        progressBar.style.width = percent + '%';
+        progressBar.textContent = Math.round(percent) + '%';
+    }
+};
+
+const passData = (score, totalQuestion) => {
     const data = {
         'score': score, 
         'totalQuestion': totalQuestion
     }
-
+    
     fetch( `${window.origin}/quiz-complete/responses`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -20,7 +28,15 @@ function passData(score, totalQuestion) {
     .catch( error => console.error("Error:", error));
 }
 
+const editAnswers = () => {
+    $('.answers-section').css('display', 'none');
+    $('#modify-answers').css('display', 'flex');
+}
+
 $(document).ready(function() {
+    $('#edit-ans-btn').click(editAnswers);
+
+
     $('#options-form').on('submit', function(event) {
         event.preventDefault();
         // Show the loader

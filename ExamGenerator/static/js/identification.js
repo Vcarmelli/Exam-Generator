@@ -29,13 +29,7 @@ $(document).ready(function () {
         feedback.classList.remove("correct-message", "incorrect-message"); // Reset feedback classes
         Submit.style.display = "inline-block";
         Cancel.innerText = "Cancel";
-        let updateProgress = (percent) => {
-            const progressBar = document.getElementById('progress');
-            if (progressBar) {
-                progressBar.style.width = percent + '%';
-                progressBar.textContent = Math.round(percent) + '%';
-            }
-        };
+
         let progressPercentage = ((index + 1) / totalQuestion) * 100;
         updateProgress(progressPercentage);
     };

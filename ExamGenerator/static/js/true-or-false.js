@@ -34,17 +34,7 @@ $(document).ready(function () {
         if (message) {
             message.remove();  // Clear previous feedback message
         }
-
-        // Update Progress Bar
-        let updateProgress = (percent) => {
-            const progressBar = document.getElementById('progress');
-            if (progressBar) {
-                progressBar.style.width = percent + '%';
-                progressBar.textContent = Math.round(percent) + '%';
-            }
-        };
-
-        // Calculate and update progress
+        
         let progressPercentage = ((index + 1) / totalQuestion) * 100;
         updateProgress(progressPercentage);
     };

@@ -1,14 +1,120 @@
 {% extends "layout/base.html" %}
 
+{% block css_file %}   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
 {% block title %} Page Selection {% endblock %} 
 
 {% block content %}
-<div>
-    <h1 class="page-title">Review Questions</h1>
+<h1 class="page-title">Review Questions</h1>
+<div class="rev-ques-container">
 
-    <div>
-        
+    <!-- MULTIPLE CHOICE -->
+    <div class="edit-question">
+        <div class="edit-ques-header">
+            <h3>Question 1</h3>
+            <button type="button"><i class="fa-solid fa-trash-can" style="color: #FFFFFF;"></i></button>
+        </div>
+        <div class="question-section">
+            <label for="question">Question</label>
+            <input type="text" name="question" id="question" value="Which of the following is a primary cause of climate change?">
+        </div>
+        <div>
+            <div class="ans-sec-header">
+                <span>Correct Answer</span>
+                <button type="button" id="edit-ans-btn"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
+            </div>
+
+            <div class="answers-section">
+                <div>
+                    <span class="choice-letter">a</span>
+                    <span>Natural variations in the Earth's orbit</span>
+                </div>
+                <div>
+                    <span class="choice-letter">b</span>
+                    <span>Human activities such as burning fossil fuels and deforestation</span>
+                </div>
+                <div>
+                    <span class="choice-letter answer">c</span>
+                    <span>Volcanic eruptions</span>
+                </div>
+                <div>
+                    <span class="choice-letter">d</span>
+                    <span>Changes in solar radiation</span>
+                </div>
+            </div> 
+
+            <div class="answers-section" id="modify-answers">
+                <div>
+                    <span class="choice-letter">a</span>
+                    <input type="text" name="" value="Natural variations in the Earth's orbit">
+                </div>
+                <div>
+                    <span class="choice-letter">b</span>
+                    <input type="text" name="" value="Human activities such as burning fossil fuels and deforestation">
+                </div>
+                <div>
+                    <span class="choice-letter answer">c</span>
+                    <input type="text" name="" value="Volcanic eruptions">
+                </div>
+                <div>
+                    <span class="choice-letter">d</span>
+                    <input type="text" name="" value="Changes in solar radiation">
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- TRUE OR FALSE -->
+    <div class="edit-question">
+        <div class="edit-ques-header">
+            <h3>Question 2</h3>
+            <button type="button"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>
+        </div>
+        <div class="question-section">
+            <label for="question">Question</label>
+            <input type="text" name="question" id="question" value="Which of the following is a primary cause of climate change?">
+        </div>
+        <div>
+            <div class="ans-sec-header">
+                <span>Correct Answer</span>
+                <button type="button"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
+            </div>
+            <div class="answers-section">
+                <div>
+                    <span class="choice-letter answer">a</span>
+                    <span>True</span>
+                </div>
+                <div>
+                    <span class="choice-letter">b</span>
+                    <span>False</span>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+    <!-- IDENTIFICATION -->
+    <div class="edit-question">
+        <div class="edit-ques-header">
+            <h3>Question 3</h3>
+            <button type="button"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>
+        </div>
+        <div class="question-section">
+            <label for="question">Question</label>
+            <input type="text" name="question" id="question" value="What is the capital city of France?">
+        </div>
+        <div>
+            <div class="ans-sec-header">
+                <span>Correct Answer</span>
+                <button type="button"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
+            </div>
+            <div class="answers-section">
+                <div>
+                    <span>Paris</span>
+                </div>
+            </div>    
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -64,10 +64,7 @@ def selection():
 def quiz_complete():
     score = request.args.get('score')
     total = request.args.get('total')
-
-    ajax = '_ajax' in request.form
-    if ajax:        # Add these
-        return ''   # two lines
+    
     return render_template('quiz-complete.html', score=score, total=total)
 
 
