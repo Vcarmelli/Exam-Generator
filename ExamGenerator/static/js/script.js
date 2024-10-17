@@ -33,11 +33,28 @@ const editAnswers = () => {
     $('#modify-answers').css('display', 'flex');
 }
 
+const addQuestionType = () => {
+    // add input type and quantity
+    console.log("CLICKED TYPE QUES BTN")
+}
+
 $(document).ready(function() {
     $('#edit-ans-btn').click(editAnswers);
+    $('#ques-btn').click(addQuestionType);
 
 
     $('#options-form').on('submit', function(event) {
+        event.preventDefault();
+        // Show the loader
+        $('.loader-container').css('display', 'flex');
+
+        const form = this;
+        setTimeout(() => {
+            form.submit(); 
+        }, 3000);
+    });
+
+    $('#upload-form').on('submit', function(event) {
         event.preventDefault();
         // Show the loader
         $('.loader-container').css('display', 'flex');

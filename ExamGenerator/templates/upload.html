@@ -2,22 +2,25 @@
 
 {% block css_file %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block title %} File Upload {% endblock %} 
 
 {% block content %}
+<img src="../static/images/main_bg.svg" class="bg-image">
 <div class="header-section">
-    <h1>EasyGen</h1>
-    <p>Upload and attach files to generate exam (PDF, DOCX, PPT, or other file formats).</p>
+    <a href=" {{ url_for('views.index') }}"><i class="fa-solid fa-chevron-left"></i> Go back</a>
+    <h1>Upload</h1>
+    <p>Upload and attach files to generate exam (PDF and Word file formats).</p>
 </div>
 
-<form method="POST" action="/upload/file" enctype="multipart/form-data">
+<form method="POST" action="/upload/file" enctype="multipart/form-data" id="upload-form">
     <div class="container">
         <div class="drop-section">
             <div class="col">
                 <div class="upload-icon">
-                    <img src="static/images/up.svg" alt="file">
+                    <img src="../static/images/up.svg" alt="file">
                 </div>
                 <a class="file-selector">Click to upload</a>
                 <span>or drag and drop.</span>
@@ -32,8 +35,12 @@
             </div>            
         </div>
     </div>
-    <div class="upload-btn"><button class="btn btn-primary" role="button" type="submit">Submit</button></div>
+    <div class="upload-btn"><button id="upload" class="btn btn-primary" role="button" type="submit">Upload</button></div>
 </form>
+
+<div class="loader-container">
+    <div class="loader"></div>
+</div>
 {% endblock %}
 
 {% block js_file %} 

@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const listContainer = document.querySelector('.list');
     const fileSelector = document.querySelector('.file-selector');
     const fileSelectorInput = document.querySelector('.file-selector-input');
+    const Upload = document.querySelector('#upload');
 
     fileSelector.onclick = () => fileSelectorInput.click();
     fileSelectorInput.onchange = () => {
@@ -103,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         listContainer.prepend(li);
+        Upload.innerText = "Submit";
 
         let http = new XMLHttpRequest();
         let data = new FormData();

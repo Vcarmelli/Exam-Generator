@@ -24,12 +24,20 @@
     font-weight: normal;
 }
 
+.header-section a {
+    text-decoration: none;
+    color: var(--black-color);
+    padding-bottom: 2em;
+
+}
+
 .drop-section {
     display: flex;
     min-height: 350px;
-    border: 2px dashed var(--black-color);
-    margin: 7px 35px;
-    border-radius: 12px;
+    margin: 7px 45px;
+    border-radius: 2em;
+    background-color: white;
+    box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
 }
 
 .drop-section .col:first-child {
@@ -249,7 +257,8 @@
 }
 
 .upload-btn {
-    padding-left: 5%;
+    text-align: end;
+    padding-right: 7%;
 }
 
 .upload-btn button {

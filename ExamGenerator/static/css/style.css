@@ -24,9 +24,9 @@ body {
     overflow-x: hidden;
 }
 
-h1 {
+/* h1 {
     color: var(--primary-color);
-}
+} */
 
 .page-title {
     width: 100%;
@@ -67,6 +67,13 @@ h1 {
     color: var(--black-color);
     border: 2px solid var(--black-color);
     background-color: white !important;
+}
+
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 
@@ -143,7 +150,7 @@ h1 {
 .preview-container {
     width: 100vw;
     height: 100vh;
-    background-image: url('../images/preview_bg.svg');
+    background-image: url('../images/main_bg.svg');
     background-size: cover;
 }
 
@@ -151,44 +158,22 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 3%;
-    padding: 2%;
+    padding: 0.5% 7%;
 }
 
 .file-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     width: 55vw;
     height: 70vh;
-    padding: 0 2em 2em 2em;
-    border-radius: 1em;
-    background-color: var(--primary-color);
-    box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
+    gap: 2em;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
-.file-header {
-    display: flex;
-    flex-basis: 100%;
-    width: 100%;
-    color: white;
-    padding: 1.5em 0;
-    background-color: var(--primary-color);
-    position: sticky;
-    top: 0;
-    z-index: 1; 
-} 
-
-.pages-container {
-    background-color: var(--gray-color);
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2.5em;
-    padding: 3em 0;
-    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.7);
+.file-container::-webkit-scrollbar {
+    display: none;
 }
 
 .thumbnail-item img {
@@ -208,16 +193,40 @@ h1 {
     flex-direction: column;
     gap: 1em;
     border-radius: 1em;
+    width: 25vw;
     background-color: var(--background-color);
     box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
     padding: 1.2em 2em;
     margin: 0.8em;
 }
 
-.options div {
+.options-header {
+    text-align: center;
+    border-bottom: 1px solid var(--black-color);
+}
+
+.options-header h2 {
+    padding-bottom: 0.5em;
+}
+
+.options-question {
+    font-weight: bold;
     display: flex;
-    flex-direction: column;
-    gap: 0.8em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.options-question button {
+    padding: 0.2em 0.7em;
+}
+
+.options-input {
+    display: flex;
+    gap: 1em;
+}
+
+.options-input.type {
+    padding: 0.8em;
 }
 
 .edit-question input,
@@ -227,11 +236,11 @@ h1 {
     border-radius: 5px;
     border: 1px solid var(--gray-color);
     padding: 0.7em;
+    width: 90%;
 }
 
 .options select {
-    background-color: var(--accent-color);
-    color: white;
+    width: 100%;
 }
 
 .options label {

@@ -1,55 +1,69 @@
 {% extends "layout/base.html" %}
 
+{% block css_file %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
 {% block title %} Page Selection {% endblock %} 
 
 {% block content %}
+<img src="../static/images/main_bg.svg" class="bg-image">
 <div class="preview-container">
-    <h1 class="page-title">Page Selection</h1>
+    <a href=" {{ url_for('views.upload') }}"><i class="fa-solid fa-chevron-left"></i> Go back</a>
+    <h1 class="page-title"> Select Page</h1>
     <div class="preview-main">
         <div class="file-container" id="thumbnail-container">
-            <div class="file-header">
-                <h2>{{ filename }}</h2>
-            </div>
-
-            <div class="pages-container">
-                {% if thumbnails %}
-                    {% for thumbnail in thumbnails %}
-                        <div class="thumbnail-item">
-                            <img src="../static/uploads/tmp/{{ thumbnail }}">
-                            <p>{{ loop.index }}</p>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>No thumbnails available.</p>
-                {% endif %}
-            </div>
+            {% if thumbnails %}
+                {% for thumbnail in thumbnails %}
+                    <div class="thumbnail-item">
+                        <img src="../static/uploads/tmp/{{ thumbnail }}">
+                        <p>{{ loop.index }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No thumbnails available.</p>
+            {% endif %}
         </div>
 
         <form action="" method="POST" class="options-container" id="options-form">
-            <div>
-                <h2>Options</h2>
-            </div>
             <div class="options">
-                <div>
-                    <label for="page-selection">Page Selection</label>
-                    <select name="page-selection" id="page-selection">
-                        <option value="all">All Pages</option>
-                        <option value="current">Current Page</option>
-                        <option value="select">Select Pages</option>
-                    </select>
-                    <input type="text" name="pages" placeholder="Example: “1-2, 5”">
-                </div> 
-                <div>
-                    <label for="ques-type">Question Type</label>
-                    <select name="ques-type" id="ques-type">
-                        <option value="identification">Identification</option>
-                        <option value="multiple_choice">Multiple Choice</option>
-                        <option value="true_or_false">True or False</option>
-                    </select>
+                <div class="options-header">
+                    <h2>Options</h2>
                 </div>
                 <div>
-                    <label for="ques-num">No. of Questions</label>
-                    <input type="number" name="ques-num" id="ques-num" placeholder="1">
+                    <label for="filename">File Name</label>
+                        <input type="text" name="filename" id="filename" value="{{ filename }}">
+                </div> 
+                <div>
+                    <label for="page-selection">Page Selection</label>
+                    <div class="options-input">
+                        <select name="page-selection" id="page-selection">
+                            <option value="all">All Pages</option>
+                            <option value="current">Current Page</option>
+                            <option value="select">Select Pages</option>
+                        </select>
+                        <input type="text" name="pages" placeholder="Example: “1-2, 5”">
+                    </div>
+                </div> 
+                <div>
+                    <div class="options-question">
+                        <h3>Questions<h3>
+                        <button type="button" class="btn btn-primary" id="ques-btn">+</button>
+                    </div>
+                    <div class="options-input type">
+                        <div>
+                            <label for="ques-type">Type of Question</label>
+                            <select name="ques-type" id="ques-type">
+                                <option value="identification">Identification</option>
+                                <option value="multiple_choice">Multiple Choice</option>
+                                <option value="true_or_false">True or False</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ques-num">Quantity</label>
+                            <input type="number" name="ques-num" id="ques-num" placeholder="1">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="options-button">
