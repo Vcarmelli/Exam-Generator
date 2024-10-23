@@ -1,0 +1,672 @@
+:root{
+    --primary-color:#5B699C;
+    --secondary-color: #ECD7EC;
+    --tertiary-color: #D1E5F9;
+    --accent-color: #1E4050;
+
+    --background-color: #EFF2FE;
+    --black-color: #2B1B1B;
+    --gray-color: #D9D9D9;
+    --green-color: #4CAF50;;
+    --green-light: #ADFFE4;
+    --red-color: #E72636;
+    --red-light: #FFADC8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--black-color);
+    overflow-x: hidden;
+    background-color: #F1FEF8;
+}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    z-index: 1000; 
+    margin-bottom: 200px;
+}
+
+header .navbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 1250px;
+    margin: 0 auto;
+    text-shadow: 1px 1px white;
+    margin-bottom: 20px;
+}
+
+.navbar .logo {
+    color: #fff;
+    width: 30px; 
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.navbar h1 {
+    font-weight: 500;
+    font-size: 2rem;
+    color: black;
+}
+
+.navbar .menu-link {
+    display: block;
+    position: fixed;
+    padding: 50px 20px; 
+    top: 0;
+    right: 0;    
+    margin-right: 100px;
+}
+
+.card-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(245px, auto));
+    margin: 10vh auto;
+    padding: 20px;
+    gap: 20px;
+    max-width: 1250px;  
+    align-items: center;   
+    justify-content: center; 
+}
+
+.greeting {
+    display: column;
+}
+
+.greeting h3{
+  font-size: 2.54rem;
+}
+
+.card-list .card-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.04);
+    list-style: none;
+    cursor: pointer;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: border 0.5s ease;
+    height: 70px;
+}
+.card-list .card-item:nth-of-type(1) {
+    background-color: #ECD7EC;
+}
+.card-list .card-item:nth-of-type(2) {
+    background-color: #D1E5F9;
+}
+.card-list .card-item:nth-of-type(3) {
+    width: 60%;
+    background-color: #BAE6E2;
+}
+
+.card-list .card-item:hover {
+    border: 2px solid #000;
+}
+
+.card-list span {
+    display: inline-block;
+    background: #F7DFF5;
+    margin-top: 32px;
+    padding: 8px 15px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.card-item h3 {
+    color: #000;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.card-item p {
+    color: #000;
+    font-size: 0.9rem;
+}
+
+hr {
+    margin: 10px auto; /* Center horizontally */   
+     border-top: 2px solid #929292;
+    max-width: 1250px;
+    align-items: center;
+}
+/*for review cards*/
+.review{
+    margin: 0.5vh auto;
+    padding: 40px;
+    padding-left: 140px;
+    justify-content: center;
+}
+.review h2{
+    font-size: 2.5rem;
+    font-weight: 1000;
+}
+.card-list1 {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 50px;
+    max-width: 1250px;
+}
+
+.card-list1 .card-item {
+    display: flex;
+    flex-direction: column; 
+    width: 240px;
+    border: 1px solid #ccc; 
+    border-radius: 10px;
+    overflow: hidden; 
+    width: 20%;
+    margin: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
+}
+.card-list1 .card-body {
+    padding: 20px; 
+    flex: 1; 
+    border-top: 1px solid transparent;
+}
+
+.card-list1 .card-item:hover {
+    border: 2px solid #000; 
+}
+
+.card-list1 .card-item:hover {
+    border: 2px solid #000;
+}
+
+.card-list1 .card-item:nth-of-type(1) .card-header {
+    padding: 10px; 
+    background-color: #FFCA95;
+}
+
+.card-list1 .card-item:nth-of-type(2) .card-header {
+    padding: 10px; 
+    background-color: #FFCA95;
+}
+
+.card-list1 .card-item:nth-of-type(3) .card-header {
+    padding: 10px; 
+    background-color: #BAE6E2;
+}
+
+.card-list1 .card-item:nth-of-type(4) .card-header {
+    padding: 10px; 
+    background-color: #BAE6E2;
+}
+
+
+.card-list1 span {
+    display: inline-block;
+    background: #F7DFF5;
+    margin-top: 32px;
+    padding: 8px 15px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.card-item1 h3 {
+    color: #000;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.card-item1 p {
+    color: #000;
+    font-size: 0.9rem;
+}
+
+h2{
+    font-weight: 500;
+    font-size: 2rem;
+    color: black;
+}
+
+/*for exam*/
+.exam{
+    margin: 0.5vh auto;
+    padding: 40px;
+    padding-left: 140px;
+    justify-content: center;
+}
+.exam h2{
+    font-size: 2.5rem;
+    font-weight: 1000;
+}
+.exam .card-list1 {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 50px;
+    max-width: 1250px;
+}
+
+.exam .card-list1 .card-item {
+    display: flex;
+    flex-direction: column; 
+    width: 240px;
+    border: 1px solid #ccc; 
+    border-radius: 10px;
+    overflow: hidden; 
+    width: 20%;
+    margin: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
+}
+.exam .card-list1 .card-body {
+    padding: 20px; 
+    flex: 1; 
+    border-top: 1px solid transparent;
+}
+
+.exam .card-list1 .card-item:hover {
+    border: 2px solid #000; 
+}
+
+.exam .card-list1 .card-item:hover {
+    border: 2px solid #000;
+}
+
+.exam .card-list1 .card-item:nth-of-type(1) .card-header {
+    padding: 10px; 
+    background-color: #D1E5F9;
+}
+
+.exam .card-list1 .card-item:nth-of-type(2) .card-header {
+    padding: 10px; 
+    background-color: #D1E5F9;
+}
+
+.exam .card-list1 .card-item:nth-of-type(3) .card-header {
+    padding: 10px; 
+    background-color: #ECD7EC;
+}
+
+.exam .card-list1 .card-item:nth-of-type(4) .card-header {
+    padding: 10px; 
+    background-color: #ECD7EC;
+}
+
+.exam .card-list1 span {
+    display: inline-block;
+    background: #F7DFF5;
+    margin-top: 32px;
+    padding: 8px 15px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.exam .card-item1 h3 {
+    color: #000;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.exam .card-item1 p {
+    color: #000;
+    font-size: 0.9rem;
+}
+
+.exam h2{
+    font-weight: 500;
+    font-size: 2rem;
+    color: black;
+}
+
+/*for homepage*/
+
+nav ul {
+    list-style: none;
+    padding: 10px;
+    text-align: center;
+    position: fixed; 
+    top: 0;
+    left: 0; 
+    right: 0;
+    border-bottom: 1px solid #000; 
+    padding-bottom: 10px; 
+    margin-bottom: 30px; 
+}
+
+
+nav ul li {
+    display: inline;
+    margin: 7%;
+}
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+nav.hr{
+    max-width: 122px;
+    border-top: black;
+}
+nav ul li a.active {
+    font-weight: bold;
+}
+
+.welcome-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.welcome-section h2 {
+    margin: 0;
+    font-size: 7rem;
+    font-weight: 700;
+}
+.welcome-section p {
+    right: 0;
+    margin: 25px;
+    font-size: 1rem;
+}
+
+
+.tagline{
+    display: inline-block;
+    justify-content: space-between;
+    margin: 4%;
+    padding: 5px;
+}
+
+.tagline p{
+    font-size: 1rem;
+
+}
+
+.getstarted{
+    background-color: #9ECAF5;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 20px;
+    width: 200px;
+    border: 1px solid transparent;
+    margin: 25px;
+}
+/*for cards*/
+.info .card-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    margin: 3vh auto;
+    padding: 20px;
+    gap: 20px; 
+    align-items: stretch; 
+    justify-content: center;
+}
+
+.info .card-item {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.04);
+    list-style: none;
+    cursor: pointer;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: border 0.5s ease;
+    min-height: 90px;
+    min-width: 350px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 40px; 
+}
+
+.info .card-item:nth-of-type(1) {
+    background-color: #ECD7EC;
+}
+.info .card-item:nth-of-type(2) {
+    background-color: #D1E5F9;
+}
+.info .card-item:nth-of-type(3) {
+    background-color: #FFCA95;
+}
+
+.info .card-list span {
+    display: inline-block;
+    background: #F7DFF5;
+    margin-top: 32px;
+    padding: 8px 15px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.info .card-item h3 {
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.info .card-item p {
+    color: #000;
+    font-size: 0.9rem;
+}
+
+.aboutus-section {
+    display: inline-block;
+    padding: 50px;
+    width: 100%; 
+}
+
+.aboutus-section .titles {
+    display: flex;
+    align-items: center; 
+    margin-left: 50px;
+    gap: 50px;
+    margin-bottom: -30px;
+    color: black;
+}
+
+.aboutus-section .titles h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: black;
+ 
+}
+
+.aboutus-section .titles .oval {
+    height: 50px;
+    background: linear-gradient(90deg, #D1E5F9 0%, #83BBF4 100%);
+    width: 75%; 
+    border-radius: 100px;
+}
+
+.story-container {
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+    padding: 50px
+}
+
+.story-container .story {
+    display: flex;
+    flex-direction: column; 
+    flex: 1;
+}
+
+.story-container img {
+    max-width: 600px; 
+    height: auto; 
+    flex-shrink: 0; 
+}
+
+.story-container .story h1{
+    font-size: 3rem;
+    font-weight: 600;
+    color: black;
+}
+
+
+.story-container .story p{
+    font-size: 1rem;
+    text-align: justify;
+    letter-spacing: 0.1rem;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+.mind {
+    margin: 70px;
+    font-size: 2rem;
+}
+
+.mind .photos {
+    display: flex;
+    gap: 20px; 
+    align-items: center;
+    justify-content: center; 
+    flex-wrap: wrap;
+}
+
+.mind .photos .aboutthem {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center;
+    width: 250px; 
+    color: black;
+}
+
+.mind .photos p {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.mind h1 {
+    color:black
+}
+
+.mind .photos img {
+    width: 50%;
+}
+
+.mind .photos h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 0;
+    color: black;
+}
+
+.mind .photos .contact {
+    padding: 10px;
+    background-color: #00B1DD;
+    border-radius: 20px;
+    border: none;
+    width: 70%; 
+    color: white;
+    cursor: pointer;
+    margin-top: 10px; 
+}
+
+.mind .photos .contact:hover {
+    background-color: #0088aa;
+}
+
+.jump-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.jump {
+    display: block;
+    background: #1E1E20;
+    padding: 20px;
+    border-radius: 50px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.04);
+    border: 2px solid transparent;
+    transition: border 0.5s ease;
+    height: 350px;
+    color: white;
+    max-width: 1250px;
+}
+.jump h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin: 20px;
+}
+
+.jump p {
+    font-size: 1.5rem;
+    font-weight: 200;
+    color: gray;
+    margin: 20px;
+}
+.jump .contact {
+    padding: 10px;
+    background-color: #00B1DD;
+    border-radius: 20px;
+    border: none;
+    width: 30%;
+    align-items: center;
+    color: white;
+    font-size: 21px;
+    margin: 20px;
+
+}
+.contanctus-section {
+    margin: 20px;
+    padding: 50px;
+}
+
+.contact-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between; /* Ensures even space between both contacts */
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+.contacts, .contacts1 {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: 48%; /* Ensures both take up no more than 48% of the width */
+}
+
+.contacts h1, .contacts1 h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    height: 60px;
+}
+
+.contacts h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.contacts p, .contacts1 p {
+    font-size: 1.5rem;
+    text-align: justify;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+
+.texter {
+    display: flex; 
+    border-bottom: 1px solid #000; 
+    padding-bottom: 10px; 
+    margin-bottom: 10px; 
+    width: 100%; 
+    justify-content: space-between; 
+}
+
+.contacts h1{
+    font-size: 5rem;
+    margin-bottom: 30px;
+    color: black;
+}
+.contacts h2{
+    font-size: 4rem;
+    margin-bottom: 30px;
+}
+

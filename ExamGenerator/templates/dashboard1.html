@@ -1,0 +1,83 @@
+{% extends "/layout/game-base.html" %}
+
+{% block css_file %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dash.css') }}">
+{% endblock %}
+
+{% block title %} File Upload {% endblock %} 
+
+{% block content %}
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="" width="10%" class="logo">
+                <h1>EasyGen</h1>
+            </div>
+            <div class="menu-link">
+                <img src="https://static-00.iconduck.com/assets.00/search-icon-256x256-6b4tg3bl.png" class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/6228/6228888.png" class="logo">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/020/911/737/small_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png" class="logo">
+            </div>
+        </nav>
+    </header>
+    <div class="card-list">
+        <div class="greeting">
+            <h3>What do you</h3>
+            <h3>want to do?</h3>
+        </div>
+    
+        <a  href=" {{ url_for('views.upload') }}" class="card-item">
+            <h3>Generate Exam</h3>
+            <p>Upload a file to create an exam.</p>
+        </a>
+        
+        <a href=" {{ url_for('views.upload') }}" class="card-item">
+            <h3>Generate Reviewer</h3>
+            <p>Upload a file to create a reviewer.</p>
+        </a>
+        
+        <a href=" {{ url_for('views.upload') }}" class="card-item">
+            <h3>Metrics</h3>
+            <p>View Progress</p>
+        </a>
+    </div>
+    <hr> 
+    <div class="exam">
+        <h2>Exam Board</h2> 
+        <div class="card-list1">
+            <div class="card-item">
+                <div class="card-header">
+                    <h3>Exam 1</h3>
+                </div>
+                <div class="card-body">
+                    <p>Additional information for Exam 1 can go here.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="card-header">
+                    <h3>Exam 2</h3>
+                </div>
+                <div class="card-body">
+                    <p>Additional information for Exam 2 can go here.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="card-header">
+                    <h3>Exam 3</h3>
+                </div>
+                <div class="card-body">
+                    <p>Additional information for Exam 3 can go here.</p>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="card-header">
+                    <h3>Exam 4</h3>
+                </div>
+                <div class="card-body">
+                    <p>Additional information for Exam 4 can go here.</p>
+                </div>
+            </div>
+        </div>    
+    </div>
+    
+    {% endblock %}
