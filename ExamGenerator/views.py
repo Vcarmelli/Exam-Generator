@@ -9,6 +9,18 @@ views = Blueprint('views', __name__)
 def index():
     return render_template('index.html')
 
+@views.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@views.route('/dashboard1')
+def dashboard1():
+    return render_template('dashboard1.html')
+
+@views.route('/homepage')
+def homepage():
+    return render_template('homepage.html')
+
 @views.route('/upload')
 def upload():
     return render_template('upload.html')  
@@ -95,5 +107,3 @@ def responses():
     total = result.get('totalQuestion')
 
     return redirect( url_for('views.quiz_complete', score=score, total=total) )
-
-
