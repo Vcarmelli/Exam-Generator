@@ -17,9 +17,6 @@ def dashboard():
 def dashboard1():
     return render_template('dashboard1.html')
 
-@views.route('/homepage')
-def homepage():
-    return render_template('homepage.html')
 
 @views.route('/upload')
 def upload():

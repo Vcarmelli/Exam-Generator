@@ -1,11 +1,198 @@
-{% extends "layout/base.html" %}
+{% extends "/layout/game-base.html" %}
 
-{% block title %} Dashboard {% endblock %} 
+{% block css_file %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block title %} Home Page {% endblock %} 
+
 
 {% block content %}
-    <div style="display: block; margin: 5em;">
-        <h1>Easygen: Exam Generator</h1>
-        <p style="padding-bottom: 3em;">Transform study materials into adaptive quizzes or generate exams instantly. Easygen makes it simple for students and teachers alike.</p>
-        <a class="btn btn-primary" href=" {{ url_for('views.homepage') }}">Start</a>
-    </div>
-{% endblock %}
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#welcome">Home</a></li>
+                <li><a href="#aboutus">About</a></li>
+                <li><a href="{{ url_for('views.dashboard') }}"> <b>Easygen</b></a></li>
+                <li><a href="#contactinfo">Contact us</a></li>
+                <li><a href="#">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="welcome-section" id="welcome">
+        <div class="tagline">
+            <div>
+                <h1>MAKE YOUR LIFE EASIER</h1>
+            </div>
+            <div>
+                <p>Transform study materials into adaptive quizzes or </p>
+                <p>generate exams instantly. Easygen makes it simple</p>
+                <p>for students and teachers alike.</p>
+                <button class="getstarted">Get Started</button>
+            </div>
+        </div>
+        <div class="info">
+            <div class="card-list">
+                <div class="card-item">
+                    <h2>Adaptive Quizzes</h2>
+                    <p>Adaptive Quizzes for Students: Upload your materials, and Easygen will generate quizzes that adjust in difficulty as you progress.</p>
+                </div>
+                
+                <div class="card-item">
+                    <h2>Exam Creation</h2>
+                    <p>Exam Creation for Teachers: Save time with intelligent, algorithm-assisted exam generation tailored to your curriculum.</p>
+                </div>
+                
+                <div class="card-item">                
+                    <h2>Seamless Exporting</h2>
+                    <p>Export with Ease: Export your quizzes and exams to PDF, Docs, or Google Forms with just a few clicks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="aboutus-section" id="aboutus">
+        <div class="titles">
+            <h1>About Us</h1>
+            <div class="oval"></div>
+        </div>
+        <div class="story-container">
+            <div class="story">
+                <h2>Story</h2>
+                <p>At Easygen, we understand the struggles both students and teachers face. Students often find it hard to stay engaged while reviewing, and teachers spend hours crafting the perfect exam. That's why we developed Easygen—to bridge the gap between learning and assessment with cutting-edge AI technology.</p>
+                <h2>Our Mission</h2>
+                <p>Our mission is to make learning more interactive, personalized, and effective, while empowering teachers to save time without sacrificing quality.</p>
+            </div>
+            <div>
+                <img src="../static/images/aboutus.svg" alt="aboutuspng">
+            </div>
+        </div>
+    </section>
+    
+    <section class="contactus-section" id="contactinfo">
+        <div class="mind">
+            <h1>The Minds Behind the Innovation</h1>
+            <div class="photos">
+                <div class="aboutthem">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/020/911/737/small_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png">
+                    <h4>Jamie Jasmine Sano </h4>
+                    <p>Leader</p>
+                    <a class="contact">
+                        <span> CONTACT </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>    
+                    </a>
+                </div>
+                <div class="aboutthem">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/020/911/737/small_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png">
+                    <h4>Jamie Jasmine Sano </h4>
+                    <p>Leader</p>
+                    <a class="contact">
+                        <span> CONTACT </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>    
+                    </a>
+                </div>
+                <div class="aboutthem">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/020/911/737/small_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png">
+                    <h4>Jamie Jasmine Sano </h4>
+                    <p>Leader</p>
+                    <a class="contact">
+                        <span> CONTACT </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>    
+                    </a>
+                </div>
+                <div class="aboutthem">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/020/911/737/small_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png">
+                    <h4>Jamie Jasmine Sano </h4>
+                    <p>Leader</p>
+                    <a class="contact">
+                        <span> CONTACT </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>    
+                    </a>
+                </div>
+                <div class="aboutthem">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/020/911/737/small_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png">
+                    <h4>Jamie Jasmine Sano </h4>
+                    <p>Leader</p>
+                    <a class="contact">
+                        <span> CONTACT </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>    
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="jump-container">
+            <div class="jump">
+                <h2>Join Easygen and Simplify Your Learning or Teaching</h2>
+                <p>Sign up now to get started with creating quizzes, generating exams, and exploring all that Easygen has to offer.</p>
+                <a>
+                    <span> GET STARTED </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>    
+                </a>
+            </div>
+        </div>
+        <div class="contact-container">
+            <div>
+                <h1>Keep In Touch</h1>
+                <h2>Easygen</h2>
+                <p>Whether you have questions, feedback, or need support, we're here to help.</p>
+            </div>
+            <div class="contacts">
+                <div class="texter">
+                    <span>EMAIL</span>
+                    <span>easygen@gmail.com
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </span>
+                </div>
+                <div class="texter">
+                    <span>EMAIL</span>
+                    <span>easygen@gmail.com
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </span>
+                </div>
+                <div class="texter">
+                    <span>EMAIL</span>
+                    <span>easygen@gmail.com
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </span>
+                </div>
+                <div class="texter">
+                    <span>EMAIL</span>
+                    <span>easygen@gmail.com
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </span>
+                </div>
+                <div class="texter">
+                    <span>EMAIL</span>
+                    <span>easygen@gmail.com
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>  
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('header nav ul li a');
+    
+        window.addEventListener('scroll', () => {
+            let current = '';
+    
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');  
+                }
+            });
+    
+            navLinks.forEach(link => {
+                link.classList.remove('active'); 
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');  
+                }
+            });
+        });
+    </script>
+      
+      {% endblock %}
