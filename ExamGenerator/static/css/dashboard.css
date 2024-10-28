@@ -66,13 +66,13 @@ header {
 }
 
 .dashboard.card-list .card-item:hover {
-    border: 2px solid #000;
+    border: 2px solid var(--black-color);
 }
 
 
 hr {
     margin: 10px auto; /* Center horizontally */   
-     border-top: 2px solid #929292;
+    border-top: 2px solid #929292;
     max-width: 1250px;
     align-items: center;
 }
@@ -290,19 +290,18 @@ nav ul li a.active {
 }
 
 .tagline p {
-    padding-bottom: 1em;
-    max-width: 45vw;
+    padding-bottom: 2em;
+    max-width: 28vw;
+    line-height: 2.5em;
 }
 
 .getstarted {
     font-family: 'Poppins', sans-serif;
     background-color: var(--tertiary-color);
-    padding: 10px;
+    padding: 0.7em 4em;
     text-decoration: none;
-    border-radius: 20px;
-    width: 200px;
-    border: none;
-    
+    border-radius: 2em;
+    color: var(--black-color);
 }
 
 
@@ -456,6 +455,7 @@ nav ul li a.active {
 } 
 
 .jump a {
+    text-decoration: none;
     background-color: var(--primary-color);
     border-radius: 2em;
     padding: 1em 2em;

@@ -24,9 +24,18 @@ body {
     overflow-x: hidden;
 }
 
-/* h1 {
-    color: var(--primary-color);
-} */
+.title-section {
+    margin: 2% 5%;
+}
+
+.title-section h1 {
+    padding-top: 0.3em;
+}
+
+.title-section a {
+    text-decoration: none;
+    color: var(--black-color);
+}
 
 .page-title {
     width: 100%;
@@ -150,8 +159,6 @@ body {
 .preview-container {
     width: 100vw;
     height: 100vh;
-    background-image: url('../images/main_bg.svg');
-    background-size: cover;
 }
 
 .preview-main {
@@ -161,7 +168,7 @@ body {
     padding: 0.5% 7%;
 }
 
-.file-container {
+.thumbnail-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -172,12 +179,13 @@ body {
     overflow-x: hidden;
 }
 
-.file-container::-webkit-scrollbar {
+.thumbnail-container::-webkit-scrollbar {
     display: none;
 }
 
 .thumbnail-item img {
-    border-radius: 5px;
+    border-radius: 8px;
+    border: 2px solid transparent;
 }
 
 .thumbnail-item img:hover {
@@ -186,6 +194,12 @@ body {
 
 .thumbnail-item p {
     text-align: center;
+}
+
+#end-of-thumbnails {
+    display: block;
+    width: 100%;
+    background-color: cyan;
 }
 
 .options {

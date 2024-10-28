@@ -9,10 +9,13 @@
 {% block content %}
 <img src="../static/images/main_bg.svg" class="bg-image">
 <div class="preview-container">
-    <a href=" {{ url_for('views.upload') }}"><i class="fa-solid fa-chevron-left"></i> Go back</a>
-    <h1 class="page-title"> Select Page</h1>
+    <div class="title-section">
+        <a href=" {{ url_for('views.upload') }}"><i class="fa-solid fa-chevron-left"></i> Go back</a>
+        <h1>Select Page</h1>
+    </div>
+
     <div class="preview-main">
-        <div class="file-container" id="thumbnail-container">
+        <div class="thumbnail-container">
             {% if thumbnails %}
                 {% for thumbnail in thumbnails %}
                     <div class="thumbnail-item">
@@ -20,6 +23,7 @@
                         <p>{{ loop.index }}</p>
                     </div>
                 {% endfor %}
+                    <div id="end-of-thumbnails">end-of-thumbnails</div>
             {% else %}
                 <p>No thumbnails available.</p>
             {% endif %}
@@ -32,7 +36,7 @@
                 </div>
                 <div>
                     <label for="filename">File Name</label>
-                        <input type="text" name="filename" id="filename" value="{{ filename }}">
+                    <input type="text" name="filename" id="filename" value="{{ filename }}">
                 </div> 
                 <div>
                     <label for="page-selection">Page Selection</label>
@@ -76,4 +80,8 @@
 <div class="loader-container">
     <div class="loader"></div>
 </div>
+{% endblock %}
+
+{% block js_file %} 
+    <script src="../static/js/preview.js"></script>
 {% endblock %}

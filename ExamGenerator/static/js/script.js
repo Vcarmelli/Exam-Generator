@@ -38,6 +38,7 @@ const addQuestionType = () => {
     console.log("CLICKED TYPE QUES BTN")
 }
 
+
 $(document).ready(function() {
     $('#edit-ans-btn').click(editAnswers);
     $('#ques-btn').click(addQuestionType);

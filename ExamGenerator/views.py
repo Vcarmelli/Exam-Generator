@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, render_template, redirect, url_for, request
+from flask import Blueprint, current_app, render_template, redirect, url_for, request, session, jsonify
 import os
 from .util import convert_file_to_thumbnail
 
@@ -18,9 +18,24 @@ def dashboard1():
     return render_template('dashboard1.html')
 
 
-@views.route('/upload')
+@views.route('/upload', methods=['GET', 'POST'])
 def upload():
-    return render_template('upload.html')  
+    if request.method == 'GET':
+        return render_template('upload.html') 
+    
+    elif request.method == 'POST':
+        if 'input_file' not in request.files:
+            return redirect(request.url)
+
+        file = request.files['input_file']
+        if file.filename == '':
+            return redirect(request.url)
+        
+        session['file_path'] = os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(session['file_path'])
+
+        return redirect(url_for('views.selection', file_name=file.filename))
+ 
 
 @views.route('/done')
 def done():
@@ -34,22 +49,11 @@ def download():
     return render_template('download.html', ques_type=ques_type)
 
 
-@views.route('/review-questions')
-def review_questions():
-    ques_type = request.args.get('ques_type')
-    return render_template('review-ques.html', ques_type=ques_type)
-
-@views.route('/review-answers')
-def review_answers():
-    return render_template('review-ans.html')
-
-
 @views.route('/selection',  methods=['GET', 'POST'])
 def selection():
     if request.method == 'GET':
-        file_path = request.args.get('file_path')
         filename = request.args.get('file_name')
-        thumbnails = convert_file_to_thumbnail(file_path, current_app.config['THUMBNAIL_FOLDER'])
+        thumbnails = convert_file_to_thumbnail(session['file_path'], current_app.config['THUMBNAIL_FOLDER'], start_page=0, end_page=10)
 
         return render_template('preview.html', filename=filename, thumbnails=thumbnails)
     
@@ -68,6 +72,23 @@ def selection():
 
         return redirect(url_for('views.download', ques_type=ques_type))
 
+@views.route('/selection/<int:page>')
+def load_thumbnails(page):
+    end = page + 10
+    thumbnails = convert_file_to_thumbnail(session['file_path'], current_app.config['THUMBNAIL_FOLDER'], start_page=page, end_page=end)
+    return jsonify(thumbnails=thumbnails)
+
+
+
+@views.route('/review-questions')
+def review_questions():
+    ques_type = request.args.get('ques_type')
+    return render_template('review-ques.html', ques_type=ques_type)
+
+
+@views.route('/review-answers')
+def review_answers():
+    return render_template('review-ans.html')
 
 
 @views.route('/quiz-complete', methods=['GET', 'POST'])
@@ -78,24 +99,6 @@ def quiz_complete():
     return render_template('quiz-complete.html', score=score, total=total)
 
 
-
-@views.route('/upload/file', methods=['POST'])
-def upload_file():
-    if 'input_file' not in request.files:
-        return redirect(request.url)
-
-    file = request.files['input_file']
-    if file.filename == '':
-        return redirect(request.url)
-    
-    if file and file.filename.endswith('.pdf'):
-        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename)
-        file.save(file_path)
-
-        return redirect(url_for('views.selection', file_name=file.filename, file_path=file_path))
-    return redirect(request.url)
-
-    
 
 @views.route('/quiz-complete/responses', methods=['POST'])
 def responses():

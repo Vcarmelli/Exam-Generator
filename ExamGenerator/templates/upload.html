@@ -9,33 +9,36 @@
 
 {% block content %}
 <img src="../static/images/main_bg.svg" class="bg-image">
-<div class="header-section">
+<div class="title-section">
     <a href=" {{ url_for('views.index') }}"><i class="fa-solid fa-chevron-left"></i> Go back</a>
     <h1>Upload</h1>
     <p>Upload and attach files to generate exam (PDF and Word file formats).</p>
 </div>
 
-<form method="POST" action="/upload/file" enctype="multipart/form-data" id="upload-form">
+<form method="POST" action=" " enctype="multipart/form-data" id="upload-form">
     <div class="container">
         <div class="drop-section">
             <div class="col">
                 <div class="upload-icon">
                     <img src="../static/images/up.svg" alt="file">
                 </div>
-                <a class="file-selector">Click to upload</a>
-                <span>or drag and drop.</span>
+                <div class="upload-text">
+                    <a class="file-selector">Click to upload</a>
+                    <span>or drag and drop.</span>
+                </div>
                 <input type="file" class="file-selector-input" name="input_file">
             </div>
             <div class="col">
-                <div class="drop-here">or drag and drop</div>
+                <div class="drop-here">Drop file here</div>
             </div>
         </div>
-        <div class="list-section">
+        <div class="list-section" style="display: block;">
             <ul class="list"></ul>
-            </div>            
+        </div>
+        <div class="validation-message">
         </div>
     </div>
-    <div class="upload-btn"><button id="upload" class="btn btn-primary" role="button" type="submit">Upload</button></div>
+    <div class="upload-btn"><button id="upload" class="btn btn-primary" type="submit">Upload</button></div>
 </form>
 
 <div class="loader-container">
@@ -44,5 +47,5 @@
 {% endblock %}
 
 {% block js_file %} 
-    <script src="../static/js/up1.js"></script>
+    <script src="../static/js/upload.js"></script>
 {% endblock %}
