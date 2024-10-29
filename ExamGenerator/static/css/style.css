@@ -159,6 +159,7 @@ body {
 .preview-container {
     width: 100vw;
     height: 100vh;
+    overflow-y: hidden;
 }
 
 .preview-main {
@@ -171,10 +172,11 @@ body {
 .thumbnail-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     width: 55vw;
     height: 70vh;
     gap: 2em;
+    padding: 0 1em;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -185,21 +187,27 @@ body {
 
 .thumbnail-item img {
     border-radius: 8px;
-    border: 2px solid transparent;
+    border: 3px solid transparent;
+    transition: border 0.2s ease;
 }
 
 .thumbnail-item img:hover {
-    border: 2px solid var(--primary-color);
+    border: 3px solid var(--primary-color);
 }
 
 .thumbnail-item p {
     text-align: center;
 }
 
+.thumbnail-item.selected img {
+    border: 3px solid var(--accent-color);
+}
+
 #end-of-thumbnails {
-    display: block;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; 
     width: 100%;
-    background-color: cyan;
 }
 
 .options {
@@ -602,4 +610,23 @@ body {
     0%,20%  {transform:rotate(0deg)                    translate(0,0)     rotate(0deg)}
     50%     {transform:rotate(calc(var(--s,1)*-90deg)) translate(0,0)     rotate(0deg)}
     100%    {transform:rotate(calc(var(--s,1)*-90deg)) translate(0,-40px) rotate(calc(var(--s,1)*-90deg))}
+}
+
+
+/* PREVIEW LOADER */
+.preview-loader {
+    width:100px;
+    height:24px;
+    background: 
+        radial-gradient(circle closest-side,#5B699C 90%,#0000) 0%   50%,
+        radial-gradient(circle closest-side,#5B699C 90%,#0000) 50%  50%,
+        radial-gradient(circle closest-side,#5B699C 90%,#0000) 100% 50%;
+    background-size:calc(100%/3) 100%;
+    background-repeat: no-repeat;
+    animation:d7 1s infinite linear;
+}
+@keyframes d7 {
+    33%{background-size:calc(100%/3) 0%  ,calc(100%/3) 100%,calc(100%/3) 100%}
+    50%{background-size:calc(100%/3) 100%,calc(100%/3) 0%  ,calc(100%/3) 100%}
+    66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
 }

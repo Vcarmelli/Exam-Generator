@@ -252,7 +252,7 @@ nav ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid var(--black-color);
 }
 
 nav ul li a {
@@ -261,12 +261,13 @@ nav ul li a {
     font-size: 1.2rem;
 }
 
-nav.hr{
+nav.hr {
     max-width: 122px;
     border-top: black;
 }
+
 nav ul li a.active {
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .welcome-section {
@@ -348,7 +349,7 @@ nav ul li a.active {
     justify-content: center;
     align-items: center; 
     gap: 50px;
-    padding-top: 1em;
+    padding-top: 3em;
 }
 
 

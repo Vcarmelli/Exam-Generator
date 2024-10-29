@@ -4,7 +4,7 @@ import os
 
 def convert_file_to_thumbnail(file_path, thumbnail_path, start_page=0, end_page=1, size=(256, 256)):
     # Convert PDF to a list of images (one per page)
-    images = convert_from_path(file_path, dpi=300)
+    images = convert_from_path(file_path, dpi=180)
 
     # in case the pages are less than 10 (first set of pages to load)
     end_page = min(end_page, len(images)) 

@@ -33,16 +33,9 @@ const editAnswers = () => {
     $('#modify-answers').css('display', 'flex');
 }
 
-const addQuestionType = () => {
-    // add input type and quantity
-    console.log("CLICKED TYPE QUES BTN")
-}
-
 
 $(document).ready(function() {
     $('#edit-ans-btn').click(editAnswers);
-    $('#ques-btn').click(addQuestionType);
-
 
     $('#options-form').on('submit', function(event) {
         event.preventDefault();
