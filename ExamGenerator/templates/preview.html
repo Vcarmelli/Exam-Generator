@@ -31,18 +31,18 @@
             {% endif %}
         </div>
 
-        <form action="" method="POST" class="options-container" id="options-form">
+        <form method="POST" class="options-container" id="options-form">
             <div class="options">
                 <div class="options-header">
                     <h2>Options</h2>
                 </div>
                 <div>
                     <label for="filename">File Name</label>
-                    <input type="text" name="filename" id="filename" value="{{ filename }}">
+                    <input type="text" name="filename" id="filename" class="filename" value="{{ filename }}">
                 </div> 
                 <div>
                     <label for="page-selection">Page Selection</label>
-                    <div class="options-input">
+                    <div class="options-page">
                         <select name="page-selection" id="page-selection">
                             <option value="select">Select Pages</option>
                             <option value="current">Current Page</option>
@@ -54,27 +54,21 @@
                 <div>
                     <div class="options-question">
                         <h3>Questions<h3>
-                        <button type="button" class="btn btn-primary" id="ques-btn">+</button>
+                        <button type="button" class="btn btn-primary" id="ques-btn">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
                     </div>
-                    <div class="options-input type">
-                        <div class="add-type">
+                    <div class="options-type">
+                        <div class="type-labels">
                             <label for="ques-type">Type of Question</label>
-                            <select name="ques-type" id="ques-type">
-                                <option value="identification">Identification</option>
-                                <option value="multiple_choice">Multiple Choice</option>
-                                <option value="true_or_false">True or False</option>
-                            </select>
-                            <!-- add question type input  -->
-                            <select name="ques-type" id="ques-type">
-                                <option value="identification">Identification</option>
-                                <option value="multiple_choice">Multiple Choice</option>
-                                <option value="true_or_false">True or False</option>
-                            </select>
-                        </div>
-                        <div class="add-quantity">
                             <label for="ques-num">Quantity</label>
-                            <input type="number" name="ques-num" id="ques-num" placeholder="1">
-                            <!-- add question quantity input  -->
+                        </div>
+                        <div class="type-inputs">
+                            <select name="ques-type" id="ques-type">
+                                <option value="identification">Identification</option>
+                                <option value="multiple_choice">Multiple Choice</option>
+                                <option value="true_or_false">True or False</option>
+                            </select>
                             <input type="number" name="ques-num" id="ques-num" placeholder="1">
                         </div>
                     </div>

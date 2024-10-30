@@ -1,3 +1,4 @@
+const optionsForm = document.getElementById("options-form");
 const quesTypeBtn = document.querySelector("#ques-btn");
 const target = document.querySelector("#end-of-thumbnails");
 const container = document.querySelector(".thumbnail-container");
@@ -5,37 +6,83 @@ const pagesInput = document.querySelector("input[name='pages']");
 let selectedPages = [];
 let isVisible = null;
 let page = 10; 
+let questionCount = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
     addThumbnailListeners();
-    quesTypeBtn.addEventListener("click", () => addQuestionType());
+    quesTypeBtn.addEventListener("click", addQuestionType);
+    //optionsForm.addEventListener("submit", submitFormAsJson);
 });
 
-const addQuestionType = () => {
-    const type = document.querySelector(".add-type");
-    const quantity = document.querySelector(".add-quantity");
-    // add input type and quantity
+function submitFormAsJson(event) {
+    event.preventDefault();
 
-    const newSelect = document.createElement("select");
-    newSelect.name = "ques-type";
-    newSelect.classList.add("ques-type");
-    newSelect.innerHTML = `
-        <option value="identification">Identification</option>
-        <option value="multiple_choice">Multiple Choice</option>
-        <option value="true_or_false">True or False</option>
-    `;
-    type.appendChild(newSelect);
+    const form = event.target;
+    const jsonObject = formDataToJson(form); // Convert form data to JSON
 
+    console.log("Form JSON:", JSON.stringify(jsonObject)); // Log the JSON for debugging
 
-    const newInput = document.createElement("input");
-    newInput.type = "number";
-    newInput.name = "ques-num";
-    newInput.classList.add("ques-num");
-    newInput.placeholder = "1";
-    quantity.appendChild(newInput);
-
-    console.log("CLICKED TYPE QUES BTN")
+    // fetch("/selection", {
+    //     method: "POST", 
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(jsonObject),
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     console.log("Success:", data);
+    // })
+    // .catch(error => {
+    //     console.error("Error:", error);
+    // });
 }
+
+// Function to convert form data to JSON object
+function formDataToJson(form) {
+    const formData = new FormData(form);
+    const jsonObject = {};
+
+    formData.forEach((value, key) => {
+        if (jsonObject[key]) {
+            // If key already exists, convert to array or add to existing array
+            if (!Array.isArray(jsonObject[key])) {
+                jsonObject[key] = [jsonObject[key]];
+            }
+            jsonObject[key].push(value);
+        } else {
+            jsonObject[key] = value;
+        }
+    });
+
+    return jsonObject;
+}
+
+
+function addQuestionType() {
+    const type = document.querySelector(".options-type");
+    questionCount++;
+
+    const newQuesType = document.createElement("div");
+    newQuesType.classList.add("type-inputs");
+    newQuesType.innerHTML = `
+        <select name="ques-type">
+            <option value="identification">Identification</option>
+            <option value="multiple_choice">Multiple Choice</option>
+            <option value="true_or_false">True or False</option>
+        </select>
+        <input type="number" name="ques-num" placeholder="1">
+        <button type="button" class="btn btn-secondary del-ques-btn" id="del-ques-btn-${questionCount}">
+            <i class="fa-solid fa-minus"></i>
+        </button>
+    `;
+    type.appendChild(newQuesType);
+
+    const delQuesBtn = newQuesType.querySelector(`#del-ques-btn-${questionCount}`);
+    delQuesBtn.addEventListener("click", () => {
+        newQuesType.remove();
+    });
+};
 
 // FUNCTION FOR SELECTING PAGES
 function addThumbnailListeners() {
@@ -60,7 +107,7 @@ const newThumbnailListeners = (mutationList, moreThumbs) => {
     }
 };
 // INITIALIZE OBSERVERS FOR THUMBNAIL LISTENERS
-const newThumbs = new MutationObserver(moreThumbnailListeners);
+const newThumbs = new MutationObserver(newThumbnailListeners);
 newThumbs.observe(container, config);
 
 

@@ -5,7 +5,7 @@
     --accent-color: #1E4050;
 
     --background-color: #EFF2FE;
-    --black-color: #2B1B1B;
+    --black-color: #0D1717;
     --gray-color: #D9D9D9;
     --green-color: #4CAF50;;
     --green-light: #ADFFE4;
@@ -220,6 +220,12 @@ body {
     box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
     padding: 1.2em 2em;
     margin: 0.8em;
+    height: 55vh;
+    overflow-y: scroll;
+}
+
+.options::-webkit-scrollbar {
+    display: none;
 }
 
 .options-header {
@@ -232,37 +238,46 @@ body {
 }
 
 .options-question {
-    font-weight: bold;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.options-question button {
+.options-question button,
+.type-inputs button {
     padding: 0.2em 0.7em;
+    border-radius: 0.8em;
 }
 
-.options-input {
+.options-page {
+    display: grid;
+    grid-template-columns: auto 45%;
+    column-gap: 1em;
+}
+
+.options-type {
     display: flex;
-    gap: 1em;
+    flex-direction: column;
+    gap: 0.8em;
 }
 
-.options-input.type {
-    padding: 0.8em;
+.options-type div {
+    display: grid;
+    grid-template-columns: 60% 20% auto;
+    column-gap: 1em;
 }
 
 .edit-question input,
 .options select,
 .options input {
     font-family: 'Poppins', sans-serif;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 1px solid var(--gray-color);
     padding: 0.7em;
-    width: 90%;
 }
 
-.options select {
-    width: 100%;
+.options .filename {
+    width: -webkit-fill-available;
 }
 
 .options label {

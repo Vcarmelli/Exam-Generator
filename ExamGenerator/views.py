@@ -1,6 +1,6 @@
 from flask import Blueprint, current_app, render_template, redirect, url_for, request, session, jsonify
 import os
-from .util import convert_file_to_thumbnail
+from .util import convert_file_to_thumbnail, parse_page_ranges
 
 views = Blueprint('views', __name__)
 
@@ -35,18 +35,6 @@ def upload():
         file.save(session['file_path'])
 
         return redirect(url_for('views.selection', file_name=file.filename))
- 
-
-@views.route('/done')
-def done():
-    return render_template('done.html') 
-
-@views.route('/download')
-def download():
-    # integrate model to generate questions here
-
-    ques_type = request.args.get('ques_type')
-    return render_template('download.html', ques_type=ques_type)
 
 
 @views.route('/selection',  methods=['GET', 'POST'])
@@ -58,26 +46,41 @@ def selection():
         return render_template('preview.html', filename=filename, thumbnails=thumbnails)
     
     elif request.method == 'POST':
+        filename = request.form.get('filename')
         page_selection = request.form.get('page-selection')
         pages = request.form.get('pages')
-        ques_type = request.form.get('ques-type')
-        ques_num = request.form.get('ques-num')
+        pages = parse_page_ranges(pages)
 
-        # NOTE: add form validation here
-        
+        question_types = request.form.getlist('ques-type')
+        question_quantities = request.form.getlist('ques-num')
+         # Process questions and quantities
+        questions = []
+        for q_type, q_num in zip(question_types, question_quantities):
+            questions.append({'type': q_type, 'quantity': int(q_num) if q_num.isdigit() else None})
+
+        # NOTE: FORM VALIDATION HERE
+
+        print(f"Filename: {filename}")
         print(f"Page Selection: {page_selection}")
         print(f"Pages: {pages}")
-        print(f"Question Type: {ques_type}")
-        print(f"Number of Questions: {ques_num}")
+        # print(f"question_types: {question_types}")
+        # print(f"question_quantities: {question_quantities}")
+        print("Questions:", questions)
 
-        return redirect(url_for('views.download', ques_type=ques_type))
+        return redirect(url_for('views.download', ques_type=question_types[0]))   # temporary: ques_type=question_types[0]
 
-@views.route('/selection/<int:page>')
-def load_thumbnails(page):
-    end = page + 10
-    thumbnails = convert_file_to_thumbnail(session['file_path'], current_app.config['THUMBNAIL_FOLDER'], start_page=page, end_page=end)
-    return jsonify(thumbnails=thumbnails)
 
+@views.route('/download')
+def download():
+    # integrate model to generate questions here
+
+    ques_type = request.args.get('ques_type')
+    return render_template('download.html', ques_type=ques_type)
+
+
+@views.route('/done')
+def done():
+    return render_template('done.html') 
 
 
 @views.route('/review-questions')
@@ -85,10 +88,6 @@ def review_questions():
     ques_type = request.args.get('ques_type')
     return render_template('review-ques.html', ques_type=ques_type)
 
-
-@views.route('/review-answers')
-def review_answers():
-    return render_template('review-ans.html')
 
 
 @views.route('/quiz-complete', methods=['GET', 'POST'])
@@ -98,6 +97,15 @@ def quiz_complete():
 
     return render_template('quiz-complete.html', score=score, total=total)
 
+
+
+
+# ROUTES FOR FETCHING DATA 
+@views.route('/selection/<int:page>')
+def load_thumbnails(page):
+    end = page + 10
+    thumbnails = convert_file_to_thumbnail(session['file_path'], current_app.config['THUMBNAIL_FOLDER'], start_page=page, end_page=end)
+    return jsonify(thumbnails=thumbnails)
 
 
 @views.route('/quiz-complete/responses', methods=['POST'])
