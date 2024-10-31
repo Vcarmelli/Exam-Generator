@@ -1,6 +1,7 @@
 from flask import Blueprint, current_app, render_template, redirect, url_for, request, session, jsonify
-import os
+from flask_login import login_required, current_user
 from .util import convert_file_to_thumbnail, parse_page_ranges
+import os
 
 views = Blueprint('views', __name__)
 
@@ -10,8 +11,9 @@ def index():
     return render_template('index.html')
 
 @views.route('/dashboard')
+@login_required
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', user=current_user)
 
 @views.route('/dashboard1')
 def dashboard1():

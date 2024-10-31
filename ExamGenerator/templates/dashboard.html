@@ -1,4 +1,4 @@
-{% extends "/layout/game-base.html" %}
+{% extends "layout/base.html" %}
 
 {% block css_file %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
@@ -12,6 +12,12 @@
             <li class="logo-container"><a href="{{ url_for('views.index') }}">
                     <img src="../static/images/logo.svg" style="width: 100%;" class="logo">
             </a></li>
+
+            <!-- TEMPORARY  -->
+            <div>
+                <span><b>Welcome, {{ user.first_name }}</b></span>
+                <a href=" {{ url_for('auth.logout') }}">Logout</a>
+            </div>
             
             <div class="menu-link">
                 <li><a href="#">

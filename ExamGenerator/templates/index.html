@@ -1,10 +1,10 @@
-{% extends "/layout/game-base.html" %}
+{% extends "layout/base.html" %}
 
 {% block css_file %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 {% endblock %}
 
-{% block title %} Home Page {% endblock %} 
+{% block title %} Home {% endblock %} 
 
 
 {% block content %}
@@ -15,7 +15,7 @@
                 <li><a href="#aboutus">About</a></li>
                 <li><a href="{{ url_for('views.dashboard') }}"><img src="../static/images/logo.svg" alt="Easygen"></a></li>
                 <li><a href="#contactinfo">Contact us</a></li>
-                <li><a href="#">Register</a></li>
+                <li><a href="{{ url_for('auth.signup') }}">Register</a></li>
             </ul>
         </nav>
     </header>
@@ -123,7 +123,7 @@
             <div class="jump">
                 <h2>Join Easygen and Simplify Your Learning or Teaching</h2>
                 <p>Sign up now to get started with creating quizzes, generating exams, and exploring all that Easygen has to offer.</p>
-                <a href="{{ url_for('views.upload') }}">
+                <a href="{{ url_for('auth.signup') }}">
                     <span> GET STARTED </span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>    
                 </a>
