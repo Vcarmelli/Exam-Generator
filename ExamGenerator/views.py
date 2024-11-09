@@ -1,6 +1,6 @@
 from flask import Blueprint, current_app, render_template, redirect, url_for, request, session, jsonify
 from flask_login import login_required, current_user
-from .util import convert_file_to_thumbnail, parse_page_ranges
+from .util import convert_file_to_thumbnail, parse_page_ranges, extract_text
 import os
 
 views = Blueprint('views', __name__)
@@ -56,10 +56,8 @@ def selection():
         question_types = request.form.getlist('ques-type')
         question_quantities = request.form.getlist('ques-num')
          # Process questions and quantities
-        questions = []
-        for q_type, q_num in zip(question_types, question_quantities):
-            questions.append({'type': q_type, 'quantity': int(q_num) if q_num.isdigit() else None})
-
+        questions = [{'type': qt, 'quantity': int(qn)} for qt, qn in zip(question_types, question_quantities) if qn.isdigit()]
+        
         # NOTE: FORM VALIDATION HERE
 
         print(f"Filename: {filename}")
@@ -69,7 +67,10 @@ def selection():
         # print(f"question_quantities: {question_quantities}")
         print("Questions:", questions)
 
-        return redirect(url_for('views.download', ques_type=question_types[0]))   # temporary: ques_type=question_types[0]
+        text = extract_text(session['file_path'], pages)
+
+        #return redirect(url_for('views.download', ques_type=question_types[0]))   # temporary: ques_type=question_types[0]
+        return jsonify({'questions': questions, 'text': text})
 
 
 @views.route('/download')

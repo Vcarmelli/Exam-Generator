@@ -1,6 +1,7 @@
+import os
 from PIL import Image
 from pdf2image import convert_from_path
-import os
+from langchain_community.document_loaders import PyMuPDFLoader
 
 def convert_file_to_thumbnail(file_path, thumbnail_path, start_page=0, end_page=1, size=(256, 256)):
     # Convert PDF to a list of images (one per page)
@@ -44,4 +45,17 @@ def parse_page_ranges(pages):
     return page_list
 
 #print(parse_page_ranges('2-9, 10, 15-16'))
+
+
+def extract_text(file_path, pages):
+    loader = PyMuPDFLoader(file_path)
+    docs = loader.load()   
+
+    extracted_text = ""
+    for page_num in pages:
+        if page_num <= len(docs):
+            extracted_text += docs[page_num-1].page_content
+
+    #print(extracted_text)
+    return extracted_text
 

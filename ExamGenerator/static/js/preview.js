@@ -11,51 +11,25 @@ let questionCount = 0;
 document.addEventListener('DOMContentLoaded', () => {
     addThumbnailListeners();
     quesTypeBtn.addEventListener("click", addQuestionType);
-    //optionsForm.addEventListener("submit", submitFormAsJson);
+    optionsForm.addEventListener("submit", submitForm);
 });
 
-function submitFormAsJson(event) {
+function submitForm(event) {
     event.preventDefault();
+    const formData = new FormData(this);
 
-    const form = event.target;
-    const jsonObject = formDataToJson(form); // Convert form data to JSON
-
-    console.log("Form JSON:", JSON.stringify(jsonObject)); // Log the JSON for debugging
-
-    // fetch("/selection", {
-    //     method: "POST", 
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(jsonObject),
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     console.log("Success:", data);
-    // })
-    // .catch(error => {
-    //     console.error("Error:", error);
-    // });
-}
-
-// Function to convert form data to JSON object
-function formDataToJson(form) {
-    const formData = new FormData(form);
-    const jsonObject = {};
-
-    formData.forEach((value, key) => {
-        if (jsonObject[key]) {
-            // If key already exists, convert to array or add to existing array
-            if (!Array.isArray(jsonObject[key])) {
-                jsonObject[key] = [jsonObject[key]];
-            }
-            jsonObject[key].push(value);
-        } else {
-            jsonObject[key] = value;
-        }
+    fetch('/selection', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server:', data);
+        //window.location.href = `/download?ques_type=${data.questions['type']}`;
+    })
+    .catch(error => {
+        console.error('Error:', error); 
     });
-
-    return jsonObject;
 }
 
 

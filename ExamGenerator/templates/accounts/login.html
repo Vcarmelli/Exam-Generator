@@ -21,20 +21,11 @@
     </header>
 
     <form method="POST" class="mt-5 pt-5">
-        <div>
-            <br>
-            <h1 align="center">Log In</h1>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
-            </div>
-            <div class="form-group">
-                <label for="password">Confirm Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Confirm password">
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Login</button>
-        </div>
+        <h1 align="center">Log In</h1>
+        {{ form.hidden_tag() }}
+        <p>{{ form.email.label }} {{ form.email() }}</p>
+        <p>{{ form.password.label }} {{ form.password() }}</p>
+        <p>{{ form.submit() }}</p>
     </form>
 
 {% with messages = get_flashed_messages(with_categories=true) %}
