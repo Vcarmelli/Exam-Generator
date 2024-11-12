@@ -10,25 +10,18 @@ body {
 }
 
 #optionList h4 {
-    margin: 0; 
-    padding: 0;
+    display: flex;
+    flex: 1;
     line-height: 50px;
     border-radius: 7px;
-    font-size: 18px;
+    font-size: 1em;
     background-color: white;
-    overflow: hidden;
     border: 2px solid var(--black-color);
     cursor: pointer;
-    display: flex;
     align-items: center;
-    padding: 3px;
+    padding-left: 1em;
 }
 
-#optionList h4.choice_que {
-    flex: 1; 
-    margin-left: 20px;
-    padding-left: 20px;
-}
 
 .feedback-message {
     font-size: 18px;

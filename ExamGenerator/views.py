@@ -1,6 +1,6 @@
 from flask import Blueprint, current_app, render_template, redirect, url_for, request, session, jsonify
 from flask_login import login_required, current_user
-from .util import convert_file_to_thumbnail, parse_page_ranges, extract_text
+from .util import convert_file_to_thumbnail, parse_page_ranges, extract_text, generate_questions
 import os
 
 views = Blueprint('views', __name__)
@@ -67,18 +67,35 @@ def selection():
         # print(f"question_quantities: {question_quantities}")
         print("Questions:", questions)
 
-        text = extract_text(session['file_path'], pages)
+        text = ''
+        try:
+            text = extract_text(session['file_path'], pages)
+        except KeyError:
+            return jsonify({'message': 'Return to Upload Page'}), 400
 
-        #return redirect(url_for('views.download', ques_type=question_types[0]))   # temporary: ques_type=question_types[0]
-        return jsonify({'questions': questions, 'text': text})
+
+        session['questions'] = questions
+        session['text'] = text
+
+        return redirect(url_for('views.download'))
+        #return jsonify({'questions': questions, 'text': text})
 
 
 @views.route('/download')
 def download():
-    # integrate model to generate questions here
+    questions = session.get('questions', [])
+    text = session.get('text', '')
 
-    ques_type = request.args.get('ques_type')
-    return render_template('download.html', ques_type=ques_type)
+    # For debugging purpose, making sure correct values are being passed
+    for question in questions:
+        question_type = question.get('type')
+        num_questions = question.get('quantity')
+        print(f"Preparing to generate {num_questions} {question_type} questions.")
+
+    generated_questions = generate_questions(questions, text)
+
+    #return render_template('download.html', generated_questions=generated_questions) # download page shows the generated question and button to continue to quiz
+    return render_template('generated.html', generated_questions=generated_questions)
 
 
 @views.route('/done')
@@ -109,6 +126,7 @@ def load_thumbnails(page):
     end = page + 10
     thumbnails = convert_file_to_thumbnail(session['file_path'], current_app.config['THUMBNAIL_FOLDER'], start_page=page, end_page=end)
     return jsonify(thumbnails=thumbnails)
+
 
 
 @views.route('/quiz-complete/responses', methods=['POST'])

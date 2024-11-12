@@ -11,7 +11,7 @@ let questionCount = 0;
 document.addEventListener('DOMContentLoaded', () => {
     addThumbnailListeners();
     quesTypeBtn.addEventListener("click", addQuestionType);
-    optionsForm.addEventListener("submit", submitForm);
+    //optionsForm.addEventListener("submit", submitForm);
 });
 
 function submitForm(event) {
@@ -24,14 +24,20 @@ function submitForm(event) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Response from server:', data);
-        //window.location.href = `/download?ques_type=${data.questions['type']}`;
+        console.log('Extracted text:', data.text);  // Log or handle the extracted text
+        window.location.href = `/download?ques_type=${data.questions[0].type}`;
     })
     .catch(error => {
         console.error('Error:', error); 
     });
 }
 
+// async function fetchExtractedText() {
+//     // Fetch the next set of thumbnails
+//     const response = await fetch(`/selection`);
+//     const data = await response.json();
+//     return data.IDK || [];
+// }
 
 function addQuestionType() {
     const type = document.querySelector(".options-type");
@@ -154,7 +160,6 @@ const loadThumbnails = async (entries) => {
 
     if (isVisible) {
         const thumbnails = await fetchThumbnails(page);
-        console.log("thumbnails:", thumbnails);
         if (thumbnails.length > 0) {
             appendThumbnails(thumbnails, page);
             page += 10;

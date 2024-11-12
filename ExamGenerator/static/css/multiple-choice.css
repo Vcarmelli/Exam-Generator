@@ -9,7 +9,7 @@ body {
     margin-bottom: 20px;
 }
 
-#optionList h4 {
+#optionList p {
     margin: 0; 
     padding: 0;
     line-height: 50px;
@@ -24,21 +24,25 @@ body {
     padding: 3px;
 }
 
-#optionList h4.choice_que {
+#optionList p.choice_que {
     flex: 1; 
     margin-left: 20px;
     padding-left: 20px;
 }
 
-#optionList h4#answerNo1,
-#optionList h4#answerNo2,
-#optionList h4#answerNo3,
-#optionList h4#answerNo4 {
+#optionList p#answerNo1,
+#optionList p#answerNo2,
+#optionList p#answerNo3,
+#optionList p#answerNo4 {
     width: 3%;
     text-align: center;
     background-color: white;
     margin-left: 20px;
     padding-left: 20px;
+}
+
+#questionText1 {
+    text-align: start;
 }
 
 .feedback-message {
@@ -55,41 +59,41 @@ body {
     color: var(--red-color);
 }
 
-#optionList h4.correct {
+#optionList p.correct {
     border: 3px solid var(--green-color) !important;
 }
 
-#optionList h4.incorrect {
+#optionList p.incorrect {
     border: 3px solid var(--red-color) !important;
 }
 
-#optionList h4.choice_que.correct {
+#optionList p.choice_que.correct {
     border: 3px solid var(--green-color);
 }
 
-#optionList .answerItem h4.choice_que:hover,
-#optionList .answerItem h4#answerNo1:hover,
-#optionList .answerItem h4#answerNo2:hover,
-#optionList .answerItem h4#answerNo3:hover,
-#optionList .answerItem h4#answerNo4:hover
-#optionList .answerItem:hover h4.choice_que,
-#optionList .answerItem:hover h4#answerNo1,
-#optionList .answerItem:hover h4#answerNo2,
-#optionList .answerItem:hover h4#answerNo3,
-#optionList .answerItem:hover h4#answerNo4{
+#optionList .answerItem p.choice_que:hover,
+#optionList .answerItem p#answerNo1:hover,
+#optionList .answerItem p#answerNo2:hover,
+#optionList .answerItem p#answerNo3:hover,
+#optionList .answerItem p#answerNo4:hover
+#optionList .answerItem:hover p.choice_que,
+#optionList .answerItem:hover p#answerNo1,
+#optionList .answerItem:hover p#answerNo2,
+#optionList .answerItem:hover p#answerNo3,
+#optionList .answerItem:hover p#answerNo4{
     background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6));
 }
 
-#optionList .answerItem h4.choice_que.active,
-#optionList .answerItem h4#answerNo1.active,
-#optionList .answerItem h4#answerNo2.active,
-#optionList .answerItem h4#answerNo3.active,
-#optionList .answerItem h4#answerNo4.active,
-#optionList .answerItem.active h4.choice_que,
-#optionList .answerItem.active h4#answerNo1,
-#optionList .answerItem.active h4#answerNo2,
-#optionList .answerItem.active h4#answerNo3,
-#optionList .answerItem.active h4#answerNo4 {
+#optionList .answerItem p.choice_que.active,
+#optionList .answerItem p#answerNo1.active,
+#optionList .answerItem p#answerNo2.active,
+#optionList .answerItem p#answerNo3.active,
+#optionList .answerItem p#answerNo4.active,
+#optionList .answerItem.active p.choice_que,
+#optionList .answerItem.active p#answerNo1,
+#optionList .answerItem.active p#answerNo2,
+#optionList .answerItem.active p#answerNo3,
+#optionList .answerItem.active p#answerNo4 {
     background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6));
     border: 3px solid var(--accent-color);
 }

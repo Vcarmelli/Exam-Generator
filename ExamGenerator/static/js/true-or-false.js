@@ -18,7 +18,6 @@ $(document).ready(function () {
     const loadData = () => {
         questionNo.innerText = (index + 1) + "/" + totalQuestion;
         questionText.innerText = TOF[index].question;
-        questionText1.innerText = "Select up to one option";
         choice_que[0].innerText = TOF[index].choice1;
         choice_que[1].innerText = TOF[index].choice2;
 
