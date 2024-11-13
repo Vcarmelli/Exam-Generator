@@ -10,112 +10,105 @@
 <h1 class="page-title">Review Questions</h1>
 <div class="rev-ques-container">
 
-    <!-- MULTIPLE CHOICE -->
-    <div class="edit-question">
-        <div class="edit-ques-header">
-            <h3>Question 1</h3>
-            <button type="button"><i class="fa-solid fa-trash-can" style="color: #FFFFFF;"></i></button>
-        </div>
-        <div class="question-section">
-            <label for="question">Question</label>
-            <input type="text" name="question" id="question" value="Which of the following is a primary cause of climate change?">
-        </div>
-        <div>
-            <div class="ans-sec-header">
-                <span>Correct Answer</span>
-                <button type="button" id="edit-ans-btn"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
-            </div>
+    {% if generated_questions %}
+        {% for set in generated_questions %}
 
-            <div class="answers-section">
-                <div>
-                    <span class="choice-letter">a</span>
-                    <span>Natural variations in the Earth's orbit</span>
-                </div>
-                <div>
-                    <span class="choice-letter">b</span>
-                    <span>Human activities such as burning fossil fuels and deforestation</span>
-                </div>
-                <div>
-                    <span class="choice-letter answer">c</span>
-                    <span>Volcanic eruptions</span>
-                </div>
-                <div>
-                    <span class="choice-letter">d</span>
-                    <span>Changes in solar radiation</span>
-                </div>
-            </div> 
+            {% if set.type == 'IDN' %}
+                <h2>Identification</h2>
+                {% for item in set.questions %}   
+                    <div class="edit-question">
+                        <div class="edit-ques-header">
+                            <h3>Question {{ loop.index }}</h3>
+                            <button type="button"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>
+                        </div>
+                        <div class="question-section">
+                            <label for="question">Question</label>
+                            <input type="text" name="question" id="question" value="{{ item.question }}">
+                        </div>
+                        <div>
+                            <div class="ans-sec-header">
+                                <span>Correct Answer</span>
+                                <button type="button"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
+                            </div>
+                            <div class="answers-section">
+                                <div>
+                                    <span>{{ item.answer }}</span>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                {% endfor %}
 
-            <div class="answers-section" id="modify-answers">
-                <div>
-                    <span class="choice-letter">a</span>
-                    <input type="text" name="" value="Natural variations in the Earth's orbit">
-                </div>
-                <div>
-                    <span class="choice-letter">b</span>
-                    <input type="text" name="" value="Human activities such as burning fossil fuels and deforestation">
-                </div>
-                <div>
-                    <span class="choice-letter answer">c</span>
-                    <input type="text" name="" value="Volcanic eruptions">
-                </div>
-                <div>
-                    <span class="choice-letter">d</span>
-                    <input type="text" name="" value="Changes in solar radiation">
-                </div>
-            </div>
-        </div>
-    </div>
+            {% elif set.type == 'MCQ' %}
+                <h2>Multiple Choice</h2>
+                {% for item in set.questions %}       
+                    <div class="edit-question">
+                        <div class="edit-ques-header">
+                            <h3>Question {{ loop.index }}</h3>
+                            <button type="button"><i class="fa-solid fa-trash-can" style="color: #FFFFFF;"></i></button>
+                        </div>
+                        <div class="question-section">
+                            <label for="question">Question</label>
+                            <input type="text" name="question" id="question" value="{{ item.question }}">
+                        </div>
+                        <div>
+                            <div class="ans-sec-header">
+                                <span>Correct Answer</span>
+                                <button type="button" id="edit-ans-btn"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
+                            </div>
 
-    <!-- TRUE OR FALSE -->
-    <div class="edit-question">
-        <div class="edit-ques-header">
-            <h3>Question 2</h3>
-            <button type="button"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>
-        </div>
-        <div class="question-section">
-            <label for="question">Question</label>
-            <input type="text" name="question" id="question" value="Which of the following is a primary cause of climate change?">
-        </div>
-        <div>
-            <div class="ans-sec-header">
-                <span>Correct Answer</span>
-                <button type="button"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
-            </div>
-            <div class="answers-section">
-                <div>
-                    <span class="choice-letter answer">a</span>
-                    <span>True</span>
-                </div>
-                <div>
-                    <span class="choice-letter">b</span>
-                    <span>False</span>
-                </div>
-            </div>    
-        </div>
-    </div>
+                            <div class="answers-section">
+                                {% for choice in item.choices %} 
+                                    <div>
+                                        <span class="choice-letter">{{ loop.index }}</span>
+                                        <span>{{ choice }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div> 
 
-    <!-- IDENTIFICATION -->
-    <div class="edit-question">
-        <div class="edit-ques-header">
-            <h3>Question 3</h3>
-            <button type="button"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>
-        </div>
-        <div class="question-section">
-            <label for="question">Question</label>
-            <input type="text" name="question" id="question" value="What is the capital city of France?">
-        </div>
-        <div>
-            <div class="ans-sec-header">
-                <span>Correct Answer</span>
-                <button type="button"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
-            </div>
-            <div class="answers-section">
-                <div>
-                    <span>Paris</span>
-                </div>
-            </div>    
-        </div>
-    </div>
+                            <div class="answers-section" id="modify-answers">
+                                {% for choice in item.choices %} 
+                                    <div>
+                                        <span class="choice-letter">{{ loop.index }}</span>
+                                        <input type="text" name="" value="{{ choice }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            {% elif set.type == 'TOF' %}
+                <h2>True or False</h2>
+                {% for item in set.questions %}   
+                    <div class="edit-question">
+                        <div class="edit-ques-header">
+                            <h3>Question {{ loop.index }}</h3>
+                            <button type="button"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>
+                        </div>
+                        <div class="question-section">
+                            <label for="question">Question</label>
+                            <input type="text" name="question" id="question" value="{{ item.question }}">
+                        </div>
+                        <div>
+                            <div class="ans-sec-header">
+                                <span>Correct Answer</span>
+                                <button type="button"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
+                            </div>
+                            <div class="answers-section">
+                                {% for choice in item.choices %} 
+                                    <div>
+                                        <span class="choice-letter">{{ loop.index }}</span>
+                                        <span>{{ choice }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>    
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 
 
     <div class="rev-ques-buttons">

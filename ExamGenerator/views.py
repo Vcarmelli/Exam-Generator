@@ -1,6 +1,6 @@
 from flask import Blueprint, current_app, render_template, redirect, url_for, request, session, jsonify
 from flask_login import login_required, current_user
-from .util import convert_file_to_thumbnail, parse_page_ranges, extract_text, generate_questions
+from .util import convert_file_to_thumbnail, parse_page_ranges, parse_result, extract_text, generate_questions
 import os
 
 views = Blueprint('views', __name__)
@@ -71,7 +71,8 @@ def selection():
         try:
             text = extract_text(session['file_path'], pages)
         except KeyError:
-            return jsonify({'message': 'Return to Upload Page'}), 400
+            # return jsonify({'message': 'Return to Upload Page'}), 400
+            return redirect(url_for('views.upload'))
 
 
         session['questions'] = questions
@@ -90,24 +91,34 @@ def download():
     for question in questions:
         question_type = question.get('type')
         num_questions = question.get('quantity')
-        print(f"Preparing to generate {num_questions} {question_type} questions.")
+        print(f"Preparing to generate {num_questions} {question_type} question/s.")
 
-    generated_questions = generate_questions(questions, text)
+    result = generate_questions(questions, text)
+    generated_questions = parse_result(result) # extract question, choices, answer from model's response
+    print("PARSED result:']:", generated_questions)
 
-    #return render_template('download.html', generated_questions=generated_questions) # download page shows the generated question and button to continue to quiz
-    return render_template('generated.html', generated_questions=generated_questions)
+    session['generated_questions'] = generated_questions
+    print("session['generated_questions']:", session['generated_questions'])
+
+    #return jsonify({'result': session['generated_questions']})
+    return render_template('download.html')
+    #return render_template('generated.html', generated_questions=generated_questions)
+
+
+@views.route('/review-questions')
+def review_questions():
+    generated_questions = []
+    try:
+        generated_questions = session.get('generated_questions', {})
+    except KeyError:
+        return jsonify({'message': 'No questions generated.'}), 400
+
+    return render_template('review-ques.html', generated_questions=generated_questions)
 
 
 @views.route('/done')
 def done():
     return render_template('done.html') 
-
-
-@views.route('/review-questions')
-def review_questions():
-    ques_type = request.args.get('ques_type')
-    return render_template('review-ques.html', ques_type=ques_type)
-
 
 
 @views.route('/quiz-complete', methods=['GET', 'POST'])

@@ -388,6 +388,12 @@ nav ul li a.active {
     align-items: center;
 }
 
+.rev-ques-container h2 {
+    text-align: left;
+    width: 100%;
+    padding: 1.3em 0 0.2em 6em;
+}
+
 .rev-ques-buttons {
     display: flex;
     justify-content: center;
