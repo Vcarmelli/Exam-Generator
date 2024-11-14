@@ -1,75 +1,108 @@
-$(document).ready(function () {
-    let quiz = document.querySelector("#quiz");
-    let questionNo = document.querySelector("#questionNo");
-    let questionText = document.querySelector("#questionText");
-    let questionImage = document.querySelector("#questionImage");
-    let userAnswer = document.querySelector("#userAnswer");
-    let Submit = document.querySelector("#Submit");
-    let Cancel = document.querySelector("#Cancel");
-    let feedback = document.querySelector("#feedback");
-    let result = document.querySelector("#result");
-    let points = document.querySelector("#points");
+let allQuestions = [];
+let selectedQuestions = [];
+let index = 0;
+let correct = 0;
 
-    let index = 0;
-    let correct = 0;
-    let totalQuestion = IDEN.length;
+const loadQuestions = () => {
+    $.get("/quiz", function (data) {
+        allQuestions = data.all_questions || [];
+        const questionList = document.querySelector("#questionList");
+        questionList.innerHTML = "";  // Clear any existing content
 
-    const loadData = () => {
-        questionNo.innerText = (index + 1) + "/" + totalQuestion;
-        questionText.innerText = IDEN[index].question;
-        if (IDEN[index].image) {
-            questionImage.src = IDEN[index].image;
-            questionImage.style.display = "block";
-        } else {
-            questionImage.style.display = "none";
-        }
-        userAnswer.value = "";
-        userAnswer.classList.remove("correct", "incorrect"); // Reset class
-        feedback.innerText = "";
-        feedback.classList.remove("correct-message", "incorrect-message"); // Reset feedback classes
-        Submit.style.display = "inline-block";
-        Cancel.innerText = "Cancel";
+        allQuestions.forEach((question, i) => {
+            if (question.questions && question.answers) {
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.value = i;
+                checkbox.id = `question_${i}`;
 
-        let progressPercentage = ((index + 1) / totalQuestion) * 100;
-        updateProgress(progressPercentage);
-    };
+                const label = document.createElement("label");
+                label.setAttribute("for", `question_${i}`);
+                label.innerText = `Question ${i + 1}: ${question.questions}`;
 
-    loadData();
-
-    Submit.addEventListener("click", () => {
-        let answer = userAnswer.value.trim().toLowerCase();
-        let correctAnswer = IDEN[index].answer.trim().toLowerCase();
-
-        if (answer) {
-            if (answer === correctAnswer) {
-                feedback.innerText = "Correct!";
-                feedback.classList.add("correct-message");
-                userAnswer.classList.add("correct");
-                correct++;
+                const div = document.createElement("div");
+                div.classList.add("question-option");
+                div.appendChild(checkbox);
+                div.appendChild(label);
+                questionList.appendChild(div);
             } else {
-                feedback.innerText = `Incorrect. The correct answer is: ${IDEN[index].answer}`;
-                feedback.classList.add("incorrect-message");
-                userAnswer.classList.add("incorrect");
+                console.error(`Question data missing for index ${i}:`, question);
             }
-            Submit.style.display = "none";
-            Cancel.innerText = "Next";
-        } else {
-            alert("Please enter an answer before submitting.");
-        }
-    });
+        });
+    }).fail(() => alert("Error loading questions. Please try again."));
+};
 
-    Cancel.addEventListener("click", () => {
-        if (Cancel.innerText === "Next") {
-            if (index < IDEN.length - 1) {
-                index++;
-                loadData();
-            } else {
-                passData(correct, totalQuestion);
-            }
+const startQuiz = (selectedIndices) => {
+    selectedQuestions = selectedIndices.map(i => allQuestions[i]);
+    if (selectedQuestions.length === 0) {
+        alert("Please select at least one question to start the quiz.");
+        return;
+    }
+    index = 0;
+    correct = 0;
+    loadQuestion();
+};
+
+const loadQuestion = () => {
+    const currentQuestion = selectedQuestions[index];
+    if (currentQuestion && currentQuestion.questions) {
+        document.querySelector("#question-title").innerText = `Question ${index + 1} of ${selectedQuestions.length}`;
+        document.querySelector("#questionText").innerText = currentQuestion.questions;
+        document.querySelector("#userAnswer").value = "";  // Clear previous answer
+        document.querySelector("#feedback").innerText = "";
+        document.querySelector("#Submit").style.display = "inline-block";
+        document.querySelector("#Cancel").innerText = "Cancel";
+        document.querySelector("#feedback").classList.remove("correct", "incorrect");
+    } else {
+        console.error("Error: Question data missing or malformed for current index.");
+        document.querySelector("#questionText").innerText = "Error loading question. Please try again.";
+    }
+};
+
+const handleSubmit = () => {
+    const answer = document.querySelector("#userAnswer").value.trim().toLowerCase();
+    const correctAnswer = selectedQuestions[index]?.answers?.trim().toLowerCase();
+    const feedback = document.querySelector("#feedback");
+
+    if (answer && correctAnswer) {
+        const isCorrect = answer === correctAnswer;
+        feedback.innerText = isCorrect ? "Correct!" : "Incorrect.";
+        feedback.classList.add(isCorrect ? "correct" : "incorrect");
+        correct += isCorrect ? 1 : 0;
+
+        document.querySelector("#Submit").style.display = "none";
+        document.querySelector("#Cancel").innerText = "Next";
+    } else if (!answer) {
+        alert("Please enter an answer before submitting.");
+    } else {
+        console.error("Answer data missing for current question.");
+    }
+};
+
+const handleCancelOrNext = () => {
+    if (document.querySelector("#Cancel").innerText === "Next") {
+        if (index < selectedQuestions.length - 1) {
+            index++;
+            loadQuestion();
         } else {
-            if (confirm("Are you sure you want to cancel?")) {
-                window.location.reload();
-            }
+            alert(`Quiz complete! You scored ${correct}/${selectedQuestions.length}`);
+            window.location.reload();
         }
-    });
+    } else if (confirm("Are you sure you want to cancel?")) {
+        window.location.reload();
+    }
+};
+
+// Event Listeners
+document.querySelector("#questionForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const selectedIndices = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(checkbox => parseInt(checkbox.value));
+    startQuiz(selectedIndices);
 });
+
+document.querySelector("#Submit").addEventListener("click", handleSubmit);
+document.querySelector("#Cancel").addEventListener("click", handleCancelOrNext);
+
+// Initial load of questions
+loadQuestions(); 

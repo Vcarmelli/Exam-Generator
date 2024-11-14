@@ -83,20 +83,32 @@ def selection():
 
 @views.route('/download')
 def download():
+    # Retrieve `questions` and `text` data from the session
     questions = session.get('questions', [])
     text = session.get('text', '')
 
-    # For debugging purpose, making sure correct values are being passed
+    # Debugging output to verify the content of `questions` and `text`
+    print("Questions from session:", questions)
+    print("Text from session:", text)
+
+    # Ensure that questions and text are populated
+    if not questions or not text:
+        return render_template('game/identification.html', message="No questions or text available for generation")
+
+    # Debugging: Log each question type and quantity before generating
     for question in questions:
         question_type = question.get('type')
         num_questions = question.get('quantity')
         print(f"Preparing to generate {num_questions} {question_type} questions.")
 
+    # Generate the questions using the provided function
     generated_questions = generate_questions(questions, text)
 
-    #return render_template('download.html', generated_questions=generated_questions) # download page shows the generated question and button to continue to quiz
-    return render_template('generated.html', generated_questions=generated_questions)
+    # Additional debugging to verify the structure of `generated_questions`
+    print("Generated Questions:", generated_questions)
 
+    # Render the `identification.html` template and pass `generated_questions` to it
+    return render_template('/game/identification.html', generated_questions=generated_questions)
 
 @views.route('/done')
 def done():
