@@ -4,25 +4,39 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/true-or-false.css') }}">
 {% endblock %}
 
-{% block game_title %} {{ game_mode }} {% endblock %} 
-
-{% block game_header %} {{ game_mode }} {% endblock %} 
+{% block game_header %} {{ game_mode }} {% endblock %}
 
 {% block game_content %}
+<div id="question-container">
+    <h1 id="question-title">True or False</h1>
 
-    <div id="question">
-        <p id="questionText"></p>
-    </div>
-    <div id="optionList">
-        <h3 id="questionText1"></h3>
-        <div class="answerItem">
-            <h4 class="choice_que" id="option1"></h4>
-        </div>
-        <div class="answerItem">
-            <h4 class="choice_que" id="option2"></h4>
-        </div>
-    </div>
+    {% if generated_questions %}
+        {% for question_set in generated_questions %}
+            <div class="question-set">                
+                {% for question_data in question_set.questions %}
+                    <div class="question-card">
+                        <p class="question-text">{{ question_data.text }}</p>
 
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" name="question_{{ loop.index0 }}" value="True" class="user-answer">
+                                <label>True</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="question_{{ loop.index0 }}" value="False" class="user-answer">
+                                <label>False</label>
+                            </div>
+                        </div>
+
+                        <span class="correct-answer" style="display: none;">{{ question_data.answer }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p id="no-questions-message">No questions generated.</p>
+    {% endif %}
+</div>
 {% endblock %}
 
 {% block js_file %} 
