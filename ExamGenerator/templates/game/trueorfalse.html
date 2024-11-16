@@ -1,7 +1,7 @@
 {% extends "layout/game-base.html" %}
 
 {% block css_file %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/multiple-choice.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/true-or-false.css') }}">
 {% endblock %}
 
 {% block game_title %} View Progress {{ game_mode }} {% endblock %}
@@ -10,7 +10,7 @@
 
 {% block game_content %}
     <div id="question-container">
-        <h1 id="question-title">Multiple Choice</h1>
+        <h1 id="question-title">True or False</h1>
     
         {% if generated_questions %}
             {% for question_data in generated_questions %}
@@ -18,11 +18,12 @@
                     <p class="question-text">{{ question_data.text }}</p>
                     <p>Answer:</p>
                     <div class="answer-options">
-                        {% for option in question_data.options %}
-                            <label>
-                                <input type="radio" name="question_{{ loop.index }}" value="{{ option }}" class="user-answer"> {{ option }}
-                            </label><br>
-                        {% endfor %}
+                        <label>
+                            <input type="radio" name="question_{{ loop.index }}" value="True" class="user-answer"> True
+                        </label>
+                        <label>
+                            <input type="radio" name="question_{{ loop.index }}" value="False" class="user-answer"> False
+                        </label>
                     </div>
                     <span class="correct-answer" style="display: none;">{{ question_data.answer }}</span>
                 </div>
@@ -34,5 +35,5 @@
 {% endblock %}
 
 {% block js_file %}
-<script src="{{ url_for('static', filename='js/multiple-choice.js') }}"></script>
+<script src="{{ url_for('static', filename='js/true-or-false.js') }}"></script>
 {% endblock %}

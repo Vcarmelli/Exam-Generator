@@ -125,37 +125,32 @@ def game():
             return redirect(url_for('views.identification'))
     else:
         return render_template('/game/selection_menu.html', questions=generated_questions)
+
 @views.route('/multiplechoice')
 def multiplechoice():
     # Retrieve the generated questions from the session
     generated_questions = session.get('generated_questions', [])
+    multiplechoice_questions = [q for q in generated_questions if q['type'] == 'MCQ']
+    print("Filtered Questions:", multiplechoice_questions)  
 
-    # Filter out only MCQ questions
-    mcq_questions = [q for q in generated_questions if q['type'] == 'MCQ']
-
-    # Render the template and pass the MCQ questions
-    return render_template('/game/multiplechoice.html', questions=mcq_questions)
+    return render_template('/game/multiple-choice.html', generated_questions=multiplechoice_questions)
 
 @views.route('/true_or_false')
 def true_or_false():
     # Retrieve the generated questions from the session
     generated_questions = session.get('generated_questions', [])
+    true_or_false_questions = [q for q in generated_questions if q['type'] == 'TOF']
+    print("Filtered Questions:", true_or_false_questions)  
 
-    # Filter out only TOF questions
-    tof_questions = [q for q in generated_questions if q['type'] == 'TOF']
-
-    # Render the template and pass the TOF questions
-    return render_template('/game/true_or_false.html', questions=tof_questions)
+    return render_template('/game/trueorfalse.html', generated_questions=true_or_false_questions)
 
 @views.route('/identification')
 def identification():
     # Retrieve the generated questions from the session
     generated_questions = session.get('generated_questions', [])
-
-    # Ensure only IDN (Identification) questions are passed to the template
     identification_questions = [q for q in generated_questions if q['type'] == 'IDN']
+    print("Filtered Questions:", identification_questions)  
 
-    # Render the template and pass the identification questions
     return render_template('/game/identification.html', generated_questions=identification_questions)
 
 @views.route('/done')

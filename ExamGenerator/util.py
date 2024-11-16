@@ -77,7 +77,6 @@ def generate_questions(questions, text):
             The questions should be clear, concise, and relevant to the text. Here is the text:
             {context}
         """,
-
         'TOF': """
             Generate {number_of_questions} True or False questions from the following text.
             For each question, specify the correct answer at the end in the following format:
@@ -88,7 +87,6 @@ def generate_questions(questions, text):
             The questions should be clear, concise, and relevant to the text. Here is the text:
             {context}
         """,
-
         'IDN': """
             Generate {number_of_questions} Identification Questions from the following text.
             For each question, specify the correct answer at the end in the following format:
@@ -104,52 +102,53 @@ def generate_questions(questions, text):
         num_questions = question.get('quantity')
         print(f"Generating {num_questions} {question_type} questions...")
 
-        # Retrieve the prompt template and replace `{context}` with `text`
+        # Retrieve the prompt template and replace placeholders
         prompt_template = question_prompts.get(question_type)
         if prompt_template:
             prompt = prompt_template.format(number_of_questions=num_questions, context=text)
             result = llm.invoke(prompt)
 
-            # Improved parsing to handle questions and answers without strict "Answer:" keyword
-# Parsing loop within generate_questions
-        question_answer_pairs = []
-        lines = result.strip().split('\n')
-        current_question = ""
-        current_answer = ""
-        options = []
-        for line in lines:
-            line = line.strip()
-            if line.startswith(tuple(str(i) for i in range(1, num_questions + 1))):
-                # New question detected
-                if current_question:
-                    question_answer_pairs.append({
-                        'text': current_question.strip(),
-                        'options': options,
-                        'answer': current_answer.strip()
-                    })
-                current_question = line  # Start new question
-                current_answer = ""
-                options = []  # Reset options for new question
-            elif line.lower().startswith("answer:"):
-                # Capture answer
-                current_answer = line.split(":", 1)[1].strip()
-            elif line.startswith(('a)', 'b)', 'c)', 'd)')):
-                # Capture multiple-choice options
-                options.append(line)
-            elif current_question:
-                # Additional lines for the current question
-                current_question += " " + line
+            # Parsing the results based on question type
+            question_answer_pairs = []
+            lines = result.strip().split('\n')
+            current_question = ""
+            current_answer = ""
+            options = []
+            for line in lines:
+                line = line.strip()
+                if line.startswith(tuple(str(i) for i in range(1, num_questions + 1))):
+                    # New question detected
+                    if current_question:
+                        question_answer_pairs.append({
+                            'text': current_question.strip(),
+                            'options': options if options else None,
+                            'answer': current_answer.strip()
+                        })
+                    current_question = line  # Start new question
+                    current_answer = ""
+                    options = []  # Reset options for new question
+                elif line.lower().startswith("answer:"):
+                    # Capture answer
+                    current_answer = line.split(":", 1)[1].strip()
+                elif line.startswith(('a)', 'b)', 'c)', 'd)')) and question_type == 'MCQ':
+                    # Capture multiple-choice options
+                    options.append(line)
+                elif current_question:
+                    # Additional lines for the current question
+                    current_question += " " + line
 
-        # Append the final question-answer pair if it exists
+            # Append the final question-answer pair if it exists
         if current_question:
             question_answer_pairs.append({
+                'type': question_type,  # Add type here
                 'text': current_question.strip(),
-                'options': options,
+                'options': options if options else None,
                 'answer': current_answer.strip()
             })
+            
+            all_generated_questions.extend(question_answer_pairs)
 
     return all_generated_questions
-
 
 # Abbreviate question types
 def abbreviate(q_type):

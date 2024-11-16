@@ -1,54 +1,101 @@
 body {
-    background-image: radial-gradient(circle, white 7%, var(--secondary-color), var(--secondary-color));  
+    background-image: radial-gradient(circle, white 7%, var(--green-light), var(--green-light));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
-.answerItem {
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
+#question-container {
+    width: 80%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: none;
+}
+
+#question-title {
+    font-size: 2em;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-#optionList p {
-    margin: 0; 
-    padding: 0;
-    line-height: 50px;
-    border-radius: 7px;
-    font-size: 18px;
-    background-color: white;
-    overflow: hidden;
-    border: 2px solid var(--black-color);
-    cursor: pointer;
+.question-set {
+    margin-bottom: 20px;
+}
+
+.question-set h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    background-color: none;
+}
+
+.question-card {
     display: flex;
-    align-items: center;
-    padding: 3px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: none;
 }
 
-#optionList p.choice_que {
-    flex: 1; 
-    margin-left: 20px;
-    padding-left: 20px;
-}
-
-#optionList p#answerNo1,
-#optionList p#answerNo2,
-#optionList p#answerNo3,
-#optionList p#answerNo4 {
-    width: 3%;
-    text-align: center;
-    background-color: white;
-    margin-left: 20px;
-    padding-left: 20px;
-}
-
-#questionText1 {
-    text-align: start;
-}
-
-.feedback-message {
-    font-size: 18px;
+.question-text {
+    width: 100%;
+    margin-left: 10px;
+    height: 50px;
+    background-color: #5B699C;
+    color: white;
+    font-size: 1.2em;
+    padding: 10px;
     text-align: left;
-    margin-left: 50px; 
+    border-radius: 7px;
+    margin-top: 10px;
+    border: 2px solid var(--black-color);
+}
+
+.user-answer {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 2px solid var(--black-color);
+    border-radius: 5px;
+    background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6));
+    margin-top: 10px;
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+.user-answer.correct {
+    border-color: var(--green-color);
+}
+
+.user-answer.incorrect {
+    border-color: var(--red-color);
+}
+
+#no-questions-message {
+    font-size: 1.2em;
+    text-align: center;
+    color: #666;
+}
+
+.correct-answer {
+    font-size: 0.9em;
+    color: var(--green-color);
+    margin-top: 5px;
+}
+
+#feedback {
+    font-size: 1.2em;
+    padding: 10px;
+    margin-top: 30px;
+    border-radius: 5px;
+    text-align: left;
 }
 
 .correct-message {
@@ -57,68 +104,4 @@ body {
 
 .incorrect-message {
     color: var(--red-color);
-}
-
-#optionList p.correct {
-    border: 3px solid var(--green-color) !important;
-}
-
-#optionList p.incorrect {
-    border: 3px solid var(--red-color) !important;
-}
-
-#optionList p.choice_que.correct {
-    border: 3px solid var(--green-color);
-}
-
-#optionList .answerItem p.choice_que:hover,
-#optionList .answerItem p#answerNo1:hover,
-#optionList .answerItem p#answerNo2:hover,
-#optionList .answerItem p#answerNo3:hover,
-#optionList .answerItem p#answerNo4:hover
-#optionList .answerItem:hover p.choice_que,
-#optionList .answerItem:hover p#answerNo1,
-#optionList .answerItem:hover p#answerNo2,
-#optionList .answerItem:hover p#answerNo3,
-#optionList .answerItem:hover p#answerNo4{
-    background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6));
-}
-
-#optionList .answerItem p.choice_que.active,
-#optionList .answerItem p#answerNo1.active,
-#optionList .answerItem p#answerNo2.active,
-#optionList .answerItem p#answerNo3.active,
-#optionList .answerItem p#answerNo4.active,
-#optionList .answerItem.active p.choice_que,
-#optionList .answerItem.active p#answerNo1,
-#optionList .answerItem.active p#answerNo2,
-#optionList .answerItem.active p#answerNo3,
-#optionList .answerItem.active p#answerNo4 {
-    background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6));
-    border: 3px solid var(--accent-color);
-}
-
-
-
-
-#NextButton {
-    background-color: var(--green-color);
-    color: white;
-    border: 2px solid white;
-    border-radius: 10px;
-    width: 400px;
-    position: absolute;
-    left: calc(50% + 100px); 
-}
-
-#NextButton:hover {
-    background: white;
-    color: #4caf50;
-    border: 2px solid black;
-    margin-top: -100%;
-}
-
-#NextButton.disabled {
-    background-color: #ccc; 
-    cursor: not-allowed; 
 }
