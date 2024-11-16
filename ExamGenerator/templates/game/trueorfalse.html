@@ -14,26 +14,26 @@
     
         {% if generated_questions %}
             {% for question_data in generated_questions %}
-                <div class="question-card">
-                    <p class="question-text">{{ question_data.text }}</p>
-                    <p>Answer:</p>
-                    <div class="answer-options">
+                {% if question_data.type == 'TOF' %}
+                    <div class="question-card">
+                        <p class="question-text">{{ question_data.text.split('a)')[0] }}</p>
+                        <p>YAnswer:</p>
                         <label>
                             <input type="radio" name="question_{{ loop.index }}" value="True" class="user-answer"> True
                         </label>
                         <label>
                             <input type="radio" name="question_{{ loop.index }}" value="False" class="user-answer"> False
                         </label>
+                        <span class="correct-answer" style="display: none;">The correct answer is {{ question_data.answer }}</span>
                     </div>
-                    <span class="correct-answer" style="display: none;">{{ question_data.answer }}</span>
-                </div>
+                {% endif %}
             {% endfor %}
         {% else %}
             <p id="no-questions-message">No questions generated.</p>
         {% endif %}
-    </div>
+
 {% endblock %}
 
 {% block js_file %}
-<script src="{{ url_for('static', filename='js/true-or-false.js') }}"></script>
+<script src="{{ url_for('static', filename='js/true-false.js') }}"></script>
 {% endblock %}

@@ -1,103 +1,52 @@
-$(document).ready(function () {
-    let quiz = document.querySelector("#quiz");
-    let questionNo = document.querySelector("#questionNo");
-    let questionText = document.querySelector("#questionText");
-    let questionText1 = document.querySelector("#questionText1");
-    let choice_que = document.querySelectorAll(".choice_que");
-    let Submit = document.querySelector("#Submit");
-    let Cancel = document.querySelector("#Cancel");
-    let result = document.querySelector("#result");
-    let points = document.querySelector("#points");
+document.addEventListener("DOMContentLoaded", function() {
+    const questionCards = document.querySelectorAll(".question-card");
+    const submitButton = document.getElementById("submit-button");
+    const cancelButton = document.getElementById("cancel-button");
 
-    let index = 0;
-    let correct = 0;
-    let UserAns = undefined;
-    let UserAnsList = [];
-    let totalQuestion = TOF.length;
+    // Submit button click event
+    submitButton.addEventListener("click", function() {
+        let allAnswered = true;
 
-    const loadData = () => {
-        questionNo.innerText = (index + 1) + "/" + totalQuestion;
-        questionText.innerText = TOF[index].question;
-        choice_que[0].innerText = TOF[index].choice1;
-        choice_que[1].innerText = TOF[index].choice2;
+        // Loop through each question card
+        questionCards.forEach(card => {
+            const selectedOption = card.querySelector("input[type='radio']:checked");
 
-        // Clear previous states
-        choice_que.forEach((option) => {
-            option.classList.remove("active", "correct", "incorrect", "disabled");
-        });
+            if (selectedOption) {
+                // Get the correct answer text
+                const correctAnswer = card.querySelector(".correct-answer").textContent.split("is")[1].trim();
+                const userAnswer = selectedOption.value;
 
-        // Reset buttons and feedback message
-        Submit.style.display = "inline-block";
-        Cancel.innerText = "Cancel";
-        let message = document.querySelector(".feedback-message");
-        if (message) {
-            message.remove();  // Clear previous feedback message
-        }
-        
-        let progressPercentage = ((index + 1) / totalQuestion) * 100;
-        updateProgress(progressPercentage);
-    };
+                // Check if the user's answer is correct
+                if (userAnswer === correctAnswer) {
+                    selectedOption.parentNode.style.color = "green"; // Correct answer in green
+                } else {
+                    selectedOption.parentNode.style.color = "red"; // Incorrect answer in red
+                }
 
-    loadData();
-
-    choice_que.forEach((choice, choiceNo) => {
-        choice.addEventListener("click", () => {
-            // Deselect all options
-            choice_que.forEach(option => option.classList.remove("active"));
-
-            // Select the clicked option
-            choice.classList.add("active");
-            UserAns = choiceNo;
-
-            // Disable further selections
-            choice_que.forEach(option => option.classList.add("disabled"));
-        });
-    });
-
-    Submit.addEventListener("click", () => {
-        if (UserAns !== undefined) {
-            // Create a feedback message element
-            let message = document.createElement("div");
-            message.classList.add("feedback-message");
-
-            if (UserAns === TOF[index].answer - 1) {  // Correct answer
-                choice_que[UserAns].classList.add("correct");
-                correct++;
-                message.innerText = "Correct!";
-                message.classList.add("correct-message");
-            } else {  // Incorrect answer
-                choice_que[UserAns].classList.add("incorrect");
-                // Show the correct answer
-                choice_que[TOF[index].answer - 1].classList.add("correct");
-                message.innerText = "Check your answer!";
-                message.classList.add("incorrect-message");
-            }
-            // save the user's answers in each question
-            UserAnsList[index] = UserAns;
-
-            // Append the feedback message after the question text
-            questionText1.parentElement.appendChild(message);
-
-            // Disable further submissions and show the Next button
-            Submit.style.display = "none";
-            Cancel.innerText = "Next";
-        } else {
-            alert("Please select an option before submitting.");
-        }
-    });
-
-    Cancel.addEventListener("click", () => {
-        if (Cancel.innerText === "Next") {
-            if (index < TOF.length - 1) {
-                index++;
-                loadData();
+                // Display the correct answer message
+                const correctMessage = card.querySelector(".correct-answer");
+                correctMessage.style.display = "inline"; // Show the correct answer message
             } else {
-                passData(correct, totalQuestion);
+                allAnswered = false; // If no answer is selected, mark as incomplete
             }
-        } else {
-            if (confirm("Are you sure you want to cancel?")) {
-                window.location.reload();
-            }
+        });
+
+        // If some questions are unanswered, alert the user
+        if (!allAnswered) {
+            alert("Please answer all questions before submitting.");
         }
+    });
+
+    // Cancel button click event
+    cancelButton.addEventListener("click", function() {
+        // Reset answers and hide correct answers
+        questionCards.forEach(card => {
+            const selectedOption = card.querySelector("input[type='radio']:checked");
+            if (selectedOption) {
+                selectedOption.checked = false; // Uncheck the selected radio button
+                selectedOption.parentNode.style.color = ""; // Reset color to default
+            }
+            card.querySelector(".correct-answer").style.display = "none"; // Hide correct answers
+        });
     });
 });

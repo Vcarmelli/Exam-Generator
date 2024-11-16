@@ -19,16 +19,18 @@
             <!-- Quiz questions and choices goes here -->
             {% block game_content %}
             {% endblock %}
-            
-            <div class="quiz_buttons">
-                <button id="Cancel" class="btn btn-secondary" type="button">Cancel</button>
-                <button id="Submit" class="btn btn-primary" type="button">Submit</button>
-            </div>
-            
+            <!-- Submit Button -->
+        <button id="submit-button">Submit Answers</button>
+        <!-- Cancel Button -->
+        <button id="cancel-button">Cancel</button>
         </div>
     </div>
     
     <div id="result"></div>
     <div id="points"></div>
 </div>
+{% endblock %}
+
+{% block js_file %}
+<script src="{{ url_for('static', filename='js/multiple-choice.js') }}"></script>
 {% endblock %}
