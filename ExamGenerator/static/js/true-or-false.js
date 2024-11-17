@@ -5,39 +5,32 @@ document.addEventListener("DOMContentLoaded", function() {
     const nextButton = document.getElementById("next-button");
     let currentQuestionIndex = 0;
 
-    // Initially hide the Next button and Submit button
     nextButton.style.display = "none";
     submitButton.style.display = "none";
 
-    // Show the first question
     questionCards[currentQuestionIndex].style.display = "block";
 
-    // Show Submit button after an answer is selected
     questionCards.forEach(card => {
         card.addEventListener("change", function() {
             const selectedOption = card.querySelector("input[type='radio']:checked");
             if (selectedOption) {
-                submitButton.style.display = "block";  // Show Submit button when an answer is selected
+                submitButton.style.display = "block";  
             } else {
-                submitButton.style.display = "none"; // Hide Submit button if no answer is selected
+                submitButton.style.display = "none"; 
             }
         });
     });
 
-    // Submit button click event
     submitButton.addEventListener("click", function() {
         let allAnswered = true;
 
-        // Loop through each question card to check if it's answered
         questionCards.forEach(card => {
             const selectedOption = card.querySelector("input[type='radio']:checked");
 
             if (selectedOption) {
-                // Get the correct answer text
                 const correctAnswer = card.querySelector(".correct-answer").textContent.split("is")[1].trim();
                 const userAnswer = selectedOption.value;
 
-                // Check if the user's answer is correct
                 if (userAnswer === correctAnswer) {
                     selectedOption.parentNode.style.color = "green"; // Correct answer in green
                 } else {
