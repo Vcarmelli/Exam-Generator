@@ -70,7 +70,6 @@ def selection():
         print(f"Pages: {pages}")
         print("Questions:", questions)
 
-        # Text extraction
         try:
             text = extract_text(session['file_path'], pages)
         except KeyError:
@@ -112,9 +111,10 @@ def game():
     if not generated_questions:
         return redirect(url_for('views.selection', message="No generated questions available"))
 
-    # Check if there is more than one type in generated questions
+    # Safely collect question types
     question_types = {q['type'] for q in generated_questions}
-    
+
+    # Handle case when only one question type is present
     if len(question_types) == 1:
         question_type = next(iter(question_types))
         if question_type == 'MCQ':
@@ -124,16 +124,19 @@ def game():
         elif question_type == 'IDN':
             return redirect(url_for('views.identification'))
     else:
+        # Handle multiple question types by rendering a selection menu
         return render_template('/game/selection_menu.html', questions=generated_questions)
-
 @views.route('/multiplechoice')
 def multiplechoice():
     # Retrieve the generated questions from the session
     generated_questions = session.get('generated_questions', [])
-    multiplechoice_questions = [q for q in generated_questions if q['type'] == 'MCQ']
-    print("Filtered Questions:", multiplechoice_questions)  
 
-    return render_template('/game/multiple-choice.html', generated_questions=multiplechoice_questions)
+    # Filter for multiple choice questions directly
+    multiplechoice_questions = [q for q in generated_questions if q.get('type') == 'MCQ']
+    print("Filtered Questions:", multiplechoice_questions)
+
+    # Render the multiple-choice template with the filtered questions
+    return render_template('/game/multiplechoice.html', generated_questions=multiplechoice_questions)
 
 @views.route('/true_or_false')
 def true_or_false():

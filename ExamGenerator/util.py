@@ -120,6 +120,7 @@ def generate_questions(questions, text):
                     # New question detected
                     if current_question:
                         question_answer_pairs.append({
+                            'type': question_type,  # Ensure the type is included here
                             'text': current_question.strip(),
                             'options': options if options else None,
                             'answer': current_answer.strip()
@@ -138,14 +139,14 @@ def generate_questions(questions, text):
                     current_question += " " + line
 
             # Append the final question-answer pair if it exists
-        if current_question:
-            question_answer_pairs.append({
-                'type': question_type,  # Add type here
-                'text': current_question.strip(),
-                'options': options if options else None,
-                'answer': current_answer.strip()
-            })
-            
+            if current_question:
+                question_answer_pairs.append({
+                    'type': question_type,  # Add type here
+                    'text': current_question.strip(),
+                    'options': options if options else None,
+                    'answer': current_answer.strip()
+                })
+
             all_generated_questions.extend(question_answer_pairs)
 
     return all_generated_questions

@@ -11,10 +11,10 @@
 {% block game_content %}
     <div id="question-container">
         <h1 id="question-title">Multiple Choice</h1>
-    
+
         {% if generated_questions %}
             {% for question_data in generated_questions %}
-                <div class="question-card">
+                <div class="question-card" style="display: none;">
                     <p class="question-text">{{ question_data.text }}</p>
                     <p>Answer:</p>
                     <div class="answer-options">
@@ -30,10 +30,9 @@
         {% else %}
             <p id="no-questions-message">No questions generated.</p>
         {% endif %}
-
-        <!-- Submit Button -->
-        <button id="submit-button">Submit Answers</button>
-    </div>
+        <button id="next-button" style="display: none;">Next Question</button>
+        <button id="submit-button">Submit</button>
+        <button id="cancel-button">Cancel</button>        
 {% endblock %}
 
 {% block js_file %}

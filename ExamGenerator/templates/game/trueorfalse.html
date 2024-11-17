@@ -17,7 +17,7 @@
                 {% if question_data.type == 'TOF' %}
                     <div class="question-card">
                         <p class="question-text">{{ question_data.text.split('a)')[0] }}</p>
-                        <p>YAnswer:</p>
+                        <p>Answer:</p>
                         <label>
                             <input type="radio" name="question_{{ loop.index }}" value="True" class="user-answer"> True
                         </label>
@@ -31,9 +31,11 @@
         {% else %}
             <p id="no-questions-message">No questions generated.</p>
         {% endif %}
-
+        <button id="next-button" style="display: none;">Next Question</button>
+        <button id="submit-button">Submit</button>
+        <button id="cancel-button">Cancel</button>        
 {% endblock %}
 
 {% block js_file %}
-<script src="{{ url_for('static', filename='js/true-false.js') }}"></script>
+<script src="{{ url_for('static', filename='js/true-or-false.js') }}"></script>
 {% endblock %}
