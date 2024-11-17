@@ -1,6 +1,7 @@
 body {
-    background-image: radial-gradient(circle, white 7%, var(--green-light), var(--green-light));
-    display: flex;
+    background-color: var(--secondary-color);
+    background-image: radial-gradient(circle, white 10%, var(--secondary-color), var(--secondary-color));  
+    display: absolute;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -8,66 +9,76 @@ body {
 }
 
 #question-container {
-    width: 80%;
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: none;
+    margin: 0; 
+    padding: 0;
+    width: 100%; 
+    position: relative;
 }
 
-#question-title {
+#game_header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+}
+
+#game_header h2 {
+    margin: 0;
+    padding: 0;
     font-size: 2em;
-    text-align: center;
-    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
 }
 
-.question-set {
-    margin-bottom: 20px;
-}
-
-.question-set h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    background-color: none;
-}
 
 .question-card {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
     padding: 15px;
+    margin-top: 50px;
     margin-bottom: 15px;
-    border-radius: 8px;
     background-color: none;
+    color: white;
 }
 
 .question-text {
-    width: 100%;
-    margin-left: 10px;
-    height: 50px;
-    background-color: #5B699C;
+    margin-bottom: 10px;
+    font-size: 1.5em;
     color: white;
-    font-size: 1.2em;
     padding: 10px;
-    text-align: left;
     border-radius: 7px;
-    margin-top: 10px;
+    background-color: #5B699C;
+    border-radius: 8px;
     border: 2px solid var(--black-color);
+    text-align: left;
+    width: 95%;
+    height: 40px;
 }
 
-.user-answer {
-    width: 100%;
-    padding: 10px;
-    font-size: 1em;
-    border: 2px solid var(--black-color);
-    border-radius: 5px;
-    background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6));
+.answer-options label {
+    display: block;
     margin-top: 10px;
+    font-size: 1.5em;
+    color: var(--black-color);
+    text-decoration: none;
+    height: 40px;
+    width: 90%;
+    background-color: white;  
+    margin-bottom: 15px;
+    text-align: left;
 }
 
 p {
+    color: var(--black-color);
+    text-align: left;
     font-size: 1.5rem;
+    margin-top: 15px;
+    margin-bottom: 25px;
 }
 
 .user-answer.correct {
@@ -84,24 +95,62 @@ p {
     color: #666;
 }
 
-.correct-answer {
-    font-size: 0.9em;
-    color: var(--green-color);
-    margin-top: 5px;
+#button-container {
+    text-align: center;
 }
 
-#feedback {
-    font-size: 1.2em;
-    padding: 10px;
-    margin-top: 30px;
+button {
+    margin: 5px;
+    font-size: 1.5em;
+    padding: 10px 20px;
     border-radius: 5px;
-    text-align: left;
+    cursor: pointer;
+    width: 40%;
+    background-color: white;
+    color: var(--black-color);
+    border: 2px solid #5B699C;
+
 }
 
-.correct-message {
-    color: var(--green-color);
+#submit-button {
+    color: white;
+    background: #5B699C;
+    border: 2px solid white;
 }
 
-.incorrect-message {
-    color: var(--red-color);
+#submit-button:hover,
+#next-button:hover,
+#cancel-button:hover {
+    color: white;
+    background-color: #5B699C;
+}
+
+input[type="radio"] {
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    position: relative;
+    margin: 0;
+    width: 0;
+    height: 0;
+}
+
+input[type="radio"] + label {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 3px solid black;  
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+input[type="radio"]:checked + label {
+    background-image: radial-gradient(linear, white 10%, var(--secondary-color), var(--secondary-color));  
+    color: var(--black-color);
+    border-color: #4caf50;
+}
+
+input[type="radio"] + label:hover {
+    border-color: #888;
+    background-image: radial-gradient(circle, white 10%, var(--secondary-color), var(--secondary-color));  
 }
