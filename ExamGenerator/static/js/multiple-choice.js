@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     finishExamButton.addEventListener("click", function () {
         // Handle the completion of the exam (e.g., submit, show result, etc.)
-        alert("Congratulations! You've finished the exam!");
+        alert("Congratulations! You've finished the quiz!");
         // You can redirect or show a summary here.
     });
 

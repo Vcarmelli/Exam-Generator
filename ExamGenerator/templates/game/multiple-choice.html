@@ -21,7 +21,7 @@
                             <label for="option_{{ loop.index }}">{{ option }}</label>
                         {% endfor %}
                     </div>                    
-                    <span class="correct-answer" style="display: none;">{{ question_data.answer }}</span>
+                    <span class="correct-answer" style="display: none;"> The correct answer is: {{ question_data.answer }}</span>
                 </div>
             {% endfor %}
         {% else %}
