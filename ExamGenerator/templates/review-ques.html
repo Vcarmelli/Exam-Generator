@@ -19,22 +19,29 @@
                     <div class="edit-question">
                         <div class="edit-ques-header">
                             <h3>Question {{ loop.index }}</h3>
-                            <button type="button"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>
+                            <button type="button" class="delete-btn"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>
                         </div>
                         <div class="question-section">
-                            <label for="question">Question</label>
-                            <input type="text" name="question" id="question" value="{{ item.question }}">
+                            <label for="idn-{{ loop.index }}">Question</label>
+                            <input type="text" name="question" id="idn-{{ loop.index }}" value="{{ item.question }}">
                         </div>
                         <div>
                             <div class="ans-sec-header">
                                 <span>Correct Answer</span>
-                                <button type="button"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
+                                <button type="button" class="edit-btn"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
                             </div>
+
                             <div class="answers-section">
                                 <div>
                                     <span>{{ item.answer }}</span>
                                 </div>
-                            </div>    
+                            </div>   
+                            
+                            <div class="answers-section modify">
+                                <div>
+                                    <input type="text" name=" " value="{{ item.answer }}" required>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                 {% endfor %}
@@ -45,19 +52,19 @@
                     <div class="edit-question">
                         <div class="edit-ques-header">
                             <h3>Question {{ loop.index }}</h3>
-                            <button type="button"><i class="fa-solid fa-trash-can" style="color: #FFFFFF;"></i></button>
+                            <button type="button" class="delete-btn"><i class="fa-solid fa-trash-can" style="color: #FFFFFF;"></i></button>
                         </div>
                         <div class="question-section">
-                            <label for="question">Question</label>
-                            <input type="text" name="question" id="question" value="{{ item.question }}">
+                            <label for="mcq-{{ loop.index }}">Question</label>
+                            <input type="text" name="question" id="mcq-{{ loop.index }}" value="{{ item.question }}">
                         </div>
                         <div>
                             <div class="ans-sec-header">
                                 <span>Correct Answer</span>
-                                <button type="button" id="edit-ans-btn"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
+                                <button type="button" class="edit-btn"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
                             </div>
 
-                            <div class="answers-section">
+                            <div class="answers-section with-choices">
                                 {% for choice in item.choices %} 
                                     <div>
                                         <span class="choice-letter">{{ loop.index }}</span>
@@ -66,11 +73,11 @@
                                 {% endfor %}
                             </div> 
 
-                            <div class="answers-section" id="modify-answers">
+                            <div class="answers-section with-choices modify">
                                 {% for choice in item.choices %} 
                                     <div>
                                         <span class="choice-letter">{{ loop.index }}</span>
-                                        <input type="text" name="" value="{{ choice }}">
+                                        <input type="text" name="choice-{{ loop.index }}" value="{{ choice }}" required>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -84,25 +91,34 @@
                     <div class="edit-question">
                         <div class="edit-ques-header">
                             <h3>Question {{ loop.index }}</h3>
-                            <button type="button"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>
+                            <button type="button" class="delete-btn"><i class="fa-solid fa-trash-can" style="color: white;"></i></button>
                         </div>
                         <div class="question-section">
-                            <label for="question">Question</label>
-                            <input type="text" name="question" id="question" value="{{ item.question }}">
+                            <label for="tof-{{ loop.index }}">Question</label>
+                            <input type="text" name="question" id="tof-{{ loop.index }}" value="{{ item.question }}">
                         </div>
                         <div>
                             <div class="ans-sec-header">
                                 <span>Correct Answer</span>
-                                <button type="button"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
+                                <button type="button" class="edit-btn"><i class="fa-solid fa-pen-to-square" style="color: #5B699C;"></i></button>
                             </div>
-                            <div class="answers-section">
+                            <div class="answers-section with-choices">
                                 {% for choice in item.choices %} 
                                     <div>
                                         <span class="choice-letter">{{ loop.index }}</span>
                                         <span>{{ choice }}</span>
                                     </div>
                                 {% endfor %}
-                            </div>    
+                            </div>   
+                            
+                            <div class="answers-section with-choices modify">
+                                {% for choice in item.choices %} 
+                                    <div>
+                                        <span class="choice-letter">{{ loop.index }}</span>
+                                        <input type="text" name="choice-{{ loop.index }}" value="{{ choice }}" required>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
@@ -110,10 +126,10 @@
         {% endfor %}
     {% endif %}
 
-
     <div class="rev-ques-buttons">
         <a class="btn btn-secondary" href="{{ url_for('views.download', ques_type=ques_type) }}">Back</a>
         <a class="btn btn-primary" href="{{ url_for('views.done') }}">Download Exam</a>
     </div>
 </div>
 {% endblock %}
+

@@ -2,10 +2,11 @@
     --primary-color:#5B699C;
     --secondary-color: #ECD7EC;
     --tertiary-color: #D1E5F9;
+    --tertiary-light: #EFF2FE;
     --accent-color: #1E4050;
     --fourth-color: #BAE6E2;
 
-    --background-color: #EFF2FE;
+    --background-color: #F7F9FF;
     --black-color: #0D1717;
     --gray-color: #D9D9D9;
     --green-color: #4CAF50;;
@@ -23,6 +24,7 @@ body {
     font-family: 'Poppins', sans-serif;
     color: var(--black-color);
     overflow-x: hidden;
+    background-color: #f7f9ff;
 }
 
 /* NAVIGATION LINKS STYLES */
@@ -104,7 +106,7 @@ nav ul li a.active {
 
 .btn-primary:hover {
     color: var(--accent-color);
-    background-color: var(--background-color);
+    background-color: var(--tertiary-light);
     border: 2px solid var(--accent-color);
 }
 
@@ -264,7 +266,7 @@ nav ul li a.active {
     gap: 1em;
     border-radius: 1em;
     width: 25vw;
-    background-color: var(--background-color);
+    background-color: var(--tertiary-light);
     box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
     padding: 1.2em 2em;
     margin: 0.8em;
@@ -414,7 +416,7 @@ nav ul li a.active {
     padding: 1.5em;
     margin: 1em;
     border-radius: 1em;
-    background-color: var(--background-color);
+    background-color: var(--tertiary-light);
     box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
 }
 
@@ -462,6 +464,9 @@ nav ul li a.active {
 .answers-section .choice-letter {
     color: white;
     background-color: var(--primary-color);
+    border-radius: 7px;
+    padding: 0.6em 0.8em;
+    text-align: center;
     transition: ease 0.5s;
 }
 
@@ -478,8 +483,8 @@ nav ul li a.active {
     width: 70%;
 }
 
-#modify-answers {
-    display: none;
+.answers-section.modify {
+    display: flex;
 }
 
 
@@ -569,15 +574,15 @@ nav ul li a.active {
 .choices {
     display: flex;
     flex-direction: column;
-    gap: 1.8em;
+    gap: 1.2em;
     margin: 0 1.4em;
 }
 
-.choice-letter {
-    padding: 0.6em 0.8em;
-    width: 5%;
-    border-radius: 5px;
-    background-color: var(--background-color);
+.answers-section.with-choices div {
+    display: inline-grid;
+    align-items: center;
+    grid-template-columns: 6% auto;
+    gap: 1em;
 }
 
 .correct-choice {

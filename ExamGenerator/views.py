@@ -1,6 +1,6 @@
 from flask import Blueprint, current_app, render_template, redirect, url_for, request, session, jsonify
 from flask_login import login_required, current_user
-from .util import convert_file_to_thumbnail, parse_page_ranges, extract_text, generate_questions
+from .util import convert_file_to_thumbnail, parse_page_ranges, parse_result, extract_text, generate_questions
 import os
 
 views = Blueprint('views', __name__)
@@ -82,7 +82,6 @@ def selection():
 
 @views.route('/download')
 def download():
-    # Retrieve `questions` and `text` data from the session
     questions = session.get('questions', [])
     text = session.get('text', '')
 
@@ -95,10 +94,9 @@ def download():
         num_questions = question.get('quantity')
         print(f"Preparing to generate {num_questions} {question_type} questions.")
 
-    # Generate the questions using the provided function
-    generated_questions = generate_questions(questions, text)
-
-    print("Generated Questions:", generated_questions)
+    result = generate_questions(questions, text)
+    generated_questions = parse_result(result) # extract question, choices, answer from model's response
+    print("PARSED result:", generated_questions)
 
     session['generated_questions'] = generated_questions
 

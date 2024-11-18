@@ -11,10 +11,15 @@
         </div>
         
         <div class="download-buttons">
+<<<<<<< Updated upstream
             <!-- Review & Download Button -->
             <a class="btn btn-secondary" href="{{ url_for('views.review_questions', ques_type=ques_type) }}">Review & Download</a>
             <!-- Start Exam Button -->
             <a class="btn btn-primary" href="{{ url_for('game.' + ques_type) }}">Start Exam</a>            
+=======
+            <a class="btn btn-secondary" href="{{ url_for('views.review_questions') }}">Review & Download</a>
+            <a class="btn btn-primary" href="{{ url_for('game.identification') }}">Start Exam</a>
+>>>>>>> Stashed changes
         </div>
     </div>
 </div>

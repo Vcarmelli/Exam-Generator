@@ -28,36 +28,42 @@ const passData = (score, totalQuestion) => {
     .catch( error => console.error("Error:", error));
 }
 
-const editAnswers = () => {
-    $('.answers-section').css('display', 'none');
-    $('#modify-answers').css('display', 'flex');
+const showLoader = function(event) {
+    event.preventDefault();
+    // Show the loader
+    $('.loader-container').css('display', 'flex');
+
+    const form = this;
+    setTimeout(() => {
+        form.submit(); 
+    }, 3000);
+}
+
+const editAnswers = function() {
+    const parent = $(this).closest('.edit-question'); 
+    const answerSection = parent.find('.answers-section').first(); // Default answer section
+    const modifySection = parent.find('.answers-section.modify'); // Editable answer section
+
+    // Toggle visibility
+    answerSection.toggle();
+    modifySection.toggle();
+}
+
+const deleteQuestion = function() {
+    const questionContainer = $(this).closest('.edit-question'); 
+
+    // Toggle visibility
+    questionContainer.toggle(); // Temporarily Hide Question 
 }
 
 
 $(document).ready(function() {
-    $('#edit-ans-btn').click(editAnswers);
-
-    $('#options-form').on('submit', function(event) {
-        event.preventDefault();
-        // Show the loader
-        $('.loader-container').css('display', 'flex');
-
-        const form = this;
-        setTimeout(() => {
-            form.submit(); 
-        }, 3000);
-    });
-
-    $('#upload-form').on('submit', function(event) {
-        event.preventDefault();
-        // Show the loader
-        $('.loader-container').css('display', 'flex');
-
-        const form = this;
-        setTimeout(() => {
-            form.submit(); 
-        }, 3000);
-    });
+    $('#options-form').on('submit', showLoader);
+    $('#upload-form').on('submit', showLoader);
+    
+    $('.answers-section.modify').css('display', 'none');
+    $('.edit-btn').click(editAnswers);
+    $('.delete-btn').click(deleteQuestion);
 });
 
 
