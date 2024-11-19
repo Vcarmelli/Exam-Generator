@@ -1,4 +1,5 @@
 import os
+import re
 from pdf2image import convert_from_path
 from PIL import Image
 from langchain_community.document_loaders import PyMuPDFLoader
@@ -62,9 +63,8 @@ def extract_text(file_path, pages):
 def abbreviate(q_type):
     return {'identification': 'IDN', 'multiple_choice': 'MCQ', 'true_or_false': 'TOF'}.get(q_type.lower(), 'UNKNOWN')
 
-
+# Return prompts for each type of question
 def get_prompt(question_type):
-    # Prompts for each type of question
     question_prompts = {
         'MCQ': """
             Generate {number_of_questions} multiple-choice questions from the following text. 
@@ -98,7 +98,6 @@ def get_prompt(question_type):
             {context}
         """
     }
-
     return question_prompts.get(question_type, '')
 
 
@@ -112,7 +111,7 @@ def generate_questions(questions, text):
         question_type = abbreviate(question_type)
 
         num_questions = question.get('quantity')
-        print(f"Generating {num_questions} {question_type} questions...")
+        print(f"Generating {num_questions} {question_type} question/s...")
 
         # Get the corresponding prompt for the current question type
         question_prompt = get_prompt(question_type)
@@ -136,22 +135,6 @@ def generate_questions(questions, text):
     print("Generated:", all_generated_questions)
     return all_generated_questions
 
-# SAMPLE GENERATED QUESTIONS
-# def generate_questions(questions, text):
-    return [
-        {
-            "questions": "Here are two identification questions based on the provided text:\n\n1. What style of visual art is often considered defining in Canadian visual art?\n\nAnswer: Landscape\n\n2. Who is a Brazilian architect known for his innovative use of abstract forms and curves, and designed iconic structures such as the National Congress of Brazil and the United Nations headquarters in New York?\n\nAnswer: Oscar Niemeyer",
-            "type": "IDN"
-        },
-        {
-            "questions": "Here is one multiple-choice question based on the provided text:\n\n1. What is Nigeria known for in terms of traditional art forms?\na) Ancient pottery only\nb) Vibrant traditional art forms including Nok terracotta sculptures, Yoruba masks, and contemporary art scenes\nc) Modern paintings only\nd) Woodcarvings only\n\nAnswer: b",
-            "type": "MCQ"
-        },
-        {
-            "questions": "Here are two true or false questions based on the text:\n\n1. The Group of Seven was a group of artists who produced pseudo-impressionist works in the 19th century.\n\na) True\nb) False\n\nAnswer: b) False (According to the text, they produced their works in the 1920s and 1930s.)\n\n2. Oscar Niemeyer designed the United Nations headquarters in New York alone.\n\na) True\nb) False\n\nAnswer: b) False (According to the text, Oscar Niemeyer co-designed the United Nations headquarters in New York.)",
-            "type": "TOF"
-        }
-    ]
 
 # For extracting question, choices, and answer from the model's generated text
 def parse_result(generated_questions):
@@ -162,38 +145,68 @@ def parse_result(generated_questions):
         q_text = result["questions"]
         questions_list = []
 
-        print(f"Type: {q_type}")
-        
-        if q_type == "MCQ" or q_type == "TOF":
-            # Regular expression to extract questions, choices, and answers 
-            matches = re.findall(r'\d+\.\s(.*?)\n(a\).*?)\n\nAnswer:\s(.*?)(?=\n\n\d+\.|$)', q_text, re.DOTALL) # returns list of tuple (question, choices, answer) good for MCQ and TOF formats
-
-            # Iterate through all matches
-            for idx, match in enumerate(matches):
-                question = match[0].strip()  # Extract question
-                choices = match[1].strip()   # Extract choices
-                answer = match[2].strip()    # Extract answer
-
-                # Extract choices as a list
-                choice_texts = re.findall(r'[a-d]\)\s(.*)', choices)
-                questions_list.append({
-                    "question": question,
-                    "choices": [choice.strip() for choice in choice_texts],
-                    "answer": answer
-                })
-
-        elif q_type == "IDN":
+        if q_type == "IDN":
             # Regular expression to extract questions, and answers 
-            matches = re.findall(r'\d+\.\s(.*?)\n\nAnswer:\s(.*?)(?=\n\n\d+\.|$)', q_text, re.DOTALL) # returns list of tuple (question, answer) good for IDN formats
+            matches = re.findall(
+                r'\d+\.\s(.*?)\n\s*Answer:\s(.*?)(?=\n\n\d+\.|$)',
+                q_text,
+                re.DOTALL
+            ) # returns list of tuple (question, answer) good for IDN formats
 
             # Iterate through all matches
-            for idx, match in enumerate(matches):
+            for match in matches:
                 question = match[0].strip()  # Extract question
                 answer = match[1].strip()    # Extract answer
                 
                 questions_list.append({
                     "question": question,
                     "answer": answer
+                })
+
+        elif q_type == 'MCQ':
+            # Regular expression to extract questions, choices, and answers 
+            matches = re.findall(
+                r'\d+\.\s(.*?)\n\s*(a\).*?)\n\nAnswer:\s(.*?)(?=\n\n\d+\.|$)',
+                q_text,
+                re.DOTALL
+            )
+
+            for match in matches:
+                question = match[0].strip()  # Extract question
+                choices = match[1].strip()   # Extract choices
+                answer = match[2].strip()    # Extract answer
+
+                # Extract choices as a list
+                choice_texts = re.findall(r'[a-d]\)\s(.*)', choices)
+                choice_map = {chr(97 + i): choice.strip() for i, choice in enumerate(choice_texts)}  # assign letters to each choices
+                print("choice_map:", choice_map)
+                questions_list.append({
+                    "question": question,
+                    "choices": [choice.strip() for choice in choice_texts],
+                    "answer": choice_map.get(answer.lower(), "Invalid choice") # get the corresponding text to the matching letter
+                })
+
+
+        elif q_type == 'TOF': 
+            # Regular expression to extract questions, choices, answers, and explanations
+            matches = re.findall(
+                r'\d+\.\s(.*?)\n\s*a\)\sTrue\n\s*b\)\sFalse\n\nAnswer:\s(b\)\s(True|False))(\s\((.*?)\))?',
+                q_text,
+                re.DOTALL
+            )
+
+            for match in matches:
+                question = match[0].strip()  # Extract question text
+                choices = ["True", "False"]  # Fixed choices for True/False questions
+                answer = match[2].strip()  # Extract True/False answer
+                explanation = match[4].strip() if match[4] else None # Extract explanation text if there is
+
+                # Add question with choices, answer, and explanation
+                questions_list.append({
+                    "question": question,
+                    "choices": choices,
+                    "answer": answer,
+                    "explanation": explanation
                 })
 
         # Append processed questions of the current type to result data
@@ -203,5 +216,27 @@ def parse_result(generated_questions):
         })
 
     return result_data
+
+
+
+
+
+
+# SAMPLE GENERATED QUESTIONS
+# def generate_questions(questions, text):
+#     return [
+#         {
+#             "questions": "Here are two identification questions based on the provided text:\n\n1. What style of visual art is often considered defining in Canadian visual art?\n\nAnswer: Landscape\n\n2. Who is a Brazilian architect known for his innovative use of abstract forms and curves, and designed iconic structures such as the National Congress of Brazil and the United Nations headquarters in New York?\n\nAnswer: Oscar Niemeyer",
+#             "type": "IDN"
+#         },
+#         {
+#             "questions": "Here is one multiple-choice question based on the provided text:\n\n1. What is Nigeria known for in terms of traditional art forms?\na) Ancient pottery only\nb) Vibrant traditional art forms including Nok terracotta sculptures, Yoruba masks, and contemporary art scenes\nc) Modern paintings only\nd) Woodcarvings only\n\nAnswer: b",
+#             "type": "MCQ"
+#         },
+#         {
+#             "questions": "Here are two true or false questions based on the text:\n\n1. The Group of Seven was a group of artists who produced pseudo-impressionist works in the 19th century.\n\na) True\nb) False\n\nAnswer: b) False (According to the text, they produced their works in the 1920s and 1930s.)\n\n2. Oscar Niemeyer designed the United Nations headquarters in New York alone.\n\na) True\nb) False\n\nAnswer: b) False (According to the text, Oscar Niemeyer co-designed the United Nations headquarters in New York.)",
+#             "type": "TOF"
+#         }
+#     ]
 
 

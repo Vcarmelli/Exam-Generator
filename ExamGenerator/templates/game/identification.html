@@ -4,30 +4,33 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/identification.css') }}">
 {% endblock %}
 
-{% block game_title %} View Progress {{ game_mode }} {% endblock %}
+{% block game_title %} {{ game_mode }} {% endblock %}
 
-{% block game_header %} Identification {{ game_mode }} {% endblock %}
+{% block game_header %} {{ game_mode }} {% endblock %}
 
 {% block game_content %}
+
 <div id="question-container">
     {% if generated_questions %}
-        {% for question_data in generated_questions %}
-            <div class="question-card" style="display: none;">
-                <p class="question-text">{{ question_data.text }}</p>
-                <p>Answer:</p>
-c                <input type="text" class="user-answer" placeholder="Enter your answer here" />
-                <span class="correct-answer" style="display: none;">{{ question_data.answer }}</span>
-            </div>
+        {% for question_data in generated_questions %} 
+                <div class="question-card">
+                    <p class="question-text">{{ question_data.question }}</p>
+                    <label for="user-ans-{{ loop.index }}">Answer:</label>
+                    <input type="text" id="user-ans-{{ loop.index }}" class="user-answer" placeholder="Enter your answer here" />
+                    <span class="correct-answer" style="display: none;">{{ question_data.answer }}</span>
+                </div>
         {% endfor %}
     {% else %}
         <p id="no-questions-message">No questions generated.</p>
     {% endif %}
-</div>
 
-<div id="button-container">
-    <button id="next-button" style="display: none;">Next Question</button>
-    <button id="submit-button">Submit</button>
-    <button id="cancel-button">Cancel</button>
+    <!-- <div class="question-card">
+        <p class="question-text">Tangina quesiton to eh hayuup?? </p>
+        <label for="user-ans">Answer:</label>
+        <input type="text" id="user-ans" class="user-answer" placeholder="Enter your answer here" />
+        <span class="correct-answer" style="display: none;">Sagot dito </span>
+    </div> -->
+    <!-- buttons are in game-base.html since it will be used by all quiz types -->
 </div>
 {% endblock %}
 

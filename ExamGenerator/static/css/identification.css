@@ -1,5 +1,5 @@
 body {
-    background-image: radial-gradient(circle, white 10%, var(--fourth-color), var(--fourth-color));  
+    background-image: radial-gradient(circle, white 7%, var(--green-light), var(--green-light));  
     display: absolute;
     justify-content: center;
     align-items: center;
@@ -14,38 +14,26 @@ body {
     position: relative;
 }
 
-#game_header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    text-align: left;
-    background-color: transparent;
-}
-
-#game_header h2 {
-    margin: 0;
-    padding: 0;
-    font-size: 2em;
-    font-weight: bold;
-    color: #333;
-}
-
-
 .question-card {
     display: none;
     flex-direction: column;
     align-items: flex-start;
     padding: 15px;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 15px;
-    background-color: none;
     color: white;
 }
 
-.question-text {
+.question-card label {
+    font-size: 1.2em;
+    font-weight: 700;
+    text-align: left;
+    display: block;
+    padding-top: 2em;
+    color: var(--black-color);
+}
+
+/* .question-text {
     margin-bottom: 10px;
     font-size: 1.5em;
     color: white;
@@ -57,30 +45,29 @@ body {
     text-align: left;
     width: 95%;
     height: 40px;
-}
+} */
 
 .user-answer {
     display: block;
-    margin-top: 10px;
-    font-size: 1.5em;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
     color: var(--black-color);
-    text-decoration: none;
     height: 40px;
-    width: 90%;
+    width: -webkit-fill-available;
     background-color: white;  
-    margin-bottom: 15px;
-    text-align: left;
-    padding: 10px 20px;
-    border: 3px solid black;  
-    border-radius: 5px;
+    padding: 10px 0 10px 20px;
+    margin: 10px 0;
+    border: 2px solid var(--black-color); 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .correct-answer {
     color: var(--black-color);
+    width: 100%;
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 1.2em;
     margin-top: 15px;
-    margin-bottom: 25px;
 }
 
 .user-answer.correct {
@@ -97,7 +84,7 @@ body {
     color: #666;
 }
 
-#button-container {
+/* #button-container {
     text-align: center;
     display: flex;
     justify-content: flex-end; 
@@ -116,9 +103,9 @@ button {
     width: 25%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-}
+} */
 
-#submit-button {
+/* #submit-button {
     position: relative; 
     color: white;
     background: #5B699C;
@@ -131,5 +118,5 @@ button {
 #cancel-button:hover {
     color: white;
     background-color: #5B699C;
-}
+} */
 

@@ -4,7 +4,6 @@
     --tertiary-color: #D1E5F9;
     --tertiary-light: #EFF2FE;
     --accent-color: #1E4050;
-    --fourth-color: #BAE6E2;
 
     --background-color: #F7F9FF;
     --black-color: #0D1717;
@@ -126,6 +125,7 @@ nav ul li a.active {
     top: 0;
     left: 0;
     z-index: -1;
+    width: 100vw;
     height: 100vh;
 }
 
@@ -141,14 +141,14 @@ nav ul li a.active {
     width: 100vw;
 }
 
-#quiz_header {
+#quiz-header {
     width: 100vw;
 }
 
-#quiz_header h2 {
-    font-size: 28px;
+#quiz-header h2 {
+    font-size: 2em;
     color: var(--black-color);
-    padding: 1em 0 0 1em;
+    padding: 1.5em 0 0 5em;
 }
 
 #questionNo {
@@ -158,7 +158,7 @@ nav ul li a.active {
     margin: 1em;
 }
 
-.quiz_main {
+.quiz-main {
     display: flex;
     flex-direction: column;
 }
@@ -166,22 +166,16 @@ nav ul li a.active {
 #quiz {
     height: 480px;
     width: 70%;
-    border-radius: 30px 10px;
     text-align: center;
     position: relative;
 }
 
-#quiz #question {
-    width: 95%;
-    display: flex;
+.question-text {
     color: white;
     background-color: var(--primary-color);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 15px;
-}
-
-#quiz #question p {
     font-size: 1.2em;
 }
 
@@ -191,15 +185,23 @@ nav ul li a.active {
     flex-direction: column;
 }
 
-.quiz_buttons {
+#button-container {
     display: flex;
     justify-content: flex-end;
     gap: 2em;
     padding-top: 3em;
 }
 
-.quiz_buttons button {
+#button-container button {
     width: 200px;
+}
+
+.correct-message {
+    color: var(--green-color);
+}
+
+.incorrect-message {
+    color: var(--red-color);
 }
 
 
@@ -255,7 +257,7 @@ nav ul li a.active {
 
 #end-of-thumbnails {
     display: flex;
-    justify-content: center; /* Centers horizontally */
+    justify-content: center; 
     align-items: center; 
     width: 100%;
 }
@@ -605,14 +607,14 @@ nav ul li a.active {
 
 /* PROGRESS BAR */
 .progressBarContainer {
-    width: 100%;
+    width: 85%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .progressBar {
-    width: 90%;
+    width: 80%;
     height: 5px;
     background-color: #e7e7e7;
     border-radius: 10px;

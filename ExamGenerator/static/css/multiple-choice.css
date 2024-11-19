@@ -1,5 +1,5 @@
 body {
-    background-image: radial-gradient(circle, white 10%, var(--secondary-color), var(--secondary-color));  
+    background-image: radial-gradient(circle, white 7%, var(--secondary-color), var(--secondary-color));  
     display: absolute;
     justify-content: center;
     align-items: center;
@@ -14,25 +14,6 @@ body {
     position: relative;
 }
 
-#game_header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    text-align: left;
-    background-color: transparent;
-}
-
-#game_header h2 {
-    margin: 0;
-    padding: 0;
-    font-size: 2em;
-    font-weight: bold;
-    color: #333;
-}
-
 
 .question-card {
     display: none;
@@ -41,10 +22,9 @@ body {
     padding: 15px;
     margin-top: 50px;
     margin-bottom: 15px;
-    background-color: none;
     color: white;
 }
-
+/* 
 .question-text {
     margin-bottom: 10px;
     font-size: 1.5em;
@@ -57,7 +37,7 @@ body {
     text-align: left;
     width: 95%;
     height: 40px;
-}
+} */
 
 .answer-options label {
     display: block;
@@ -75,7 +55,7 @@ body {
 p {
     color: var(--black-color);
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 1.2em;
     margin-top: 15px;
     margin-bottom: 25px;
 }
@@ -94,7 +74,7 @@ p {
     color: #666;
 }
 
-#button-container {
+/* #button-container {
     text-align: center;
     display: flex;
     justify-content: flex-end; 
@@ -128,16 +108,15 @@ button {
 #cancel-button:hover {
     color: white;
     background-color: #5B699C;
-}
+} */
+
 .correct-answer {
     color: var(--black-color);
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 1.2em;
     margin-top: 15px;
     margin-bottom: 25px;
 }
-
-
 
 input[type="radio"] {
     appearance: none; 
@@ -153,18 +132,18 @@ input[type="radio"] + label {
     display: inline-block;
     cursor: pointer;
     padding: 10px 20px;
-    border: 3px solid black;  
-    border-radius: 5px;
+    border: 3px solid var(--black-color);
+    border-radius: 10px;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 input[type="radio"]:checked + label {
-    background-image: radial-gradient(linear, white 10%, var(--secondary-color), var(--secondary-color));  
+    background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6)); 
     color: var(--black-color);
-    border-color: #4caf50;
+    border: 3px solid var(--accent-color);
 }
 
 input[type="radio"] + label:hover {
     border-color: #888;
-    background-image: radial-gradient(circle, white 10%, var(--secondary-color), var(--secondary-color));  
+    background-image: linear-gradient(to right, rgba(91, 105, 156, 0.2), rgba(239, 242, 254, 0.6)); 
 }

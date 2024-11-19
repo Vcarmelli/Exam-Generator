@@ -1,14 +1,14 @@
 {% extends "layout/base.html" %}
 
 {% block title %} 
-    {% block game_title %} Game {% endblock %} 
+    {% block game_title %} Quiz {% endblock %} 
 {% endblock %}
 
 {% block content %}
 <div id="container">
     <!-- Quiz Header -->
-    <div id="quiz_header">
-        <h2>{% block game_header %} Game header {% endblock %}</h2>
+    <div id="quiz-header">
+        <h2>{% block game_header %} {% endblock %}</h2>
     </div>    
 
     <!-- Progress Bar -->
@@ -21,16 +21,18 @@
 
     <!-- Main Quiz Content -->
     <div id="quiz">
-        <div class="quiz_main">
+        <div class="quiz-main">
             {% block game_content %}
                 <!-- Dynamic Quiz Questions and Choices Will Load Here -->
                 <p>No quiz content loaded.</p>
             {% endblock %}
         </div>
-        
-        <!-- Results and Points -->
-        <div id="result" style="display: none;"></div>
-        <div id="points" style="display: none;"></div>
+
+        <div id="button-container">
+            <button type="button" id="next-button" style="display: none;" class="btn btn-primary">Next Question</button>
+            <button type="button" id="cancel-button" class="btn btn-secondary">Cancel</button>
+            <button type="button" id="submit-button" class="btn btn-primary">Submit</button>
+        </div>
     </div>
 </div>
 {% endblock %}

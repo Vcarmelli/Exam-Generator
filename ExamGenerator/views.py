@@ -2,6 +2,7 @@ from flask import Blueprint, current_app, render_template, redirect, url_for, re
 from flask_login import login_required, current_user
 from .util import convert_file_to_thumbnail, parse_page_ranges, parse_result, extract_text, generate_questions
 import os
+import json
 
 views = Blueprint('views', __name__)
 
@@ -42,8 +43,12 @@ def upload():
 @views.route('/selection',  methods=['GET', 'POST'])
 def selection():
     if request.method == 'GET':
+        file_path = session.get('file_path')
+        if not file_path:
+            return redirect(url_for('views.upload'))
+
         filename = request.args.get('file_name')
-        thumbnails = convert_file_to_thumbnail(session['file_path'], current_app.config['THUMBNAIL_FOLDER'], start_page=0, end_page=10)
+        thumbnails = convert_file_to_thumbnail(file_path, current_app.config['THUMBNAIL_FOLDER'], start_page=0, end_page=10)
         return render_template('preview.html', filename=filename, thumbnails=thumbnails)
     
     elif request.method == 'POST':
@@ -54,26 +59,20 @@ def selection():
         question_types = request.form.getlist('ques-type')
         question_quantities = request.form.getlist('ques-num')
 
-        # Validate question quantities before proceeding
-        questions = []
-        try:
-            questions = [{'type': qt, 'quantity': int(qn)} for qt, qn in zip(question_types, question_quantities) if qn.isdigit()]
-        except ValueError:
-            return jsonify({'message': 'Invalid question quantity input'}), 400
-
-        # Proceed if questions are correctly set
-        if not questions:
-            return jsonify({'message': 'No valid questions found'}), 400
+        # Process questions and quantities
+        questions = [{'type': qt, 'quantity': int(qn)} for qt, qn in zip(question_types, question_quantities) if qn.isdigit()]
+        
+        # NOTE: FORM VALIDATION HERE
 
         print(f"Filename: {filename}")
         print(f"Page Selection: {page_selection}")
         print(f"Pages: {pages}")
-        print("Questions:", questions)
 
+        text = ''
         try:
             text = extract_text(session['file_path'], pages)
         except KeyError:
-            return jsonify({'message': 'Return to Upload Page'}), 400
+            return redirect(url_for('views.upload'))
 
         session['questions'] = questions
         session['text'] = text
@@ -92,72 +91,32 @@ def download():
     for question in questions:
         question_type = question.get('type')
         num_questions = question.get('quantity')
-        print(f"Preparing to generate {num_questions} {question_type} questions.")
+        print(f"Preparing to generate {num_questions} {question_type} question/s.")
 
     result = generate_questions(questions, text)
     generated_questions = parse_result(result) # extract question, choices, answer from model's response
-    print("PARSED result:", generated_questions)
+    print("Parsed result:")
+    print(json.dumps(generated_questions, indent=2))
 
     session['generated_questions'] = generated_questions
 
-    # Render the `download.html` template and pass `generated_questions` to it
-    return redirect(url_for('views.game'))
-
-@views.route('/game')
-def game():
-    generated_questions = session.get('generated_questions', [])
-    if not generated_questions:
-        return redirect(url_for('views.selection', message="No generated questions available"))
-
-    # Safely collect question types
-    question_types = {q['type'] for q in generated_questions}
-
-    # Handle case when only one question type is present
-    if len(question_types) == 1:
-        question_type = next(iter(question_types))
-        if question_type == 'MCQ':
-            return redirect(url_for('views.multiplechoice'))
-        elif question_type == 'TOF':
-            return redirect(url_for('views.true_or_false'))
-        elif question_type == 'IDN':
-            return redirect(url_for('views.identification'))
-    else:
-        return render_template('/game/selection_menu.html', questions=generated_questions)
-
-@views.route('/multiplechoice')
-def multiplechoice():
-    generated_questions = session.get('generated_questions', [])
-    multiplechoice_questions = [q for q in generated_questions if q.get('type') == 'MCQ']
-    print("Filtered Questions:", multiplechoice_questions)
-
-    return render_template('/game/multiple-choice.html', generated_questions=multiplechoice_questions)
-
-@views.route('/true_or_false')
-def true_or_false():
-    generated_questions = session.get('generated_questions', [])
-    true_or_false_questions = [q for q in generated_questions if q['type'] == 'TOF']
-    print("Filtered Questions:", true_or_false_questions)  
-
-    return render_template('/game/trueorfalse.html', generated_questions=true_or_false_questions)
-
-@views.route('/identification')
-def identification():
-    generated_questions = session.get('generated_questions', [])
-    identification_questions = [q for q in generated_questions if q['type'] == 'IDN']
-    print("Filtered Questions:", identification_questions)  
-
-    return render_template('/game/identification.html', generated_questions=identification_questions)
-
-@views.route('/done')
-def done():
-    return render_template('done.html') 
+    return render_template('download.html') # download page shows the generated question and button to continue to quiz
 
 
 @views.route('/review-questions')
 def review_questions():
-    ques_type = request.args.get('ques_type')
-    return render_template('review-ques.html', ques_type=ques_type)
+    generated_questions = []
+    try:
+        generated_questions = session.get('generated_questions', {})
+    except KeyError:
+        return jsonify({'message': 'No questions generated.'}), 400
+    
+    return render_template('review-ques.html', generated_questions=generated_questions)
 
+
+@views.route('/done')
+def done():
+    return render_template('done.html') 
 
 
 @views.route('/quiz-complete', methods=['GET', 'POST'])

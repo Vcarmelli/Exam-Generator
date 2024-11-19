@@ -3,8 +3,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const submitButton = document.getElementById("submit-button");
     const cancelButton = document.getElementById("cancel-button");
     const nextButton = document.getElementById("next-button");
+    let questionNo = document.querySelector("#questionNo");
     let currentQuestionIndex = 0;
-
+    questionNo.innerText = (currentQuestionIndex + 1) + "/" + questionCards.length;
     nextButton.style.display = "none";
     submitButton.disabled = true; // Initially disable Submit button
 
@@ -45,6 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         nextButton.style.display = "block";
         submitButton.disabled = true;
+
+        let progressPercentage = ((currentQuestionIndex + 1) / questionCards.length) * 100;
+        updateProgress(progressPercentage);
     });
 
     nextButton.addEventListener("click", function() {

@@ -6,10 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const finishExamButton = document.getElementById("finish-exam-button");
 
     let currentQuestionIndex = 0;
+    let questionNo = document.querySelector("#questionNo");
+    let choiceQue = questionCards[currentQuestionIndex].querySelectorAll("input[type='radio']");
 
     nextButton.style.display = "none";
 
     questionCards[currentQuestionIndex].style.display = "block";
+    questionNo.innerText = (currentQuestionIndex + 1) + "/" + questionCards.length;
 
     const enableSubmitButton = () => {
         const selectedOption = questionCards[currentQuestionIndex].querySelector("input[type='radio']:checked");
@@ -22,6 +25,23 @@ document.addEventListener("DOMContentLoaded", function () {
         card.addEventListener("change", enableSubmitButton);
     });
 
+    // NOT YET WORKING FROM PREVIOUS VERSION JS 
+    // choiceQue.forEach((choice, choiceNo) => {
+    //     choice.addEventListener("click", () => {
+    //         choiceQue.forEach(option => option.classList.remove("active"));
+    //         Object.values(answerNo).forEach(answer => answer.classList.remove("active"));
+
+    //         choice.classList.add("active");
+    //         if (answerNo[choiceNo]) {
+    //             answerNo[choiceNo].classList.add("active");
+    //         }
+    //         UserAns = choiceNo;
+
+    //         choiceQue.forEach(option => option.classList.add("disabled"));
+    //         Object.values(answerNo).forEach(answer => answer.classList.add("disabled"));
+    //     });
+    // });
+
     submitButton.addEventListener("click", function () {
         let allAnswered = true;
     
@@ -29,6 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (selectedOption) {
             const correctAnswer = questionCards[currentQuestionIndex].querySelector(".correct-answer").textContent;
             const userAnswer = selectedOption.value;
+            console.log("correctAnswer:", correctAnswer);
+            console.log("userAnswer:", userAnswer);
     
             if (userAnswer === correctAnswer) {
                 selectedOption.nextElementSibling.style.backgroundColor = "green"; // Highlight the label in green
@@ -39,6 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
     
             questionCards[currentQuestionIndex].querySelector(".correct-answer").style.display = "inline";
+            
+            let progressPercentage = ((currentQuestionIndex + 1) / questionCards.length) * 100;
+            updateProgress(progressPercentage);
         } else {
             allAnswered = false; // If no option is selected
         }
@@ -48,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             nextButton.style.display = "block"; // Show the Next button after submitting
             submitButton.style.display = "none"; // Hide the Submit button
+            cancelButton.style.display = "none";
         }
     });
 
@@ -67,11 +93,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    finishExamButton.addEventListener("click", function () {
-        // Handle the completion of the exam (e.g., submit, show result, etc.)
-        alert("Congratulations! You've finished the quiz!");
-        // You can redirect or show a summary here.
-    });
+    // finishExamButton.addEventListener("click", function () {
+    //     // Handle the completion of the exam (e.g., submit, show result, etc.)
+    //     alert("Congratulations! You've finished the quiz!");
+    //     // You can redirect or show a summary here.
+    // });
 
     cancelButton.addEventListener("click", function () {
         questionCards.forEach(card => {

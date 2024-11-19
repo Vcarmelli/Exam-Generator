@@ -4,18 +4,16 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/true-or-false.css') }}">
 {% endblock %}
 
-{% block game_title %} View Progress {{ game_mode }} {% endblock %}
+{% block game_title %} {{ game_mode }} {% endblock %}
 
-{% block game_header %} True or False {{ game_mode }} {% endblock %}
+{% block game_header %} {{ game_mode }} {% endblock %}
 
 {% block game_content %}
     <div id="question-container">
         {% if generated_questions %}
             {% for question_data in generated_questions %}
-                {% if question_data.type == 'TOF' %}
-                <div class="question-card" style="display: none;">
-                     <p class="question-text">{{ question_data.text.split(' a)')[0] }}</p>
-                     <p>Select up to one option</p>
+                <div class="question-card">
+                     <p class="question-text">{{ question_data.question }}</p>
                      <div class="answer-options">
                             <label for="true_{{ loop.index }}">
                                 <input type="radio" id="true_{{ loop.index }}" name="question_{{ loop.index }}" value="True" class="user-answer"> True
@@ -24,19 +22,14 @@
                                 <input type="radio" id="false_{{ loop.index }}" name="question_{{ loop.index }}" value="False" class="user-answer"> False
                             </label>
                         </div>
-                        <span class="correct-answer" style="display: none;">The correct answer is: {{ question_data.answer }}</span>
+                        <span class="correct-answer" style="display: none;">The correct answer is: {{ question_data.answer }}, {{ question_data.explanation }}</span>
                     </div>
-                {% endif %}
             {% endfor %}
         {% else %}
             <p id="no-questions-message">No questions generated.</p>
         {% endif %}
     </div>
-    <div id="button-container">
-        <button id="next-button" style="display: none;">Next Question</button>
-        <button id="submit-button" disabled>Submit</button>
-        <button id="cancel-button">Cancel</button>
-    </div>
+    <!-- buttons are in game-base.html since it will be used by all quiz types -->
 {% endblock %}
 
 {% block js_file %}
