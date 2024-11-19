@@ -23,7 +23,7 @@ body {
     font-family: 'Poppins', sans-serif;
     color: var(--black-color);
     overflow-x: hidden;
-    background-color: #f7f9ff;
+    background-color: var(--background-color);
 }
 
 /* NAVIGATION LINKS STYLES */
@@ -130,7 +130,42 @@ nav ul li a.active {
 }
 
 
+/* ACCOUNT TYPE MODAL STYLES */
+#account-type-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+}
 
+.select-account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    padding: 3em;
+}
+
+.acc-type {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.acc-type > div:first-child {
+    background-color: var(--primary-color);    
+    width: 20vw;
+    height: 30vh;
+    border-radius: 1em;
+    box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.5);
+}
+
+.signin-link {
+    color: var(--primary-color);
+    font-style: italic;
+    text-decoration: none;
+}
 
 /* QUIZ SECTION GLOBAL STYLES */
 #container {
@@ -177,12 +212,6 @@ nav ul li a.active {
     padding: 20px;
     margin-bottom: 15px;
     font-size: 1.2em;
-}
-
-#quiz #optionList {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 #button-container {

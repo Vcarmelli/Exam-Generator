@@ -166,23 +166,22 @@ def parse_result(generated_questions):
         elif q_type == 'MCQ':
             # Regular expression to extract questions, choices, and answers 
             matches = re.findall(
-                r'\d+\.\s(.*?)\n\s*(a\).*?)\n\nAnswer:\s(.*?)(?=\n\n\d+\.|$)',
-                q_text,
+                r'(\d+\.\s)(.*?)\n\s*a\)(.*?)\n\s*b\)(.*?)\n\s*c\)(.*?)\n\s*d\)(.*?)\n\nAnswer:\s([a-d])', 
+                q_text, 
                 re.DOTALL
             )
 
             for match in matches:
-                question = match[0].strip()  # Extract question
-                choices = match[1].strip()   # Extract choices
-                answer = match[2].strip()    # Extract answer
+                question = match[1].strip()  # Extract question
+                choices = match[2:6]         # Extract choices
+                answer = match[6].strip()    # Extract answer
 
                 # Extract choices as a list
-                choice_texts = re.findall(r'[a-d]\)\s(.*)', choices)
-                choice_map = {chr(97 + i): choice.strip() for i, choice in enumerate(choice_texts)}  # assign letters to each choices
-                print("choice_map:", choice_map)
+                choice_map = {chr(97 + i): choice.strip() for i, choice in enumerate(choices)}  # assign letters to each choices
+                #print("choice_map:", choice_map)
                 questions_list.append({
                     "question": question,
-                    "choices": [choice.strip() for choice in choice_texts],
+                    "choices": [choice.strip() for choice in choices],
                     "answer": choice_map.get(answer.lower(), "Invalid choice") # get the corresponding text to the matching letter
                 })
 
@@ -223,6 +222,7 @@ def parse_result(generated_questions):
 
 
 # SAMPLE GENERATED QUESTIONS
+# uncomment when testing palang
 # def generate_questions(questions, text):
 #     return [
 #         {

@@ -11,10 +11,10 @@ def index():
 
     print('QUES FOR GAME:', generated_questions)
     for question_set in generated_questions:
-        # if question_set['type'] == 'IDN':
-        #     return redirect(url_for('game.identification'))
-        # if question_set['type'] == 'MCQ':
-        #     return redirect(url_for('game.multiple_choice'))
+        if question_set['type'] == 'IDN':
+            return redirect(url_for('game.identification'))
+        if question_set['type'] == 'MCQ':
+            return redirect(url_for('game.multiple_choice'))
         if question_set['type'] == 'TOF':
             return redirect(url_for('game.true_or_false'))
 

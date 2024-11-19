@@ -12,6 +12,9 @@ def signup():
     form = SignupForm()
 
     # NOTE: Show validation message on each input 
+    account_type = request.args.get('account_type')
+    if account_type:
+        form.account_type.data = account_type
 
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -25,6 +28,7 @@ def signup():
                     password=generate_password_hash(form.password.data, method='pbkdf2:sha256'),
                     first_name=form.first_name.data,
                     last_name=form.last_name.data,
+                    account_type=form.account_type.data  
                 )
                 db.session.add(new_user)
                 db.session.commit()

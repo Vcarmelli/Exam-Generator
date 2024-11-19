@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, HiddenField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
 
 class SignupForm(FlaskForm):
@@ -39,6 +39,8 @@ class SignupForm(FlaskForm):
             Length(max=32)
         ]
     )
+    account_type = HiddenField('Account Type')
+
     submit = SubmitField('Register')
 
 

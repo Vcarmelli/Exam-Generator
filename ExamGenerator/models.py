@@ -7,3 +7,4 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(32))
     first_name = db.Column(db.String(32))
     last_name = db.Column(db.String(32))
+    account_type=db.Column(db.String(8))

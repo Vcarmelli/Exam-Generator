@@ -1,5 +1,9 @@
 body {
-    background-color: #f7f9ff;
+    background-color: var(--background-color);
+}
+
+h1, h2, h4 {
+    font-weight: 700 !important;
 }
 
 .menu-link {
@@ -277,6 +281,10 @@ hr {
     width: 30%;
 }
 
+.info .card-item h2 {
+    font-size: 1.8rem;
+}
+
 .info .card-item:nth-of-type(1) {
     background-color: #ECD7EC;
 }
@@ -370,6 +378,10 @@ hr {
     width: 200px;
 }
 
+.mind .photos .aboutthem h4 {
+    font-size: 1.3rem;
+}
+
 .mind .photos .contact {
     padding: 10px;
     background-color: var(--primary-color);
@@ -382,6 +394,7 @@ hr {
     display: flex;
     align-content: center;
     justify-content: center;
+    text-decoration: none;
 }
 
 .jump a:hover,

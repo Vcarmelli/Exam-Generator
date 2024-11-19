@@ -29,6 +29,7 @@
         <p>{{ form.email.label }} {{ form.email() }}</p>
         <p>{{ form.password.label }} {{ form.password() }}</p>
         <p>{{ form.confirm_password.label }} {{ form.confirm_password() }}</p>
+        
         <p>{{ form.submit() }}</p>
         <br>
         <a href="{{ url_for('auth.login') }}">Have an account already? Login here</a>

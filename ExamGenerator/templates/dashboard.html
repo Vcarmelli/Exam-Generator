@@ -33,6 +33,12 @@
         </ul>
     </nav>
 
+    {% if user.account_type == 'student' %}
+        {% set board = 'Reviewer Board' %} 
+    {% elif user.account_type == 'teacher' %}
+        {% set board = 'Exam Board' %} 
+    {% endif %} 
+
     <div class="dashboard-main">
         <div class="greeting">
             <h3>What do you</h3>
@@ -58,7 +64,7 @@
     </div>
     <hr> 
     <div class="review">
-        <h2>Reviewer Board</h2> 
+        <h2>{{ board }}</h2> 
         <div class="board card-list">
             <div class="card-item">
                 <div class="card-header">
@@ -78,7 +84,7 @@
             </div>
             <div class="card-item">
                 <div class="card-header">
-                    <h3>Review 3</h3>
+                    <h3>Examination 3</h3>
                 </div>
                 <div class="card-body">
                     <p>Additional information for Review 3 can go here.</p>
@@ -86,7 +92,7 @@
             </div>
             <div class="card-item">
                 <div class="card-header">
-                    <h3>Review 4</h3>
+                    <h3>Examination 4</h3>
                 </div>
                 <div class="card-body">
                     <p>Additional information for Review 4 can go here.</p>
