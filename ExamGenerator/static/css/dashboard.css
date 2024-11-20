@@ -383,10 +383,9 @@ hr {
 }
 
 .mind .photos .contact {
-    padding: 10px;
+    padding: 10px 20px;
     background-color: var(--primary-color);
     border-radius: 40px;
-    width: 60%; 
     color: white;
     cursor: pointer;
     margin-top: 10px; 
@@ -397,7 +396,7 @@ hr {
     text-decoration: none;
 }
 
-.jump a:hover,
+.jump button:hover,
 .mind .photos .contact:hover {
     color: var(--black-color);
     background-color: var(--tertiary-color);
@@ -428,7 +427,7 @@ hr {
     padding-bottom: 3em;
 } 
 
-.jump a {
+.jump button {
     text-decoration: none;
     background-color: var(--primary-color);
     border-radius: 2em;

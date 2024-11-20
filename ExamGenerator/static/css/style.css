@@ -153,7 +153,7 @@ nav ul li a.active {
     gap: 1em;
 }
 
-.acc-type > div:first-child {
+.acc-type > a {
     background-color: var(--primary-color);    
     width: 20vw;
     height: 30vh;
@@ -221,6 +221,7 @@ nav ul li a.active {
     padding-top: 3em;
 }
 
+#button-container a,
 #button-container button {
     width: 200px;
 }

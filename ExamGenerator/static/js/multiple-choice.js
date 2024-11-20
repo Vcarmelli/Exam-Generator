@@ -1,15 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
     const questionCards = document.querySelectorAll(".question-card");
     const submitButton = document.getElementById("submit-button");
-    const cancelButton = document.getElementById("cancel-button");
+    const continueButton = document.getElementById("continue-button");
     const nextButton = document.getElementById("next-button");
+    const cancelButton = document.getElementById("cancel-button");
     const finishExamButton = document.getElementById("finish-exam-button");
 
     let currentQuestionIndex = 0;
     let questionNo = document.querySelector("#questionNo");
     let choiceQue = questionCards[currentQuestionIndex].querySelectorAll("input[type='radio']");
-
-    nextButton.style.display = "none";
 
     questionCards[currentQuestionIndex].style.display = "block";
     questionNo.innerText = (currentQuestionIndex + 1) + "/" + questionCards.length;
@@ -60,7 +59,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectedOption.nextElementSibling.style.color = "white";
             }
     
-            questionCards[currentQuestionIndex].querySelector(".correct-answer").style.display = "inline";
+            questionCards[currentQuestionIndex].querySelector(".correct-answer").style.display = "block";
+            
             
             let progressPercentage = ((currentQuestionIndex + 1) / questionCards.length) * 100;
             updateProgress(progressPercentage);
@@ -71,33 +71,34 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!allAnswered) {
             alert("Please answer the question before submitting.");
         } else {
-            nextButton.style.display = "block"; // Show the Next button after submitting
+            if ((currentQuestionIndex + 1) == questionCards.length) {
+                nextButton.style.display = "block";
+            } else {
+                continueButton.style.display = "block";
+            }
             submitButton.style.display = "none"; // Hide the Submit button
             cancelButton.style.display = "none";
         }
     });
 
-    nextButton.addEventListener("click", function () {
+    continueButton.addEventListener("click", function () {
         questionCards[currentQuestionIndex].style.display = "none";
 
         currentQuestionIndex++;
 
         if (currentQuestionIndex < questionCards.length) {
             questionCards[currentQuestionIndex].style.display = "block";
-            nextButton.style.display = "none";
-            submitButton.style.display = "inline-block";
+            continueButton.style.display = "none";
+            submitButton.style.display = "block";
             submitButton.disabled = true;
         } else {
-            nextButton.style.display = "none"; // Hide Next button
-            finishExamButton.style.display = "inline-block"; // Show Finish Exam button
+            continueButton.style.display = "none";
+            submitButton.style.display = "none";
+            cancelButton.style.display = "none";
+            nextButton.style.display = "block";
         }
     });
 
-    // finishExamButton.addEventListener("click", function () {
-    //     // Handle the completion of the exam (e.g., submit, show result, etc.)
-    //     alert("Congratulations! You've finished the quiz!");
-    //     // You can redirect or show a summary here.
-    // });
 
     cancelButton.addEventListener("click", function () {
         questionCards.forEach(card => {
@@ -115,6 +116,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         submitButton.style.display = "inline-block";
         submitButton.disabled = true;
-        nextButton.style.display = "none";
+        continueButton.style.display = "none";
     });
 });

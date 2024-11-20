@@ -101,39 +101,39 @@ def get_prompt(question_type):
     return question_prompts.get(question_type, '')
 
 
-def generate_questions(questions, text):
-    llm = OllamaLLM(model="llama3")
-    all_generated_questions = []
+# def generate_questions(questions, text):
+#     llm = OllamaLLM(model="llama3")
+#     all_generated_questions = []
 
-    # Loop through each selected question type and corresponding number of questions
-    for question in questions:
-        question_type = question.get('type')
-        question_type = abbreviate(question_type)
+#     # Loop through each selected question type and corresponding number of questions
+#     for question in questions:
+#         question_type = question.get('type')
+#         question_type = abbreviate(question_type)
 
-        num_questions = question.get('quantity')
-        print(f"Generating {num_questions} {question_type} question/s...")
+#         num_questions = question.get('quantity')
+#         print(f"Generating {num_questions} {question_type} question/s...")
 
-        # Get the corresponding prompt for the current question type
-        question_prompt = get_prompt(question_type)
-        if question_prompt:
-            prompt_template = PromptTemplate.from_template(template=question_prompt)   
-            # Format the prompt with the number of questions and text
-            prompt = prompt_template.format(
-                                        number_of_questions=num_questions,
-                                        context=text                                       
-                                        )
+#         # Get the corresponding prompt for the current question type
+#         question_prompt = get_prompt(question_type)
+#         if question_prompt:
+#             prompt_template = PromptTemplate.from_template(template=question_prompt)   
+#             # Format the prompt with the number of questions and text
+#             prompt = prompt_template.format(
+#                                         number_of_questions=num_questions,
+#                                         context=text                                       
+#                                         )
 
-            # Invoke the LLM (LangChain model) to generate questions
-            result = llm.invoke(prompt)
+#             # Invoke the LLM (LangChain model) to generate questions
+#             result = llm.invoke(prompt)
 
-            # Append the result to the list
-            all_generated_questions.append({
-                'type': question_type,
-                'questions': result
-            })
+#             # Append the result to the list
+#             all_generated_questions.append({
+#                 'type': question_type,
+#                 'questions': result
+#             })
     
-    print("Generated:", all_generated_questions)
-    return all_generated_questions
+#     print("Generated:", all_generated_questions)
+#     return all_generated_questions
 
 
 # For extracting question, choices, and answer from the model's generated text
@@ -223,20 +223,20 @@ def parse_result(generated_questions):
 
 # SAMPLE GENERATED QUESTIONS
 # uncomment when testing palang
-# def generate_questions(questions, text):
-#     return [
-#         {
-#             "questions": "Here are two identification questions based on the provided text:\n\n1. What style of visual art is often considered defining in Canadian visual art?\n\nAnswer: Landscape\n\n2. Who is a Brazilian architect known for his innovative use of abstract forms and curves, and designed iconic structures such as the National Congress of Brazil and the United Nations headquarters in New York?\n\nAnswer: Oscar Niemeyer",
-#             "type": "IDN"
-#         },
-#         {
-#             "questions": "Here is one multiple-choice question based on the provided text:\n\n1. What is Nigeria known for in terms of traditional art forms?\na) Ancient pottery only\nb) Vibrant traditional art forms including Nok terracotta sculptures, Yoruba masks, and contemporary art scenes\nc) Modern paintings only\nd) Woodcarvings only\n\nAnswer: b",
-#             "type": "MCQ"
-#         },
-#         {
-#             "questions": "Here are two true or false questions based on the text:\n\n1. The Group of Seven was a group of artists who produced pseudo-impressionist works in the 19th century.\n\na) True\nb) False\n\nAnswer: b) False (According to the text, they produced their works in the 1920s and 1930s.)\n\n2. Oscar Niemeyer designed the United Nations headquarters in New York alone.\n\na) True\nb) False\n\nAnswer: b) False (According to the text, Oscar Niemeyer co-designed the United Nations headquarters in New York.)",
-#             "type": "TOF"
-#         }
-#     ]
+def generate_questions(questions, text):
+    return [
+        {
+            "questions": "Here are two identification questions based on the provided text:\n\n1. What style of visual art is often considered defining in Canadian visual art?\n\nAnswer: Landscape\n\n2. Who is a Brazilian architect known for his innovative use of abstract forms and curves, and designed iconic structures such as the National Congress of Brazil and the United Nations headquarters in New York?\n\nAnswer: Oscar Niemeyer",
+            "type": "IDN"
+        },
+        {
+            "questions": "Here is one multiple-choice question based on the provided text:\n\n1. What is Nigeria known for in terms of traditional art forms?\na) Ancient pottery only\nb) Vibrant traditional art forms including Nok terracotta sculptures, Yoruba masks, and contemporary art scenes\nc) Modern paintings only\nd) Woodcarvings only\n\nAnswer: b",
+            "type": "MCQ"
+        },
+        {
+            "questions": "Here are two true or false questions based on the text:\n\n1. The Group of Seven was a group of artists who produced pseudo-impressionist works in the 19th century.\n\na) True\nb) False\n\nAnswer: b) False (According to the text, they produced their works in the 1920s and 1930s.)\n\n2. Oscar Niemeyer designed the United Nations headquarters in New York alone.\n\na) True\nb) False\n\nAnswer: b) False (According to the text, Oscar Niemeyer co-designed the United Nations headquarters in New York.)",
+            "type": "TOF"
+        }
+    ]
 
 

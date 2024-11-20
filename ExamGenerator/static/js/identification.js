@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const questionCards = document.querySelectorAll(".question-card");
     const submitButton = document.getElementById("submit-button");
+    const continueButton = document.getElementById("continue-button");
     const nextButton = document.getElementById("next-button");
     const cancelButton = document.getElementById("cancel-button");
     let questionNo = document.querySelector("#questionNo");
@@ -8,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     questionNo.innerText = (currentQuestionIndex + 1) + "/" + questionCards.length;
 
-    nextButton.style.display = "none";
     if (questionCards.length > 0) {
         questionCards[currentQuestionIndex].style.display = "block";
     }
@@ -31,10 +31,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 answerInput.classList.add("incorrect");
             }
 
-            
             correctAnswerElement.style.display = "block"; // Show the correct answer
 
-            nextButton.style.display = "block";
+            if ((currentQuestionIndex + 1) == questionCards.length) {
+                nextButton.style.display = "block";
+            } else {
+                continueButton.style.display = "block";
+            }
+            
             submitButton.style.display = "none";
             cancelButton.style.display = "none";
 
@@ -46,15 +50,15 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    nextButton.addEventListener("click", function() {
-        submitButton.style.display = "block";
-        cancelButton.style.display = "block";
+    continueButton.addEventListener("click", function() {
         questionCards[currentQuestionIndex].style.display = "none";
         currentQuestionIndex++;
 
         if (currentQuestionIndex < questionCards.length) {
             questionCards[currentQuestionIndex].style.display = "block";
-            nextButton.style.display = "none";
+            continueButton.style.display = "none";
+            submitButton.style.display = "block";
+            cancelButton.style.display = "block";
 
             const answerInput = questionCards[currentQuestionIndex].querySelector(".user-answer");
             answerInput.value = "";
@@ -62,8 +66,10 @@ document.addEventListener("DOMContentLoaded", function() {
             questionCards[currentQuestionIndex].querySelector(".correct-answer").classList.remove("correct-message", "incorrect-message"); 
             questionCards[currentQuestionIndex].querySelector(".correct-answer").style.display = "none"; // Hide the correct answer for the next question
         } else {
-            alert("You have completed all the questions!");
-            
+            continueButton.style.display = "none";
+            submitButton.style.display = "none";
+            cancelButton.style.display = "none";
+            nextButton.style.display = "block";
         }
     });
 
@@ -74,6 +80,6 @@ document.addEventListener("DOMContentLoaded", function() {
             answerInput.style.borderColor = "";
             card.querySelector(".correct-answer").style.display = "none";
         });
-        nextButton.style.display = "none";
+        continueButton.style.display = "none";
     });
 });

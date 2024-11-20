@@ -121,8 +121,8 @@ def done():
 
 @views.route('/quiz-complete', methods=['GET', 'POST'])
 def quiz_complete():
-    score = request.args.get('score')
-    total = request.args.get('total')
+    score = request.args.get('score', 0)
+    total = request.args.get('total', 0)
 
     return render_template('quiz-complete.html', score=score, total=total)
 

@@ -9,17 +9,22 @@
             </div>
             <div class="modal-body select-account">
                 <div class="acc-type">
-                    <div>
-                        <a class="signup-link" href="{{ url_for('auth.signup', account_type='student') }}"> TEACHER PNG/SVG</a>
-                    </div>
+                    <a class="signup-link" href="{{ url_for('auth.signup', account_type='student') }}"> 
+                        <div>
+                            TEACHER PNG/SVG
+                        </div>
+                    </a>
+                    
                     <div>
                         I am a <b>Student</b>
                     </div>
                 </div>
                 <div class="acc-type">
-                    <div>
-                        <a class="signup-link" href="{{ url_for('auth.signup', account_type='teacher') }}"> TEACHER PNG/SVG</a>
-                    </div>
+                    <a class="signup-link" href="{{ url_for('auth.signup', account_type='teacher') }}"> 
+                        <div>
+                            TEACHER PNG/SVG
+                        </div>
+                    </a>
                     <div>
                         I am a <b>Teacher</b>
                     </div>

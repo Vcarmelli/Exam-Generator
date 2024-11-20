@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
     const questionCards = document.querySelectorAll(".question-card");
     const submitButton = document.getElementById("submit-button");
-    const cancelButton = document.getElementById("cancel-button");
+    const continueButton = document.getElementById("continue-button");
     const nextButton = document.getElementById("next-button");
+    const cancelButton = document.getElementById("cancel-button");
     let questionNo = document.querySelector("#questionNo");
     let currentQuestionIndex = 0;
     questionNo.innerText = (currentQuestionIndex + 1) + "/" + questionCards.length;
-    nextButton.style.display = "none";
+
     submitButton.disabled = true; // Initially disable Submit button
 
     // Display the first question
@@ -41,26 +42,38 @@ document.addEventListener("DOMContentLoaded", function() {
             selectedOption.parentNode.style.border = "2px solid red";
         }
 
-        const correctMessage = currentCard.querySelector(".correct-answer");
-        correctMessage.style.display = "inline";
+        const correctAnswerElement = currentCard.querySelector(".correct-answer");
+        correctAnswerElement.style.display = "block"; // Show the correct answer
 
-        nextButton.style.display = "block";
+        if ((currentQuestionIndex + 1) == questionCards.length) {
+            nextButton.style.display = "block";
+        } else {
+            continueButton.style.display = "block";
+        }
+        
+        submitButton.style.display = "none";
+        cancelButton.style.display = "none";
         submitButton.disabled = true;
 
         let progressPercentage = ((currentQuestionIndex + 1) / questionCards.length) * 100;
         updateProgress(progressPercentage);
     });
 
-    nextButton.addEventListener("click", function() {
+    continueButton.addEventListener("click", function() {
         questionCards[currentQuestionIndex].style.display = "none";
         currentQuestionIndex++;
 
         if (currentQuestionIndex < questionCards.length) {
             questionCards[currentQuestionIndex].style.display = "block";
             submitButton.disabled = true; // Disable Submit until answer is selected
-            nextButton.style.display = "none"; // Hide Next until Submit is clicked
+            continueButton.style.display = "none";
+            submitButton.style.display = "block";
+            cancelButton.style.display = "block";
         } else {
-            alert("You have completed all questions!");
+            continueButton.style.display = "none";
+            submitButton.style.display = "none";
+            cancelButton.style.display = "none";
+            nextButton.style.display = "block";
         }
     });
 
@@ -79,6 +92,6 @@ document.addEventListener("DOMContentLoaded", function() {
         questionCards[currentQuestionIndex].style.display = "block";
 
         submitButton.disabled = true;  // Disable the Submit button initially
-        nextButton.style.display = "none"; // Hide Next button
+        continueButton.style.display = "none"; 
     });
 });

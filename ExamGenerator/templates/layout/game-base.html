@@ -29,9 +29,11 @@
         </div>
 
         <div id="button-container">
-            <button type="button" id="next-button" style="display: none;" class="btn btn-primary">Next Question</button>
+            <button type="button" id="continue-button" style="display: none;" class="btn btn-primary">Continue</button>
             <button type="button" id="cancel-button" class="btn btn-secondary">Cancel</button>
             <button type="button" id="submit-button" class="btn btn-primary">Submit</button>
+            
+            <a id="next-button" href="{{ url_for('game.next_question') }}" style="display: none;" class="btn btn-primary">Next</a>
         </div>
     </div>
 </div>
